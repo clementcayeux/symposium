@@ -1,8 +1,9 @@
-# Configuration GitLab Pages pour CentraleSupélec
 image: alpine:latest
 
 pages:
   stage: deploy
+  tags:
+    - docker  # On ajoute ce tag pour "appeler" le runner #3 de ta capture
   script:
     - mkdir .public
     - cp -r * .public
@@ -12,4 +13,3 @@ pages:
       - public
   only:
     - main
-    
