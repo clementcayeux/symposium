@@ -1,18 +1,10 @@
-
-
-html {
-    scroll-behavior: smooth;
-}
-
-
-
-
-
-/* --- VARIABLES ET RESET --- */
+/* ==========================================================================
+   1. VARIABLES ET RESET
+   ========================================================================== */
 :root {
     --navy: #000b29;
-    --gold: #b08d57;
-    --light-gold: #d4af37;
+    --gold: #D4AF37;
+    --light-gold: #f0c455;
     --white: #ffffff;
     --bg-light: #f4f7f6;
     --text-dark: #1a1a1a;
@@ -25,7 +17,9 @@ html {
     box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+}
 
 body {
     font-family: 'Inter', sans-serif;
@@ -34,24 +28,31 @@ body {
     background-color: var(--white);
 }
 
-/* --- NAVIGATION --- */
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   2. NAVIGATION (Fixe & Transparente)
+   ========================================================================== */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 8%;
-    background: var(--navy);
-    color: white;
-    position: sticky;
+    padding: 10px 5%;
+    background: rgba(0, 11, 41, 0.98);
+    position: fixed;
+    width: 100%;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
 }
 
-.logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    letter-spacing: 2px;
+.nav-logo {
+    height: 50px;
+    width: auto;
+    transition: transform 0.3s ease;
 }
 
 .nav-links {
@@ -61,11 +62,12 @@ body {
 }
 
 .nav-links a {
-    color: white;
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     font-size: 0.85rem;
     text-transform: uppercase;
-    font-weight: 400;
+    font-weight: 600;
+    letter-spacing: 1px;
     transition: 0.3s;
 }
 
@@ -73,10 +75,12 @@ body {
     color: var(--gold);
 }
 
-/* --- HERO SECTION --- */
+/* ==========================================================================
+   3. HERO SECTION (Logo Central & Slogan 1 ligne)
+   ========================================================================== */
 .hero {
-    height: 75vh;
-    background: linear-gradient(rgba(0, 11, 41, 0.8), rgba(0, 11, 41, 0.8)), 
+    height: 100vh;
+    background: linear-gradient(rgba(0, 11, 41, 0.75), rgba(0, 11, 41, 0.75)), 
                 url('assets/fond-amphi.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;
@@ -86,31 +90,49 @@ body {
     padding: 0 20px;
 }
 
-.badge {
-    color: var(--gold);
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 0.8rem;
-    font-weight: bold;
+.hero-content {
+    max-width: 1100px; /* Un peu plus large pour le slogan */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 4rem);
-    margin: 15px 0;
+.hero-logo {
+    width: 190px; 
+    height: auto;
+    margin-bottom: 30px;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+    animation: fadeInDown 1s ease-out;
+}
+
+.hero-content h1 {
+    font-size: clamp(1.5rem, 4.2vw, 2.8rem); /* Taille ajustée pour tenir sur une ligne */
+    margin-bottom: 10px;
     line-height: 1.1;
+    white-space: nowrap; /* Force l'affichage sur une ligne */
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 35px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
+    animation: fadeInUp 1s ease-out 0.4s both;
 }
 
 .btn-main {
     display: inline-block;
     background: var(--gold);
-    color: white;
-    padding: 16px 35px;
+    color: var(--navy);
+    padding: 14px 35px;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 50px;
     font-weight: bold;
-    margin-top: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
 }
 
 .btn-main:hover {
@@ -118,14 +140,16 @@ body {
     transform: translateY(-3px);
 }
 
-/* --- SECTIONS COMMUNES --- */
+/* ==========================================================================
+   4. CONFERENCES (Restauration du Design)
+   ========================================================================== */
 .section-container { padding: 90px 8%; }
 .bg-light { background-color: var(--bg-light); }
 
 .section-title {
     text-align: center;
-    font-family: 'Playfair Display', serif;
     font-size: 2.5rem;
+    color: var(--navy);
     margin-bottom: 50px;
     position: relative;
 }
@@ -139,14 +163,6 @@ body {
     margin: 15px auto;
 }
 
-.section-subtitle {
-    text-align: center;
-    margin-top: -30px;
-    margin-bottom: 50px;
-    color: var(--text-gray);
-}
-
-/* --- GRILLE CONFERENCES --- */
 .events-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -164,7 +180,7 @@ body {
 .event-card:hover { transform: translateY(-10px); }
 
 .event-img {
-    height: 280px;
+    height: 250px;
     background-size: cover;
     background-position: center;
     position: relative;
@@ -172,88 +188,128 @@ body {
 
 .date-tag {
     position: absolute;
-    bottom: 15px;
-    right: 15px;
+    top: 15px;
+    left: 15px;
     background: var(--gold);
-    color: white;
+    color: var(--navy);
     padding: 6px 14px;
     font-weight: bold;
     border-radius: 4px;
 }
 
-.event-info { padding: 30px; }
+.event-info { padding: 25px; }
+
 .category {
     font-size: 0.75rem;
     text-transform: uppercase;
     color: var(--gold);
     font-weight: bold;
+    letter-spacing: 1px;
 }
 
-.event-info h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.7rem;
-    margin: 10px 0;
+/* ==========================================================================
+   5. EQUIPE (Grille & Emails 1 ligne)
+   ========================================================================== */
+.page-header {
+    background: var(--navy);
+    color: white;
+    padding: 140px 20px 70px;
+    text-align: center;
 }
 
-.event-details {
-    margin: 15px 0;
-    font-size: 0.9rem;
-    color: var(--text-gray);
-    display: flex;
-    gap: 20px;
+.header-line {
+    width: 60px;
+    height: 3px;
+    background: var(--gold);
+    margin: 15px auto;
 }
 
-.status-tag {
-    display: inline-block;
-    border: 1px solid var(--navy);
-    padding: 4px 12px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-/* --- GRILLE ARCHIVES (VIDÉOS) --- */
-.video-grid {
+.team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 30px;
+    padding: 40px 0;
 }
 
-.video-card {
+.team-card {
     background: white;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: 0.4s;
+    border: 1px solid #eee;
+    text-align: center;
+}
+
+.team-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+}
+
+.member-img-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.member-img {
+    width: 100%; height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.member-info { padding: 20px; }
+
+.role {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.member-email {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: var(--text-gray);
+    text-decoration: none;
+    border: 1px solid #eee;
+    padding: 6px 12px;
+    border-radius: 50px;
+    white-space: nowrap; /* Une seule ligne */
+    max-width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   6. ARCHIVES ET FOOTER
+   ========================================================================== */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
 }
 
 .video-container {
     position: relative;
-    padding-bottom: 56.25%; /* Ratio 16:9 */
+    padding-bottom: 56.25%;
     height: 0;
-    background: black;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
 }
 
 .video-container iframe {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
 }
 
-.video-info { padding: 25px; }
-.year { font-size: 0.7rem; color: var(--gold); font-weight: bold; }
-
-/* --- FOOTER --- */
 footer {
     background: var(--navy);
     color: white;
     padding: 60px 8% 20px;
     text-align: center;
-}
-
-.footer-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    margin-bottom: 10px;
 }
 
 .footer-bottom {
@@ -264,33 +320,24 @@ footer {
     color: #888;
 }
 
-/* --- RESPONSIVE --- */
+/* ==========================================================================
+   7. ANIMATIONS & RESPONSIVE
+   ========================================================================== */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 @media (max-width: 768px) {
-    .nav-links { display: none; } /* On pourrait ajouter un menu burger ici */
-    .hero h1 { font-size: 2.5rem; }
-    .video-grid { grid-template-columns: 1fr; }
-}
-
-
-.nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.nav-logo {
-    height: 45px; /* Ajuste selon la taille de ton logo */
-    width: auto;
-    transition: 0.3s;
-}
-
-.nav-logo:hover {
-    transform: scale(1.1);
-}
-
-.logo-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    letter-spacing: 2px;
-    font-weight: 700;
+    .nav-links { display: none; }
+    .hero-content h1 { 
+        white-space: normal; /* On autorise le saut de ligne sur mobile */
+        font-size: 2.2rem; 
+    }
+    .hero-logo { width: 100px; }
 }

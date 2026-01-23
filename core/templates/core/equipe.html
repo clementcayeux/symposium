@@ -8,14 +8,13 @@
     <link rel="stylesheet" href="{% static 'core/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
 
     <nav class="navbar">
         <div class="nav-brand">
             <a href="{% url 'home' %}">
                 <img src="{% static 'core/assets/logo.png' %}" alt="Logo Symposium" class="nav-logo">
             </a>
-            <span class="logo-text">SYMPOSIUM</span>
         </div>
         <ul class="nav-links">
             <li><a href="{% url 'home' %}">Accueil</a></li>
@@ -26,28 +25,156 @@
     </nav>
 
     <header class="page-header">
-        <h1>L'Équipe Symposium</h1>
-        <p>Ceux qui font vivre le débat à CentraleSupélec</p>
+        <div class="header-overlay">
+            <h1>L'Équipe Symposium</h1>
+            <div class="header-line"></div>
+            <p>Les membres pour l'année 2026</p>
+        </div>
     </header>
 
     <section class="section-container">
         <div class="team-grid">
+            
             <div class="team-card">
-                <div class="member-img" style="background-image: url('{% static 'core/assets/president.jpg' %}');"></div>
+                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/augustin.jpg' %}');"></div></div>
                 <div class="member-info">
-                    <h3>Nom Prénom</h3>
                     <p class="role">Président</p>
-                    <div class="social-links">
-                        <a href="#">LinkedIn</a>
-                    </div>
+                    <h3>Augustin Foray</h3>
+                    <a href="mailto:augustin.foray@symposium-cs.fr" class="member-email">augustin.foray@symposium-cs.fr</a>
                 </div>
             </div>
+
+            <div class="team-card">
+                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/malo.jpg' %}');"></div></div>
+                <div class="member-info">
+                    <p class="role">Trésorier</p>
+                    <h3>Malo Lemonnier</h3>
+                    <a href="mailto:malo.lemonnier@symposium-cs.fr" class="member-email">malo.lemonnier@symposium-cs.fr</a>
+                </div>
             </div>
+
+            <div class="team-card">
+                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/clement.jpg' %}');"></div></div>
+                <div class="member-info">
+                    <p class="role">Secrétaire Général</p>
+                    <h3>Clément Cayeux</h3>
+                    <a href="mailto:clement.cayeux@symposium-cs.fr" class="member-email">clement.cayeux@symposium-cs.fr</a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/nael.jpeg' %}');"></div></div>
+                <div class="member-info">
+                    <p class="role">Vice-Président</p>
+                    <h3>Naël Zein</h3>
+                    <a href="mailto:nael.zein@symposium-cs.fr" class="member-email">nael.zein@symposium-cs.fr</a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/benoit.png' %}');"></div></div>
+                <div class="member-info">
+                    <p class="role">VP Prospection</p>
+                    <h3>Benoit Mayet</h3>
+                    <a href="mailto:benoit.mayet@symposium-cs.fr" class="member-email">benoit.mayet@symposium-cs.fr</a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/joseph.png' %}');"></div></div>
+                <div class="member-info">
+                    <p class="role">VP Comm & Éloquence</p>
+                    <h3>Joseph Hanna</h3>
+                    <a href="mailto:joseph.hanna@symposium-cs.fr" class="member-email">joseph.hanna@symposium-cs.fr</a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/emna.jpg' %}');"></div></div>
+                <div class="member-info">
+                    <p class="role">Membre</p>
+                    <h3>Emna Bannour</h3>
+                    <a href="mailto:emna.bannour@symposium-cs.fr" class="member-email">emna.bannour@symposium-cs.fr</a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/klervi.jpg' %}');"></div></div>
+                <div class="member-info">
+                    <p class="role">Membre</p>
+                    <h3>Klervi Ringeval</h3>
+                    <a href="mailto:klervi.ringeval@symposium-cs.fr" class="member-email">klervi.ringeval@symposium-cs.fr</a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/lamine.jpg' %}');"></div></div>
+                <div class="member-info">
+                    <p class="role">Membre</p>
+                    <h3>Lamine Semmar</h3>
+                    <a href="mailto:lamine.semmar@symposium-cs.fr" class="member-email">lamine.semmar@symposium-cs.fr</a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/gabrielle.jpg' %}');"></div></div>
+                <div class="member-info">
+                    <p class="role">Membre</p>
+                    <h3>Gabrielle Hellier</h3>
+                    <a href="mailto:gabrielle.hellier@symposium-cs.fr" class="member-email">gabrielle.hellier@symposium-cs.fr</a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/marie-yang.png' %}');"></div></div>
+                <div class="member-info">
+                    <p class="role">Membre</p>
+                    <h3>Marie-Yang Venière</h3>
+                    <a href="mailto:marie-yang.veniere@symposium-cs.fr" class="member-email">marie-yang.veniere@symposium-cs.fr</a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/jules.jpg' %}');"></div></div>
+                <div class="member-info">
+                    <p class="role">Membre</p>
+                    <h3>Jules Rancurel</h3>
+                    <a href="mailto:jules.rancurel@symposium-cs.fr" class="member-email">jules.rancurel@symposium-cs.fr</a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/theophile-t.png' %}');"></div></div>
+                <div class="member-info">
+                    <p class="role">Membre</p>
+                    <h3>Théophile Thibaudon</h3>
+                    <a href="mailto:theophile.thibaudon@symposium-cs.fr" class="member-email">theophile.thibaudon@symposium-cs.fr</a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/theophile-s.png' %}');"></div></div>
+                <div class="member-info">
+                    <p class="role">Membre</p>
+                    <h3>Théophile Salabert</h3>
+                    <a href="mailto:theophile.salabert@symposium-cs.fr" class="member-email">theophile.salabert@symposium-cs.fr</a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/albert.jpg' %}');"></div></div>
+                <div class="member-info">
+                    <p class="role">Membre</p>
+                    <h3>Albert Kechteil</h3>
+                    <a href="mailto:albert.kechteil@symposium-cs.fr" class="member-email">albert.kechteil@symposium-cs.fr</a>
+                </div>
+            </div>
+
+        </div>
     </section>
 
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">SYMPOSIUM</div>
             <p>contact@symposium-cs.fr</p>
             <div class="footer-bottom">&copy; 2026 Symposium CentraleSupélec</div>
         </div>
