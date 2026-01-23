@@ -3,11 +3,14 @@ image: alpine:latest
 pages:
   stage: deploy
   tags:
-    - docker  # On ajoute ce tag pour "appeler" le runner #3 de ta capture
+    - docker
   script:
-    - mkdir .public
-    - cp -r * .public
-    - mv .public public
+    # On crée un dossier temporaire propre
+    - mkdir .temp_public
+    # On copie tout sauf le dossier temporaire lui-même
+    - cp -r * .temp_public/
+    # On s'assure que le dossier de destination 'public' est propre et reçoit tout
+    - mv .temp_public public
   artifacts:
     paths:
       - public
