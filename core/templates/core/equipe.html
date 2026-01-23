@@ -1,23 +1,27 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L'Équipe | Symposium CentraleSupélec</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="logo">SYMPOSIUM</div>
+        <div class="nav-brand">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'core/assets/logo.png' %}" alt="Logo Symposium" class="nav-logo">
+            </a>
+            <span class="logo-text">SYMPOSIUM</span>
+        </div>
         <ul class="nav-links">
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="equipe.html" class="active">L'Équipe</a></li>
-            <li><a href="index.html#conferences">Conférences</a></li>
-            <li><a href="index.html#archives">Archives</a></li>
+            <li><a href="{% url 'home' %}">Accueil</a></li>
+            <li><a href="{% url 'equipe' %}" class="active">L'Équipe</a></li>
+            <li><a href="{% url 'home' %}#conferences">Conférences</a></li>
+            <li><a href="{% url 'home' %}#archives">Archives</a></li>
         </ul>
     </nav>
 
@@ -29,21 +33,10 @@
     <section class="section-container">
         <div class="team-grid">
             <div class="team-card">
-                <div class="member-img" style="background-image: url('assets/president.jpg');"></div>
+                <div class="member-img" style="background-image: url('{% static 'core/assets/president.jpg' %}');"></div>
                 <div class="member-info">
                     <h3>Nom Prénom</h3>
                     <p class="role">Président</p>
-                    <div class="social-links">
-                        <a href="#">LinkedIn</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="team-card">
-                <div class="member-img" style="background-image: url('assets/sec-gen.jpg');"></div>
-                <div class="member-info">
-                    <h3>Nom Prénom</h3>
-                    <p class="role">Secrétaire Général</p>
                     <div class="social-links">
                         <a href="#">LinkedIn</a>
                     </div>

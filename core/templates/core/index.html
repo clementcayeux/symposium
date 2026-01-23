@@ -1,27 +1,31 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Symposium CentraleSupélec | Accueil</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="logo">SYMPOSIUM</div>
+        <div class="nav-brand">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'core/assets/logo.png' %}" alt="Logo Symposium" class="nav-logo">
+            </a>
+            <span class="logo-text">SYMPOSIUM</span>
+        </div>
         <ul class="nav-links">
-            <li><a href="index.html" class="active">Accueil</a></li>
-            <li><a href="equipe.html">L'Équipe</a></li>
+            <li><a href="{% url 'home' %}" class="active">Accueil</a></li>
+            <li><a href="{% url 'equipe' %}">L'Équipe</a></li>
             <li><a href="#conferences">Conférences</a></li>
             <li><a href="#archives">Archives</a></li>
         </ul>
     </nav>
 
-    <header class="hero">
+    <header class="hero" style="background: linear-gradient(rgba(0, 11, 41, 0.8), rgba(0, 11, 41, 0.8)), url('{% static 'core/assets/fond-amphi.jpg' %}') center/cover no-repeat;">
         <div class="hero-content">
             <span class="badge">Édition 2025-2026</span>
             <h1>LA PAROLE AUX LEADERS DE DEMAIN</h1>
@@ -34,7 +38,7 @@
         <h2 class="section-title">Prochaines Conférences</h2>
         <div class="events-grid">
             <div class="event-card">
-                <div class="event-img" style="background-image: url('assets/manuel-bompard.jpg');">
+                <div class="event-img" style="background-image: url('{% static 'core/assets/manuel-bompard.jpg' %}');">
                     <div class="date-tag">12 FÉV</div>
                 </div>
                 <div class="event-info">
@@ -50,7 +54,7 @@
             </div>
 
             <div class="event-card">
-                <div class="event-img" style="background-image: url('assets/camille-etienne.jpg');">
+                <div class="event-img" style="background-image: url('{% static 'core/assets/camille-etienne.jpg' %}');">
                     <div class="date-tag">25 FÉV</div>
                 </div>
                 <div class="event-info">

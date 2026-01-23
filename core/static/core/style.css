@@ -270,3 +270,27 @@ footer {
     .hero h1 { font-size: 2.5rem; }
     .video-grid { grid-template-columns: 1fr; }
 }
+
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-logo {
+    height: 45px; /* Ajuste selon la taille de ton logo */
+    width: auto;
+    transition: 0.3s;
+}
+
+.nav-logo:hover {
+    transform: scale(1.1);
+}
+
+.logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
