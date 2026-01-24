@@ -489,3 +489,10 @@ footer {
 .partner-logo.akoya:hover {
     transform: scale(1.15); /* Un zoom un poil plus fort au survol */
 }
+
+
+/* Ajustement pour les logos institutionnels larges */
+.partner-logo.institutionnel {
+    max-height: 70px; /* Un peu plus bas s'ils sont très larges */
+    width: auto;
+}
