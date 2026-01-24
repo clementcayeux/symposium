@@ -33,8 +33,13 @@ h1, h2, h3 {
     font-weight: 700;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* ==========================================================================
-   2. NAVIGATION (Fixe & Transparente)
+   2. NAVIGATION (Barre fixe en haut)
    ========================================================================== */
 .navbar {
     display: flex;
@@ -49,10 +54,19 @@ h1, h2, h3 {
     box-shadow: 0 2px 20px rgba(0,0,0,0.3);
 }
 
+.nav-brand {
+    display: flex;
+    align-items: center;
+}
+
 .nav-logo {
     height: 50px;
     width: auto;
     transition: transform 0.3s ease;
+}
+
+.nav-logo:hover {
+    transform: scale(1.05);
 }
 
 .nav-links {
@@ -63,20 +77,31 @@ h1, h2, h3 {
 
 .nav-links a {
     color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
     font-size: 0.85rem;
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 1px;
     transition: 0.3s;
+    position: relative;
 }
 
 .nav-links a:hover, .nav-links a.active {
     color: var(--gold);
 }
 
+/* Trait doré sous le lien actif */
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--gold);
+}
+
 /* ==========================================================================
-   3. HERO SECTION (Logo Central & Slogan 1 ligne)
+   3. HERO SECTION (Logo central & Slogan 1 ligne)
    ========================================================================== */
 .hero {
     height: 100vh;
@@ -91,14 +116,14 @@ h1, h2, h3 {
 }
 
 .hero-content {
-    max-width: 1100px; /* Un peu plus large pour le slogan */
+    max-width: 1100px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .hero-logo {
-    width: 190px; 
+    width: 190px; /* Taille moyenne équilibrée */
     height: auto;
     margin-bottom: 30px;
     filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
@@ -106,18 +131,19 @@ h1, h2, h3 {
 }
 
 .hero-content h1 {
-    font-size: clamp(1.5rem, 4.2vw, 2.8rem); /* Taille ajustée pour tenir sur une ligne */
+    font-size: clamp(1.5rem, 4.2vw, 2.8rem); /* Taille fluide pour rester sur une ligne */
     margin-bottom: 10px;
     line-height: 1.1;
-    white-space: nowrap; /* Force l'affichage sur une ligne */
+    white-space: nowrap; /* Empêche le saut de ligne sur desktop */
     animation: fadeInUp 1s ease-out 0.2s both;
 }
 
 .hero-content p {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     margin-bottom: 35px;
     color: rgba(255, 255, 255, 0.9);
     font-weight: 300;
+    letter-spacing: 1px;
     animation: fadeInUp 1s ease-out 0.4s both;
 }
 
@@ -126,24 +152,30 @@ h1, h2, h3 {
     background: var(--gold);
     color: var(--navy);
     padding: 14px 35px;
-    text-decoration: none;
     border-radius: 50px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: 0.3s;
     box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+    animation: fadeInUp 1s ease-out 0.6s both;
 }
 
 .btn-main:hover {
     background: var(--light-gold);
     transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
 }
 
 /* ==========================================================================
-   4. CONFERENCES (Restauration du Design)
+   4. SECTIONS COMMUNES ET CONFERENCES
    ========================================================================== */
-.section-container { padding: 90px 8%; }
+.section-container {
+    padding: 90px 8%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
 .bg-light { background-color: var(--bg-light); }
 
 .section-title {
@@ -151,7 +183,6 @@ h1, h2, h3 {
     font-size: 2.5rem;
     color: var(--navy);
     margin-bottom: 50px;
-    position: relative;
 }
 
 .section-title::after {
@@ -207,8 +238,19 @@ h1, h2, h3 {
     letter-spacing: 1px;
 }
 
+.event-info h3 { margin: 10px 0; font-size: 1.6rem; color: var(--navy); }
+
+.event-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    font-weight: 600;
+}
+
 /* ==========================================================================
-   5. EQUIPE (Grille & Emails 1 ligne)
+   5. EQUIPE (Grille, Cartes & Emails)
    ========================================================================== */
 .page-header {
     background: var(--navy);
@@ -236,13 +278,14 @@ h1, h2, h3 {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    transition: 0.4s;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 1px solid #eee;
     text-align: center;
 }
 
 .team-card:hover {
     transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 11, 41, 0.15);
     border-color: var(--gold);
 }
 
@@ -250,40 +293,54 @@ h1, h2, h3 {
     width: 100%;
     aspect-ratio: 1 / 1;
     overflow: hidden;
+    background: #f0f0f0;
 }
 
 .member-img {
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
+    transition: transform 0.6s ease;
 }
 
-.member-info { padding: 20px; }
+.team-card:hover .member-img { transform: scale(1.1); }
+
+.member-info { padding: 25px 20px; }
 
 .role {
     font-size: 0.75rem;
     text-transform: uppercase;
+    letter-spacing: 2px;
     color: var(--gold);
     font-weight: 600;
     margin-bottom: 5px;
 }
 
+.member-info h3 { font-size: 1.4rem; color: var(--navy); margin-bottom: 15px; }
+
 .member-email {
     display: inline-block;
     font-size: 0.75rem;
     color: var(--text-gray);
-    text-decoration: none;
     border: 1px solid #eee;
     padding: 6px 12px;
     border-radius: 50px;
-    white-space: nowrap; /* Une seule ligne */
+    transition: 0.3s;
+    white-space: nowrap; /* Indispensable : pas de saut de ligne */
     max-width: 95%;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
+.member-email:hover {
+    background: var(--navy);
+    color: white;
+    border-color: var(--navy);
+}
+
 /* ==========================================================================
-   6. ARCHIVES ET FOOTER
+   6. ARCHIVES (Miniatures Vidéos - Fix Erreur 153)
    ========================================================================== */
 .video-grid {
     display: grid;
@@ -291,20 +348,54 @@ h1, h2, h3 {
     gap: 30px;
 }
 
-.video-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
+.video-card {
+    display: block;
+    background: white;
     border-radius: 12px;
     overflow: hidden;
-    background: #000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: 0.3s;
 }
 
-.video-container iframe {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+.video-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
+.video-thumb {
+    position: relative;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-button {
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 11, 41, 0.8);
+    color: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: 0.3s;
+}
+
+.video-card:hover .play-button {
+    background: var(--gold);
+    color: var(--navy);
+    transform: scale(1.1);
+}
+
+.video-info { padding: 20px; text-align: center; }
+
+/* ==========================================================================
+   7. FOOTER ET ANIMATIONS
+   ========================================================================== */
 footer {
     background: var(--navy);
     color: white;
@@ -317,12 +408,9 @@ footer {
     padding-top: 20px;
     border-top: 1px solid rgba(255,255,255,0.1);
     font-size: 0.8rem;
-    color: #888;
+    opacity: 0.6;
 }
 
-/* ==========================================================================
-   7. ANIMATIONS & RESPONSIVE
-   ========================================================================== */
 @keyframes fadeInDown {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -333,11 +421,29 @@ footer {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* ==========================================================================
+   8. RESPONSIVE
+   ========================================================================== */
 @media (max-width: 768px) {
     .nav-links { display: none; }
     .hero-content h1 { 
         white-space: normal; /* On autorise le saut de ligne sur mobile */
         font-size: 2.2rem; 
     }
-    .hero-logo { width: 100px; }
+    .hero-logo { width: 110px; }
+    .team-grid, .events-grid, .video-grid { grid-template-columns: 1fr; }
+}
+
+
+.footer-contact-link { 
+    font-size: 1.1rem; 
+    color: rgba(255, 255, 255, 0.9); 
+    border-bottom: 1px solid var(--gold); 
+    padding-bottom: 2px; 
+    transition: 0.3s; 
+}
+
+.footer-contact-link:hover { 
+    color: var(--gold); 
+    border-bottom-color: white; 
 }

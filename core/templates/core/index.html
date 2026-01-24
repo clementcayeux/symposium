@@ -27,18 +27,15 @@
     <header class="hero" style="background: linear-gradient(rgba(0, 11, 41, 0.75), rgba(0, 11, 41, 0.75)), url('{% static 'core/assets/fond-amphi.jpg' %}') center/cover no-repeat;">
         <div class="hero-content">
             <img src="{% static 'core/assets/logo.png' %}" alt="Symposium CentraleSupélec" class="hero-logo">
-            
             <h1>LES INGÉNIEURS AU CŒUR DU DÉBAT</h1>
-            <p>La tribune étudiante de CentraleSupélec</p>
-            
-            <a href="#conferences" class="btn-main">Prochaines tribunes</a>
+            <p>La tribune étudiante de CentraleSupélec.</p>
+            <a href="#conferences" class="btn-main">Prochaines conférences</a>
         </div>
     </header>
 
     <section id="conferences" class="section-container">
         <h2 class="section-title">Prochaines Conférences</h2>
         <div class="events-grid">
-            
             <div class="event-card">
                 <div class="event-img" style="background-image: url('{% static 'core/assets/bompard.png' %}');">
                     <div class="date-tag">12 FÉV</div>
@@ -53,7 +50,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="event-card">
                 <div class="event-img" style="background-image: url('{% static 'core/assets/mensch.jpg' %}');">
                     <div class="date-tag">05 MAR</div>
@@ -63,54 +59,55 @@
                     <h3>Arthur Mensch</h3>
                     <p class="description">L'IA générative : construire un champion européen.</p>
                     <div class="event-details">
-                        <span>📍 Amphi Michelin </span>
+                        <span>📍 Amphi Michelin</span>
                         <span>⏰ 18:30</span>
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
     <section id="archives" class="section-container bg-light">
-        <h2 class="section-title">Derniers Replays</h2>
+        <h2 class="section-title">Replays</h2>
         <div class="video-grid">
-            <div class="video-card">
-                <div class="video-container">
-                    <iframe src="https://www.youtube-nocookie.com/embed/pcEV4YkUgPs" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+            <a href="https://www.youtube.com/watch?v=iPvnxnpMZ1o" target="_blank" class="video-card">
+                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/iPvnxnpMZ1o/hqdefault.jpg');">
+                    <div class="play-button">▶</div>
                 </div>
                 <div class="video-info">
-                    <h3>Jacques Attali</h3>
-                    <p>L'économie de la vie - Avril 2025</p>
+                    <h3>Valérie Pécresse</h3>
                 </div>
-            </div>
-            <div class="video-card">
-                <div class="video-container">
-                    <iframe src="https://www.youtube-nocookie.com/embed/e2yqKtWBg-0" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+            </a>
+            <a href="https://www.youtube.com/watch?v=UCAZxRdwXkc" target="_blank" class="video-card">
+                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/UCAZxRdwXkc/hqdefault.jpg');">
+                    <div class="play-button">▶</div>
                 </div>
                 <div class="video-info">
                     <h3>Dominique de Villepin</h3>
-                    <p>Géopolitique mondiale - Septembre 2024</p>
                 </div>
-            </div>
-            <div class="video-card">
-                <div class="video-container">
-                    <iframe src="https://www.youtube-nocookie.com/embed/2mkWMLssZPM" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+            </a>
+            <a href="https://www.youtube.com/watch?v=PYDNV0Ro1x0" target="_blank" class="video-card">
+                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/PYDNV0Ro1x0/hqdefault.jpg');">
+                    <div class="play-button">▶</div>
                 </div>
                 <div class="video-info">
-                    <h3>André Comte-Sponville</h3>
-                    <p>Le bonheur est-il le but de l'existence ?</p>
+                    <h3>Jean-Marc Jancovici</h3>
                 </div>
-            </div>
+            </a>
         </div>
-        <div style="text-align: center; margin-top: 40px;">
-            <a href="https://www.youtube.com/@symposiumcs" target="_blank" class="btn-main">Accéder à la chaîne YouTube</a>
+        
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="https://www.youtube.com/@symposiumcs" target="_blank" class="btn-main">Voir les autres vidéos</a>
         </div>
     </section>
 
     <footer>
         <div class="footer-content">
-            <p>contact@symposium-cs.fr</p>
+            <p>
+                <a href="{% url 'equipe' %}" class="footer-contact-link">Nous contacter</a>
+                <span style="color: var(--gold); margin: 0 10px;">•</span>
+                <a href="https://www.linkedin.com/company/symposiumcentralesup%C3%A9lec/" target="_blank" class="footer-contact-link">LinkedIn</a>
+            </p>
             <div class="footer-bottom">&copy; 2026 Symposium CentraleSupélec</div>
         </div>
     </footer>
