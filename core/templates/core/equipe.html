@@ -21,6 +21,7 @@
             <li><a href="{% url 'equipe' %}" class="active">L'Équipe</a></li>
             <li><a href="{% url 'home' %}#conferences">Conférences</a></li>
             <li><a href="{% url 'home' %}#archives">Archives</a></li>
+            <li><a href="{% url 'home' %}#partenaires">Nos partenaires</a></li>
         </ul>
     </nav>
 
@@ -175,7 +176,11 @@
 
     <footer>
         <div class="footer-content">
-            <p>contact@symposium-cs.fr</p>
+            <p>
+                <a href="{% url 'equipe' %}" class="footer-contact-link">Nous contacter</a>
+                <span style="color: var(--gold); margin: 0 10px;">•</span>
+                <a href="https://www.linkedin.com/company/symposiumcentralesup%C3%A9lec/" target="_blank" class="footer-contact-link">LinkedIn</a>
+            </p>
             <div class="footer-bottom">&copy; 2026 Symposium CentraleSupélec</div>
         </div>
     </footer>

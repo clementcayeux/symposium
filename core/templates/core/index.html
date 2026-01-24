@@ -21,6 +21,7 @@
             <li><a href="{% url 'equipe' %}">L'Équipe</a></li>
             <li><a href="#conferences">Conférences</a></li>
             <li><a href="#archives">Archives</a></li>
+            <li><a href="#partenaires">Nos partenaires</a></li>
         </ul>
     </nav>
 
@@ -50,6 +51,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="event-card">
                 <div class="event-img" style="background-image: url('{% static 'core/assets/mensch.jpg' %}');">
                     <div class="date-tag">05 MAR</div>
@@ -74,30 +76,38 @@
                 <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/iPvnxnpMZ1o/hqdefault.jpg');">
                     <div class="play-button">▶</div>
                 </div>
-                <div class="video-info">
-                    <h3>Valérie Pécresse</h3>
-                </div>
+                <div class="video-info"><h3>Valérie Pécresse</h3></div>
             </a>
+
             <a href="https://www.youtube.com/watch?v=UCAZxRdwXkc" target="_blank" class="video-card">
                 <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/UCAZxRdwXkc/hqdefault.jpg');">
                     <div class="play-button">▶</div>
                 </div>
-                <div class="video-info">
-                    <h3>Dominique de Villepin</h3>
-                </div>
+                <div class="video-info"><h3>Dominique de Villepin</h3></div>
             </a>
+
             <a href="https://www.youtube.com/watch?v=PYDNV0Ro1x0" target="_blank" class="video-card">
                 <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/PYDNV0Ro1x0/hqdefault.jpg');">
                     <div class="play-button">▶</div>
                 </div>
-                <div class="video-info">
-                    <h3>Jean-Marc Jancovici</h3>
-                </div>
+                <div class="video-info"><h3>Jean-Marc Jancovici</h3></div>
             </a>
         </div>
         
         <div style="text-align: center; margin-top: 50px;">
             <a href="https://www.youtube.com/@symposiumcs" target="_blank" class="btn-main">Voir les autres vidéos</a>
+        </div>
+    </section>
+
+    <section id="partenaires" class="section-container">
+        <h2 class="section-title">Nos Partenaires</h2>
+        <div class="partners-grid">
+            <div class="partner-item">
+                <img src="{% static 'core/assets/akoya.png' %}" alt="Akoya Strategy" class="partner-logo akoya">
+            </div>
+            <div class="partner-item">
+                <img src="{% static 'core/assets/vinci.png' %}" alt="Vinci Energies" class="partner-logo">
+            </div>
         </div>
     </section>
 
