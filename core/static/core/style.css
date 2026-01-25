@@ -103,9 +103,10 @@ a {
 /* ==========================================================================
    3. HERO SECTION (Logo central & Slogan 1 ligne)
    ========================================================================== */
+
 .hero {
     height: 100vh;
-    background: linear-gradient(rgba(0, 11, 41, 0.75), rgba(0, 11, 41, 0.75)), 
+    background: linear-gradient(rgba(0, 11, 41, 0.65), rgba(0, 11, 41, 0.65)), 
                 url('assets/fond-amphi.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;
@@ -122,13 +123,6 @@ a {
     align-items: center;
 }
 
-.hero-logo {
-    width: 190px; /* Taille moyenne équilibrée */
-    height: auto;
-    margin-bottom: 30px;
-    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
-    animation: fadeInDown 1s ease-out;
-}
 
 .hero-content h1 {
     font-size: clamp(1.5rem, 4.2vw, 2.8rem); /* Taille fluide pour rester sur une ligne */
@@ -167,11 +161,41 @@ a {
     box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
 }
 
+
+
+/* --- HERO LOGO --- */
+.hero-logo {
+    width: 300px; /* Taille augmentée (était probablement à 150-180px) */
+    margin-bottom: 25px;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+}
+
+/* --- HERO BUTTONS --- */
+.hero-btns {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espace entre les deux boutons */
+    margin-top: 30px;
+    flex-wrap: wrap; /* Pour que les boutons passent l'un sous l'autre sur petit mobile */
+}
+
+/* Largeur identique forcée pour les boutons de la bannière */
+.hero-btns .btn-main {
+    min-width: 320px; /* Ajuste cette valeur selon ton goût */
+    text-align: center;
+    margin: 0; /* On retire les marges automatiques pour gérer via le gap */
+}
+
+/* Optionnel : un style un peu différent pour le bouton "secondaire" si tu veux
+   mais tu as demandé le même bouton pour l'esthétique, donc le code ci-dessus suffit */
+
+
+
 /* ==========================================================================
    4. SECTIONS COMMUNES ET CONFERENCES
    ========================================================================== */
 .section-container {
-    padding: 90px 8%;
+    padding: 30px 8%;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -495,4 +519,111 @@ footer {
 .partner-logo.institutionnel {
     max-height: 70px; /* Un peu plus bas s'ils sont très larges */
     width: auto;
+}
+
+
+/* --- SECTION À PROPOS FORCÉE --- */
+.about-wrapper {
+    max-width: 800px;
+    margin: 0 auto !important; /* Force le centrage du bloc */
+    text-align: center !important; /* Force le centrage du texte */
+    padding: 40px 20px;
+}
+
+.about-text p {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: var(--text-gray);
+    margin-bottom: 4rem !important; /* Espace massif entre les paragraphes */
+    display: block;
+}
+
+/* On retire la marge du dernier pour ne pas décaler le bas de la section */
+.about-text p:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Mise en valeur du paragraphe central */
+.about-statement {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.4rem !important;
+    color: var(--navy) !important;
+}
+
+.about-statement strong {
+    color: var(--gold);
+}
+
+
+
+/* --- NAVIGATION ANIMÉE --- */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    position: relative; /* Important pour le positionnement de la ligne */
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+/* La ligne sous le texte */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--gold);
+    transition: width 0.3s ease; /* C'est ici que l'effet de mouvement se crée */
+}
+
+/* État au survol et quand la section est active */
+.nav-link:hover, .nav-link.active {
+    color: var(--gold) !important;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%; /* La ligne s'étend sur toute la largeur */
+}
+
+
+
+
+.contact-form {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    text-align: left;
+}
+
+.form-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--gold);
 }

@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact | Symposium CentraleSupélec</title>
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar">
+        <div class="nav-brand"><a href="{% url 'home' %}"><img src="{% static 'core/assets/logo.png' %}" class="nav-logo"></a></div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}" class="nav-link">Accueil</a></li>
+            <li><a href="{% url 'home' %}#conferences" class="nav-link">Conférences</a></li>
+            <li><a href="{% url 'home' %}#partenaires" class="nav-link">Partenaires</a></li>
+            <li><a href="{% url 'equipe' %}" class="nav-link">Nous connaître</a></li>
+        </ul>
+    </nav>
+
+    <section class="section-container" style="margin-top: 120px;">
+        <div class="about-wrapper">
+            <h2 class="section-title">Contactez-nous</h2>
+            <p style="margin-bottom: 40px;">Une question, une suggestion ou une demande de partenariat ?<br>Utilisez le formulaire ci-dessous.</p>
+
+            <form method="POST" class="contact-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Votre nom" required>
+                    <input type="email" name="email" placeholder="Votre email" required>
+                </div>
+                <input type="text" name="subject" placeholder="Sujet de votre message" required>
+                <textarea name="message" rows="6" placeholder="Votre message..." required></textarea>
+                
+                <button type="submit" class="btn-main" style="width: 100%; border: none; cursor: pointer;">
+                    Envoyer le message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    </body>
+</html>

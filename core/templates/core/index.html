@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Symposium CentraleSupélec | Accueil</title>
+    <title>Symposium CentraleSupélec</title> 
+    <link rel="icon" type="image/png" href="{% static 'core/assets/favicon.png' %}">   
     <link rel="stylesheet" href="{% static 'core/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
@@ -17,23 +18,26 @@
             </a>
         </div>
         <ul class="nav-links">
-            <li><a href="{% url 'home' %}" class="active">Accueil</a></li>
-            <li><a href="{% url 'equipe' %}">L'Équipe</a></li>
-            <li><a href="#conferences">Conférences</a></li>
-            <li><a href="#archives">Archives</a></li>
-            <li><a href="#partenaires">Nos partenaires</a></li>
+            <li><a href="#home" class="nav-link active" data-section="home">Accueil</a></li>
+            <li><a href="#conferences" class="nav-link" data-section="conferences">Conférences</a></li>
+            <li><a href="#partenaires" class="nav-link" data-section="partenaires">Partenaires</a></li>
+            <li><a href="{% url 'equipe' %}" class="nav-link">Nous Connaître</a></li>
         </ul>
     </nav>
 
-    <header class="hero" style="background: linear-gradient(rgba(0, 11, 41, 0.75), rgba(0, 11, 41, 0.75)), url('{% static 'core/assets/fond-amphi.jpg' %}') center/cover no-repeat;">
+    <header id="home" class="hero" style="background: linear-gradient(rgba(0, 11, 41, 0.65), rgba(0, 11, 41, 0.65)), url('{% static 'core/assets/fond-amphi.jpg' %}') center/cover no-repeat;">
         <div class="hero-content">
             <img src="{% static 'core/assets/logo.png' %}" alt="Symposium CentraleSupélec" class="hero-logo">
             <h1>LES INGÉNIEURS AU CŒUR DU DÉBAT</h1>
-            <p>La tribune étudiante de CentraleSupélec.</p>
-            <a href="#conferences" class="btn-main">Prochaines conférences</a>
+            <p>La tribune étudiante de CentraleSupélec</p>
+            
+            <div class="hero-btns">
+                <a href="#conferences" class="btn-main">Prochaines conférences</a>
+                <a href="{% url 'equipe' %}" class="btn-main">Nous connaître</a>
+            </div>
         </div>
     </header>
-
+    
     <section id="conferences" class="section-container">
         <h2 class="section-title">Prochaines Conférences</h2>
         <div class="events-grid">
@@ -66,10 +70,8 @@
                 </div>
             </div>
         </div>
-    </section>
 
-    <section id="archives" class="section-container bg-light">
-        <h2 class="section-title">Replays</h2>
+        <h2 class="section-title" style="margin-top: 80px;">Replays</h2>
         <div class="video-grid">
             <a href="https://www.youtube.com/watch?v=iPvnxnpMZ1o" target="_blank" class="video-card">
                 <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/iPvnxnpMZ1o/hqdefault.jpg');">
@@ -95,7 +97,7 @@
         </div>
     </section>
 
-    <section id="partenaires" class="section-container">
+    <section id="partenaires" class="section-container bg-light">
         <h2 class="section-title">Nos Partenaires</h2>
         <div class="partners-grid">
             <div class="partner-item">
@@ -116,7 +118,9 @@
     <footer>
         <div class="footer-content">
             <p>
-                <a href="{% url 'equipe' %}" class="footer-contact-link">Nous contacter</a>
+                <a href="{% url 'equipe' %}" class="footer-contact-link">À propos</a>
+                <span style="color: var(--gold); margin: 0 10px;">•</span>
+                <a href="{% url 'equipe' %}#team" class="footer-contact-link">Notre équipe & Contacts</a>
                 <span style="color: var(--gold); margin: 0 10px;">•</span>
                 <a href="https://www.linkedin.com/company/symposiumcentralesup%C3%A9lec/" target="_blank" class="footer-contact-link">LinkedIn</a>
             </p>
@@ -124,5 +128,28 @@
         </div>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('header[id], section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= (sectionTop - 200)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

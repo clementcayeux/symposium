@@ -4,9 +4,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'Équipe | Symposium CentraleSupélec</title>
+    <title>Nous connaître | Symposium CentraleSupélec</title>
+    <link rel="icon" type="image/png" href="{% static 'core/assets/favicon.png' %}">   
     <link rel="stylesheet" href="{% static 'core/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Styles spécifiques pour garantir le centrage et l'espace sur cette page */
+        .about-wrapper {
+            max-width: 900px;
+            margin: 0 auto !important;
+            text-align: center !important;
+            padding: 60px 20px;
+        }
+
+        .about-text p {
+            font-size: 1.15rem;
+            line-height: 1.6; /* Interligne diminué (était à 2) */
+            color: #444;
+            margin-bottom: 2.5rem !important; /* Espacement ajusté entre paragraphes */
+            display: block;
+        }
+
+        .about-text p:last-child {
+            margin-bottom: 0 !important;
+        }
+
+        .about-statement {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.4rem !important;
+            color: var(--navy) !important;
+            font-weight: 600;
+        }
+
+        .about-statement strong {
+            color: var(--gold);
+        }
+
+        /* Harmonisation de la ligne animée pour l'onglet actif */
+        .nav-link {
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Modification du Header avec l'image d'équipe et filtre bleu */
+        .page-header-equipe {
+            height: 50vh; /* Hauteur ajustée pour la bannière */
+            background: linear-gradient(rgba(0, 11, 41, 0.6), rgba(0, 11, 41, 0.6)), url('{% static 'core/assets/equipe.jpg' %}') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px; /* Compensation de la navbar */
+        }
+    </style>
 </head>
 <body class="bg-light">
 
@@ -17,23 +85,37 @@
             </a>
         </div>
         <ul class="nav-links">
-            <li><a href="{% url 'home' %}">Accueil</a></li>
-            <li><a href="{% url 'equipe' %}" class="active">L'Équipe</a></li>
-            <li><a href="{% url 'home' %}#conferences">Conférences</a></li>
-            <li><a href="{% url 'home' %}#archives">Archives</a></li>
-            <li><a href="{% url 'home' %}#partenaires">Nos partenaires</a></li>
+            <li><a href="{% url 'home' %}" class="nav-link">Accueil</a></li>
+            <li><a href="{% url 'home' %}#conferences" class="nav-link">Conférences</a></li>
+            <li><a href="{% url 'home' %}#partenaires" class="nav-link">Partenaires</a></li>
+            <li><a href="{% url 'equipe' %}" class="nav-link active">Nous connaître</a></li>
         </ul>
     </nav>
 
-    <header class="page-header">
-        <div class="header-overlay">
-            <h1>L'Équipe Symposium</h1>
-            <div class="header-line"></div>
-            <p>Les membres pour l'année 2026</p>
+    <header class="page-header-equipe" id="top">
+        <div class="header-content">
+            <h1 style="font-size: 3rem; margin-bottom: 10px;">Nous connaître</h1>
+            <div class="header-line" style="width: 80px; height: 3px; background: var(--gold); margin: 0 auto 20px;"></div>
+            <p style="font-size: 1.2rem; font-weight: 300;">Notre mission et l'équipe 2026</p>
         </div>
     </header>
 
-    <section class="section-container">
+    <section class="section-container" style="background-color: #fff;">
+        <div class="about-wrapper">
+            <h2 class="section-title">À propos</h2>
+            
+            <div class="about-text">
+                <p>Fondée en 2013, <strong>Symposium</strong> est la tribune étudiante de CentraleSupélec. Chaque mois, nous invitons des personnalités du monde politique, économique, culturel et académique à participer à des conférences et débats, afin d’échanger sans filtre avec les étudiants.</p>
+                
+                <p class="about-statement">À l’heure où les enjeux contemporains deviennent toujours plus techniques, Symposium défend la conviction que les <strong>ingénieurs et scientifiques</strong> doivent être pleinement acteurs du débat démocratique.</p>
+                
+                <p>Symposium s’adresse en premier lieu aux étudiants de CentraleSupélec, auxquels s’ajoutent régulièrement ceux de l’ENS Paris-Saclay, de l’École Polytechnique et, plus largement, des établissements du Plateau de Saclay.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="section-container">
+        <h2 class="section-title">L'Équipe 2026</h2>
         <div class="team-grid">
             
             <div class="team-card">
@@ -46,29 +128,29 @@
             </div>
 
             <div class="team-card">
-                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/malo.jpg' %}');"></div></div>
-                <div class="member-info">
-                    <p class="role">Trésorier</p>
-                    <h3>Malo Lemonnier</h3>
-                    <a href="mailto:malo.lemonnier@symposium-cs.fr" class="member-email">malo.lemonnier@symposium-cs.fr</a>
-                </div>
-            </div>
-
-            <div class="team-card">
-                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/clement.jpg' %}');"></div></div>
-                <div class="member-info">
-                    <p class="role">Secrétaire Général</p>
-                    <h3>Clément Cayeux</h3>
-                    <a href="mailto:clement.cayeux@symposium-cs.fr" class="member-email">clement.cayeux@symposium-cs.fr</a>
-                </div>
-            </div>
-
-            <div class="team-card">
                 <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/nael.jpeg' %}');"></div></div>
                 <div class="member-info">
                     <p class="role">Vice-Président</p>
                     <h3>Naël Zein</h3>
                     <a href="mailto:nael.zein@symposium-cs.fr" class="member-email">nael.zein@symposium-cs.fr</a>
+                </div>
+            </div>            
+
+            <div class="team-card">
+                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/clement.jpg' %}');"></div></div>
+                <div class="member-info">
+                    <p class="role">Secrétaire Général</p>
+                    <h3>Clément Caillou</h3>
+                    <a href="mailto:clement.cayeux@symposium-cs.fr" class="member-email">clement.cayeux@symposium-cs.fr</a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/malo.jpg' %}');"></div></div>
+                <div class="member-info">
+                    <p class="role">Trésorier</p>
+                    <h3>Malo Lemonnier</h3>
+                    <a href="mailto:malo.lemonnier@symposium-cs.fr" class="member-email">malo.lemonnier@symposium-cs.fr</a>
                 </div>
             </div>
 
@@ -177,7 +259,9 @@
     <footer>
         <div class="footer-content">
             <p>
-                <a href="{% url 'equipe' %}" class="footer-contact-link">Nous contacter</a>
+                <a href="#top" class="footer-contact-link">À propos</a>
+                <span style="color: var(--gold); margin: 0 10px;">•</span>
+                <a href="#team" class="footer-contact-link">Notre équipe & Contacts</a>
                 <span style="color: var(--gold); margin: 0 10px;">•</span>
                 <a href="https://www.linkedin.com/company/symposiumcentralesup%C3%A9lec/" target="_blank" class="footer-contact-link">LinkedIn</a>
             </p>
