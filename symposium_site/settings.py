@@ -125,9 +125,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
+# Configuration pour formulaire.symposium@outlook.com
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.office365.com' # À vérifier selon ton hôte
+EMAIL_HOST = 'smtp-relay.brevo.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'ton-email-expediteur@symposium-cs.fr'
-EMAIL_HOST_PASSWORD = 'ton-mot-de-passe'
+EMAIL_HOST_USER = 'a0d10e001@smtp-brevo.com'
+EMAIL_HOST_PASSWORD = 'xsmtpsib-81feafa9fc1f70343cc2c04e27ebcc5a0a43da3f9281465196936c0b213fa33b-mCTvWua6IG65ikns'
+DEFAULT_FROM_EMAIL = 'Symposium CentraleSupélec <formulaire.symposium@outlook.com>'

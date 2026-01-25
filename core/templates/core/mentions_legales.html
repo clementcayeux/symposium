@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | Symposium CentraleSupélec</title>
-    <link rel="icon" type="image/png" href="{% static 'core/assets/favicon.png' %}">   
+    <title>Mentions Légales | Symposium CentraleSupélec</title>
     <link rel="stylesheet" href="{% static 'core/style.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body class="bg-light">
 
@@ -29,48 +28,32 @@
             <li><a href="{% url 'home' %}#conferences" class="nav-link">Conférences</a></li>
             <li><a href="{% url 'home' %}#partenaires" class="nav-link">Partenaires</a></li>
             <li><a href="{% url 'equipe' %}" class="nav-link">Nous Connaître</a></li>
-            <li><a href="{% url 'contact' %}" class="nav-link active">Contact</a></li>
+            <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
         </ul>
     </nav>
 
     <header class="page-header" style="background: var(--navy); padding: 80px 0 30px;">
         <div class="header-content" style="text-align: center; color: white;">
-            <h1 style="margin: 0; font-size: 2.2rem;">Contact</h1>
+            <h1 style="margin: 0; font-size: 2.2rem;">Mentions Légales</h1>
             <div class="header-line" style="width: 40px; height: 3px; background: var(--gold); margin: 15px auto 0;"></div>
         </div>
     </header>
 
-    <section class="section-container">
-        <div class="about-wrapper" style="max-width: 700px; margin: 0 auto;">
-            
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" 
-                         style="padding: 15px; margin-bottom: 30px; border-radius: 8px; text-align: center; 
-                                background: {% if message.tags == 'success' %}#d4edda{% else %}#f8d7da{% endif %};
-                                color: {% if message.tags == 'success' %}#155724{% else %}#721c24{% endif %};">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
+    <section class="section-container" style="max-width: 800px; margin: 40px auto; line-height: 1.8; color: #444;">
+        <h3>1. Éditeur du site</h3>
+        <p>Le présent site est édité par l'association <strong>Symposium CentraleSupélec</strong>, association loi 1901.<br>
+        <strong>Siège social :</strong> Plateau de Saclay, 3 rue Joliot-Curie, 91190 Gif-sur-Yvette.<br>
+        <strong>Directeur de la publication :</strong> Le président du mandat en cours.</p>
 
-            <form method="POST" class="contact-form">
-                {% csrf_token %}
-                <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <input type="text" name="name" placeholder="Nom" required style="padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px;">
-                    <input type="email" name="email" placeholder="Email" required style="padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px;">
-                </div>
-                <input type="text" name="subject" placeholder="Sujet de votre message" required style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px;">
-                <textarea name="message" rows="6" placeholder="Votre message..." required style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 25px; font-family: inherit;"></textarea>
-                
-                <button type="submit" class="btn-main" style="width: 100%; border: none; cursor: pointer; padding: 18px;">
-                    Envoyer le message
-                </button>
-            </form>
-        </div>
+        <h3>2. Hébergement</h3>
+        <p>Le site est hébergé par : ViaRezo CentraleSupélec</p>
+
+       
+        <h3>4. Données personnelles (RGPD)</h3>
+        <p>Conformément au RGPD, les informations recueillies via le formulaire de contact sont destinées exclusivement au traitement de votre demande par l'équipe du Symposium. Elles ne sont ni cédées, ni vendues à des tiers. Vous disposez d'un droit d'accès et de rectification en nous contactant </strong>.</p>
     </section>
 
-   <footer>
+    <footer>
         <div class="footer-content">
             <p>
                 <a href="{% url 'equipe' %}" class="footer-contact-link">À propos</a>
@@ -92,5 +75,5 @@
 
     <script src="{% static 'core/script.js' %}"></script>
 
-</body>
+    </body>
 </html>

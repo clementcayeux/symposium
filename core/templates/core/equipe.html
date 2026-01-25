@@ -20,9 +20,9 @@
 
         .about-text p {
             font-size: 1.15rem;
-            line-height: 1.6; /* Interligne diminué (était à 2) */
+            line-height: 1.6; 
             color: #444;
-            margin-bottom: 2.5rem !important; /* Espacement ajusté entre paragraphes */
+            margin-bottom: 2.5rem !important; 
             display: block;
         }
 
@@ -63,16 +63,25 @@
             width: 100%;
         }
 
-        /* Modification du Header avec l'image d'équipe et filtre bleu */
+        /* Header avec l'image d'équipe et filtre bleu */
         .page-header-equipe {
-            height: 50vh; /* Hauteur ajustée pour la bannière */
+            height: 50vh; 
             background: linear-gradient(rgba(0, 11, 41, 0.6), rgba(0, 11, 41, 0.6)), url('{% static 'core/assets/equipe.jpg' %}') center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
-            padding-top: 80px; /* Compensation de la navbar */
+            padding-top: 80px; 
+        }
+
+        /* Style pour le CTA de contact en bas de grille */
+        .team-contact-cta {
+            margin-top: 60px;
+            padding: 40px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
     </style>
 </head>
@@ -84,11 +93,19 @@
                 <img src="{% static 'core/assets/logo.png' %}" alt="Logo Symposium" class="nav-logo">
             </a>
         </div>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
         <ul class="nav-links">
-            <li><a href="{% url 'home' %}" class="nav-link">Accueil</a></li>
+            <li><a href="{% url 'home' %}#home" class="nav-link">Accueil</a></li>
             <li><a href="{% url 'home' %}#conferences" class="nav-link">Conférences</a></li>
             <li><a href="{% url 'home' %}#partenaires" class="nav-link">Partenaires</a></li>
-            <li><a href="{% url 'equipe' %}" class="nav-link active">Nous connaître</a></li>
+            <li><a href="{% url 'equipe' %}" class="nav-link active">Nous Connaître</a></li>
+            <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
         </ul>
     </nav>
 
@@ -123,7 +140,6 @@
                 <div class="member-info">
                     <p class="role">Président</p>
                     <h3>Augustin Foray</h3>
-                    <a href="mailto:augustin.foray@symposium-cs.fr" class="member-email">augustin.foray@symposium-cs.fr</a>
                 </div>
             </div>
 
@@ -132,7 +148,6 @@
                 <div class="member-info">
                     <p class="role">Vice-Président</p>
                     <h3>Naël Zein</h3>
-                    <a href="mailto:nael.zein@symposium-cs.fr" class="member-email">nael.zein@symposium-cs.fr</a>
                 </div>
             </div>            
 
@@ -140,8 +155,7 @@
                 <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/clement.jpg' %}');"></div></div>
                 <div class="member-info">
                     <p class="role">Secrétaire Général</p>
-                    <h3>Clément Caillou</h3>
-                    <a href="mailto:clement.cayeux@symposium-cs.fr" class="member-email">clement.cayeux@symposium-cs.fr</a>
+                    <h3>Clément Cayeux</h3>
                 </div>
             </div>
 
@@ -150,7 +164,6 @@
                 <div class="member-info">
                     <p class="role">Trésorier</p>
                     <h3>Malo Lemonnier</h3>
-                    <a href="mailto:malo.lemonnier@symposium-cs.fr" class="member-email">malo.lemonnier@symposium-cs.fr</a>
                 </div>
             </div>
 
@@ -159,7 +172,6 @@
                 <div class="member-info">
                     <p class="role">VP Prospection</p>
                     <h3>Benoit Mayet</h3>
-                    <a href="mailto:benoit.mayet@symposium-cs.fr" class="member-email">benoit.mayet@symposium-cs.fr</a>
                 </div>
             </div>
 
@@ -168,7 +180,6 @@
                 <div class="member-info">
                     <p class="role">VP Comm & Éloquence</p>
                     <h3>Joseph Hanna</h3>
-                    <a href="mailto:joseph.hanna@symposium-cs.fr" class="member-email">joseph.hanna@symposium-cs.fr</a>
                 </div>
             </div>
 
@@ -177,7 +188,6 @@
                 <div class="member-info">
                     <p class="role">Membre</p>
                     <h3>Emna Bannour</h3>
-                    <a href="mailto:emna.bannour@symposium-cs.fr" class="member-email">emna.bannour@symposium-cs.fr</a>
                 </div>
             </div>
 
@@ -186,7 +196,6 @@
                 <div class="member-info">
                     <p class="role">Membre</p>
                     <h3>Klervi Ringeval</h3>
-                    <a href="mailto:klervi.ringeval@symposium-cs.fr" class="member-email">klervi.ringeval@symposium-cs.fr</a>
                 </div>
             </div>
 
@@ -195,7 +204,6 @@
                 <div class="member-info">
                     <p class="role">Membre</p>
                     <h3>Lamine Semmar</h3>
-                    <a href="mailto:lamine.semmar@symposium-cs.fr" class="member-email">lamine.semmar@symposium-cs.fr</a>
                 </div>
             </div>
 
@@ -204,7 +212,6 @@
                 <div class="member-info">
                     <p class="role">Membre</p>
                     <h3>Gabrielle Hellier</h3>
-                    <a href="mailto:gabrielle.hellier@symposium-cs.fr" class="member-email">gabrielle.hellier@symposium-cs.fr</a>
                 </div>
             </div>
 
@@ -213,7 +220,6 @@
                 <div class="member-info">
                     <p class="role">Membre</p>
                     <h3>Marie-Yang Venière</h3>
-                    <a href="mailto:marie-yang.veniere@symposium-cs.fr" class="member-email">marie-yang.veniere@symposium-cs.fr</a>
                 </div>
             </div>
 
@@ -222,7 +228,6 @@
                 <div class="member-info">
                     <p class="role">Membre</p>
                     <h3>Jules Rancurel</h3>
-                    <a href="mailto:jules.rancurel@symposium-cs.fr" class="member-email">jules.rancurel@symposium-cs.fr</a>
                 </div>
             </div>
 
@@ -231,7 +236,6 @@
                 <div class="member-info">
                     <p class="role">Membre</p>
                     <h3>Théophile Thibaudon</h3>
-                    <a href="mailto:theophile.thibaudon@symposium-cs.fr" class="member-email">theophile.thibaudon@symposium-cs.fr</a>
                 </div>
             </div>
 
@@ -240,7 +244,6 @@
                 <div class="member-info">
                     <p class="role">Membre</p>
                     <h3>Théophile Salabert</h3>
-                    <a href="mailto:theophile.salabert@symposium-cs.fr" class="member-email">theophile.salabert@symposium-cs.fr</a>
                 </div>
             </div>
 
@@ -249,25 +252,38 @@
                 <div class="member-info">
                     <p class="role">Membre</p>
                     <h3>Albert Kechteil</h3>
-                    <a href="mailto:albert.kechteil@symposium-cs.fr" class="member-email">albert.kechteil@symposium-cs.fr</a>
                 </div>
             </div>
 
         </div>
+
+        <div class="team-contact-cta" style="text-align: center;">
+            <p style="font-size: 1.1rem; color: #666; margin-bottom: 20px;">Vous souhaitez contacter un membre de l'équipe ?</p>
+            <a href="{% url 'contact' %}" class="btn-main">Utiliser le formulaire de contact</a>
+        </div>
     </section>
 
-    <footer>
+   <footer>
         <div class="footer-content">
             <p>
-                <a href="#top" class="footer-contact-link">À propos</a>
+                <a href="{% url 'equipe' %}" class="footer-contact-link">À propos</a>
                 <span style="color: var(--gold); margin: 0 10px;">•</span>
-                <a href="#team" class="footer-contact-link">Notre équipe & Contacts</a>
+                <a href="{% url 'equipe' %}#team" class="footer-contact-link">Notre équipe</a>
+                <span style="color: var(--gold); margin: 0 10px;">•</span>
+                <a href="{% url 'contact' %}" class="footer-contact-link">Nous contacter</a>
                 <span style="color: var(--gold); margin: 0 10px;">•</span>
                 <a href="https://www.linkedin.com/company/symposiumcentralesup%C3%A9lec/" target="_blank" class="footer-contact-link">LinkedIn</a>
             </p>
-            <div class="footer-bottom">&copy; 2026 Symposium CentraleSupélec</div>
+
+            <div class="footer-bottom">
+                &copy; 2026 Symposium CentraleSupélec 
+                <span style="margin: 0 8px; opacity: 0.5;">|</span> 
+                <a href="{% url 'mentions_legales' %}" class="footer-legal-link">Mentions Légales</a>
+            </div>
         </div>
     </footer>
+
+    <script src="{% static 'core/script.js' %}"></script>
 
 </body>
 </html>

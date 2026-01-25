@@ -181,7 +181,7 @@ a {
 
 /* Largeur identique forcée pour les boutons de la bannière */
 .hero-btns .btn-main {
-    min-width: 320px; /* Ajuste cette valeur selon ton goût */
+    min-width: 250px; /* Ajuste cette valeur selon ton goût */
     text-align: center;
     margin: 0; /* On retire les marges automatiques pour gérer via le gap */
 }
@@ -626,4 +626,70 @@ footer {
 .contact-form input:focus, .contact-form textarea:focus {
     outline: none;
     border-color: var(--gold);
+}
+
+
+
+.footer-legal-link {
+    color: inherit; /* Prend la couleur du texte du copyright */
+    text-decoration: none;
+    font-size: 0.9em;
+    opacity: 0.7; /* Légèrement plus clair */
+    transition: opacity 0.3s;
+}
+
+.footer-legal-link:hover {
+    opacity: 1;
+    color: var(--gold); /* Devient doré au survol pour montrer que c'est cliquable */
+}
+
+
+/* --- RESPONSIVE NAVBAR --- */
+
+/* Cacher le bouton hamburger sur desktop */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.menu-toggle .bar {
+    width: 28px;
+    height: 3px;
+    background-color: white; /* Ou var(--gold) selon tes goûts */
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* Version Mobile (en dessous de 768px) */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+        z-index: 1001;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Caché à droite */
+        height: 100vh;
+        width: 70%; /* Prend une partie de l'écran */
+        background-color: var(--navy);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        transition: 0.4s ease-in-out;
+        box-shadow: -10px 0 20px rgba(0,0,0,0.3);
+    }
+
+    .nav-links.active {
+        right: 0; /* Apparaît au clic */
+    }
+
+    /* Animation du bouton Hamburger en "X" au clic */
+    #mobile-menu.is-active .bar:nth-child(2) { opacity: 0; }
+    #mobile-menu.is-active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    #mobile-menu.is-active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 }
