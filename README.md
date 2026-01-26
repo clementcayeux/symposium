@@ -2,22 +2,9 @@
 
 
 
-## Getting started
+## Initialisation
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab-cw4.centralesupelec.fr/clement.cayeux/symposium.git
-git branch -M main
-git push -uf origin main
 ```
 
 ## Integrate with your tools
@@ -32,62 +19,108 @@ git push -uf origin main
 - [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
 - [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
 
-## Test and Deploy
 
-Use the built-in continuous integration in GitLab.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+# Symposium CentraleSupélec - Site Officiel
+Bienvenue sur le dépôt du site officiel de Symposium. Ce site a été conçu pour être vitrine de l'association, permettant de présenter les conférences, l'équipe et de faciliter la prise de contact.
 
-***
+Stack Technique
+Framework : Django 5.x (Python)
 
-# Editing this README
+Frontend : HTML5, CSS3 (Custom Grid & Flexbox), JavaScript Vanilla
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+Emails : Relais SMTP via Brevo
 
-## Suggestions for a good README
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+Design : Responsive (Mobile First) aux couleurs Navy & Or du Symposium.
 
-## Name
-Choose a self-explaining name for your project.
+📂 Structure du Projet
+Plaintext
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+├── symposium_site/          # Dossier de configuration Django (settings, urls)
+├── core/                    # Application principale
+│   ├── static/core/         # Fichiers CSS, JS et Assets (Images, Favicon)
+│   ├── templates/core/      # Fichiers HTML
+│   │   └── emails/          # Templates HTML pour les envois de mails
+│   ├── views.py             # Logique des pages et du formulaire de contact
+│   └── urls.py              # Routage des pages
+├── manage.py                # Point d'entrée des commandes Django
+└── db.sqlite3               # Base de données (utilisée pour les sessions/messages)
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+Installation Locale (Développement)
+Pour reprendre le projet sur votre machine :
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+Cloner le dépôt :
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+Bash
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+git clone https://gitlab-cw4.centralesupelec.fr/clement.cayeux/symposium.git
+cd symposium_site
+Créer un environnement virtuel :
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+Bash
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+python -m venv venv
+source venv/bin/activate  # Sur Windows : venv\Scripts\activate
+Installer les dépendances :
 
-## License
-For open source projects, say how it is licensed.
+Bash
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+pip install django
+Appliquer les migrations :
+
+Bash
+
+python manage.py migrate
+Lancer le serveur :
+
+Bash
+
+python manage.py runserver
+
+
+Configuration du Formulaire de Contact (Brevo)
+Le site utilise Brevo pour l'envoi des mails afin d'éviter les blocages SMTP d'Outlook/Gmail.
+
+Paramètres à vérifier dans settings.py :
+EMAIL_HOST_USER : L'adresse email du compte Brevo (formulaire.symposium@outlook.com).
+
+EMAIL_HOST_PASSWORD : La Clé SMTP Master générée sur le dashboard Brevo.
+
+DEFAULT_FROM_EMAIL : L'adresse d'expédition affichée aux utilisateurs.
+
+
+Maintenance & Mises à jour
+1. Modifier l'Équipe
+Les membres sont gérés directement dans le template core/templates/core/equipe.html.
+
+Photos : À placer dans static/core/assets/. Format recommandé : .jpg ou .png (carré de préférence).
+
+Emails : Par sécurité, les emails individuels ont été retirés pour éviter le "scraping". Privilégiez les liens LinkedIn et le formulaire Contact
+
+
+2. Modifier les adresses emails du formulaire Contact : dans views.py -> def(contact) -> Utilisateurs send(mail), il faut mettre à jour la liste :
+recipient_list=['clement.cayeux@symposium-cs.fr',...]
+qui contient les emails à qui tout message du questionnaire est transmis.
+
+3. Mettre à jour les prochaine conférences
+Directement dans core/templates/core/index.html
+
+Photos : À placer dans static/core/assets/. Format recommandé : .jpg ou .png 
+
+4. Ajouter des Replays
+Les liens YouTube se modifient dans index.html au niveau de la section "Replays".
+
+5. Mentions Légales
+Le texte est conforme à la loi LCEN. Si l'hébergeur ou le Président change, mettez à jour mentions_legales.html.
+
+
+
+Contact en cas de pépin
+Développeur Original : Clément Cayeux (Mandat 2026)
+
+Hébergement : [Préciser ici - ex: PythonAnywhere]
