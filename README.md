@@ -29,7 +29,7 @@ Bienvenue sur le dépôt du site officiel de **Symposium**. Ce site a été con�
 ```
 
 
-#" 🚀 Installation Locale (Développement)
+## 🚀 Installation Locale (Développement)
 Pour reprendre le projet sur votre machine :
 
 Cloner le dépôt :
