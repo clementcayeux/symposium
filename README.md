@@ -71,16 +71,16 @@ EMAIL_HOST_PASSWORD : La Clé SMTP Master générée sur le dashboard Brevo (ong
 
 DEFAULT_FROM_EMAIL : L'adresse d'expédition qui apparaîtra chez le destinataire.
 
-##🔧 Maintenance & Mises à jour
+## 🔧 Maintenance & Mises à jour
 
-###👥 Modifier l'Équipe
+### 👥 Modifier l'Équipe
 Les membres sont gérés manuellement dans core/templates/core/equipe.html.
 
 Photos : À placer dans static/core/assets/. Format recommandé : .jpg ou .png (format carré de préférence).
 
 Sécurité : Les emails individuels sont masqués pour éviter le "scraping". Utilisez les liens LinkedIn.
 
-###📩 Modifier les destinataires du formulaire
+### 📩 Modifier les destinataires du formulaire
 Pour changer qui reçoit les messages envoyés via le site :
 
 Ouvrir core/views.py.
