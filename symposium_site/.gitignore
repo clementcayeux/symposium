@@ -1,6 +1,36 @@
+# --- Python / Django ---
 *.pyc
 __pycache__/
+*.pyo
+*.pyd
 db.sqlite3
+.pytest_cache/
+.coverage
+
+# --- Environnement Virtuel ---
+venv/
+env/
+ENV/
+.env
 .venv/
 virenv/
+
+# --- Fichiers Media (Photos des invités) ---
+# On ne veut pas synchroniser les photos uploadées via Git
+media/
+
+# --- Fichiers Statiques Collectés ---
+# Inutile de les push, collectstatic les recréera sur la VM
+staticfiles/
+static/
+
+# --- Système & IDE ---
 .DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# --- OneDrive / Windows spécifiques ---
+Desktop.ini
+~$*
