@@ -1,103 +1,115 @@
-# Symposium CentraleSupélec - Site Officiel
-Bienvenue sur le dépôt du site officiel de Symposium. Ce site a été conçu pour être vitrine de l'association, permettant de présenter les conférences, l'équipe et de faciliter la prise de contact.
+Symposium CentraleSupélec — Site Officiel
 
-Stack Technique
+Bienvenue sur le dépôt du site officiel de Symposium CentraleSupélec.
+
+Ce site a vocation à servir de vitrine pour l’association : présentation des conférences, de l’équipe, et mise à disposition d’un formulaire de contact.
+
+Stack technique
+
 Framework : Django 5.x (Python)
 
-Frontend : HTML5, CSS3 (Custom Grid & Flexbox), JavaScript Vanilla
+Frontend : HTML5, CSS3 (Grid & Flexbox custom), JavaScript vanilla
 
 Emails : Relais SMTP via Brevo
 
+Design : Responsive (mobile first), aux couleurs Navy & Or de Symposium
 
-Design : Responsive (Mobile First) aux couleurs Navy & Or du Symposium.
-
-📂 Structure du Projet
-Plaintext
-
-├── symposium_site/          # Dossier de configuration Django (settings, urls)
+Structure du projet
+├── symposium_site/          # Configuration Django (settings, urls)
 ├── core/                    # Application principale
-│   ├── static/core/         # Fichiers CSS, JS et Assets (Images, Favicon)
-│   ├── templates/core/      # Fichiers HTML
-│   │   └── emails/          # Templates HTML pour les envois de mails
-│   ├── views.py             # Logique des pages et du formulaire de contact
+│   ├── static/core/         # CSS, JavaScript et assets (images, favicon)
+│   ├── templates/core/      # Templates HTML
+│   │   └── emails/          # Templates HTML des emails
+│   ├── views.py             # Logique des pages et formulaire de contact
 │   └── urls.py              # Routage des pages
-├── manage.py                # Point d'entrée des commandes Django
-└── db.sqlite3               # Base de données (utilisée pour les sessions/messages)
+├── manage.py                # Point d’entrée des commandes Django
+└── db.sqlite3               # Base de données (sessions et messages)
 
-
-
-Installation Locale (Développement)
-Pour reprendre le projet sur votre machine :
-
-Cloner le dépôt :
-
-
-
-Bash
-
+Installation locale (développement)
+1. Cloner le dépôt
 git clone https://gitlab-cw4.centralesupelec.fr/clement.cayeux/symposium.git
 cd symposium_site
-Créer un environnement virtuel :
 
-Bash
-
+2. Créer un environnement virtuel
 python -m venv venv
-source venv/bin/activate  # Sur Windows : venv\Scripts\activate
-Installer les dépendances :
+source venv/bin/activate     # Windows : venv\Scripts\activate
 
-Bash
-
+3. Installer les dépendances
 pip install django
-Appliquer les migrations :
 
-Bash
-
+4. Appliquer les migrations
 python manage.py migrate
-Lancer le serveur :
 
-Bash
-
+5. Lancer le serveur de développement
 python manage.py runserver
 
 
-Configuration du Formulaire de Contact (Brevo)
-Le site utilise Brevo pour l'envoi des mails afin d'éviter les blocages SMTP d'Outlook/Gmail.
+Le site est alors accessible à l’adresse :
+http://127.0.0.1:8000
 
-Paramètres à vérifier dans settings.py :
-EMAIL_HOST_USER : L'adresse email du compte Brevo (formulaire.symposium@outlook.com).
+Configuration du formulaire de contact (Brevo)
 
-EMAIL_HOST_PASSWORD : La Clé SMTP Master générée sur le dashboard Brevo.
+Le formulaire de contact utilise Brevo pour l’envoi des emails, afin d’éviter les blocages SMTP liés à Outlook ou Gmail.
 
-DEFAULT_FROM_EMAIL : L'adresse d'expédition affichée aux utilisateurs.
+Dans settings.py, vérifier les paramètres suivants :
+
+EMAIL_HOST_USER
+Adresse email du compte Brevo (ex. formulaire.symposium@outlook.com)
+
+EMAIL_HOST_PASSWORD
+Clé SMTP Master générée depuis le dashboard Brevo
+
+DEFAULT_FROM_EMAIL
+Adresse d’expédition affichée aux utilisateurs
+
+Maintenance et mises à jour
+Modifier l’équipe
+
+Fichier :
+core/templates/core/equipe.html
+
+Photos :
+À placer dans static/core/assets/
+Formats recommandés : .jpg ou .png (de préférence carrés)
+
+Emails :
+Les adresses individuelles ont été volontairement supprimées pour éviter le scraping.
+Privilégier les liens LinkedIn et le formulaire de contact.
+
+Modifier les destinataires du formulaire de contact
+
+Dans views.py, fonction contact, mettre à jour la liste :
+
+recipient_list = [
+    'clement.cayeux@symposium-cs.fr',
+    ...
+]
 
 
-Maintenance & Mises à jour
-1. Modifier l'Équipe
-Les membres sont gérés directement dans le template core/templates/core/equipe.html.
+Tous les messages envoyés via le formulaire seront transmis à ces adresses.
 
-Photos : À placer dans static/core/assets/. Format recommandé : .jpg ou .png (carré de préférence).
+Mettre à jour les prochaines conférences
 
-Emails : Par sécurité, les emails individuels ont été retirés pour éviter le "scraping". Privilégiez les liens LinkedIn et le formulaire Contact
+Fichier :
+core/templates/core/index.html
 
+Photos :
+À placer dans static/core/assets/
+Formats recommandés : .jpg ou .png
 
-2. Modifier les adresses emails du formulaire Contact : dans views.py -> def(contact) -> Utilisateurs send(mail), il faut mettre à jour la liste :
-recipient_list=['clement.cayeux@symposium-cs.fr',...]
-qui contient les emails à qui tout message du questionnaire est transmis.
+Ajouter ou modifier les replays
 
-3. Mettre à jour les prochaine conférences
-Directement dans core/templates/core/index.html
+Les liens YouTube se modifient directement dans index.html, dans la section Replays.
 
-Photos : À placer dans static/core/assets/. Format recommandé : .jpg ou .png 
+Mentions légales
 
-4. Ajouter des Replays
-Les liens YouTube se modifient dans index.html au niveau de la section "Replays".
+Le texte est conforme à la loi LCEN.
+En cas de changement d’hébergeur ou de président de l’association, mettre à jour :
 
-5. Mentions Légales
-Le texte est conforme à la loi LCEN. Si l'hébergeur ou le Président change, mettez à jour mentions_legales.html.
+mentions_legales.html
 
+Contact en cas de problème
 
-
-Contact en cas de pépin
-Développeur Original : Clément Cayeux (Mandat 2026)
+Développeur original : Clément Cayeux (mandat 2026)
 
 Hébergement : ViaRezo
