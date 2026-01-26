@@ -25,7 +25,11 @@ Bienvenue sur le dépôt du site officiel de **Symposium**. Ce site a été con�
 │   └── urls.py              # Routage des pages
 ├── manage.py                # Point d'entrée des commandes Django
 └── db.sqlite3               # Base de données (sessions et messages flash)
-🚀 Installation Locale (Développement)
+
+```
+
+
+#" 🚀 Installation Locale (Développement)
 Pour reprendre le projet sur votre machine :
 
 Cloner le dépôt :
@@ -55,7 +59,9 @@ Lancer le serveur :
 Bash
 
 python manage.py runserver
-✉️ Configuration du Formulaire de Contact (Brevo)
+
+
+## ✉️ Configuration du Formulaire de Contact (Brevo)
 Le site utilise Brevo pour l'envoi des mails afin d'éviter les blocages SMTP classiques des boîtes Outlook/Gmail.
 
 Paramètres à vérifier dans settings.py :
@@ -65,15 +71,16 @@ EMAIL_HOST_PASSWORD : La Clé SMTP Master générée sur le dashboard Brevo (ong
 
 DEFAULT_FROM_EMAIL : L'adresse d'expédition qui apparaîtra chez le destinataire.
 
-🔧 Maintenance & Mises à jour
-👥 Modifier l'Équipe
+##🔧 Maintenance & Mises à jour
+
+###👥 Modifier l'Équipe
 Les membres sont gérés manuellement dans core/templates/core/equipe.html.
 
 Photos : À placer dans static/core/assets/. Format recommandé : .jpg ou .png (format carré de préférence).
 
 Sécurité : Les emails individuels sont masqués pour éviter le "scraping". Utilisez les liens LinkedIn.
 
-📩 Modifier les destinataires du formulaire
+###📩 Modifier les destinataires du formulaire
 Pour changer qui reçoit les messages envoyés via le site :
 
 Ouvrir core/views.py.
@@ -83,18 +90,19 @@ Dans la fonction contact, modifier la recipient_list :
 Python
 
 recipient_list=['clement.cayeux@symposium-cs.fr', 'autre.membre@symposium-cs.fr']
-🎤 Mettre à jour les conférences
+
+### 🎤 Mettre à jour les conférences
 Directement dans core/templates/core/index.html.
 
 Modifier les textes et les sources d'images (static/core/assets/).
 
-🎥 Ajouter des Replays
+### 🎥 Ajouter des Replays
 Les liens YouTube se modifient dans index.html au niveau de la section "Replays". Il suffit de remplacer l'ID de la vidéo dans l'URL d'intégration.
 
-⚖️ Mentions Légales
+### ⚖️ Mentions Légales
 Le texte est conforme à la loi LCEN. Si le Président de l'association change ou si l'Hébergeur est modifié, mettez à jour le fichier mentions_legales.html.
 
-📞 Contact & Hébergement
+### 📞 Contact & Hébergement
 Développeur Original : Clément Cayeux (Mandat 2026)
 
 Hébergement : ViaRezo (CentraleSupélec)
