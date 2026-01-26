@@ -1,25 +1,3 @@
-# Symposium
-
-
-
-## Initialisation
-
-
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab-cw4.centralesupelec.fr/clement.cayeux/symposium/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
-
-
-
 # Symposium CentraleSupélec - Site Officiel
 Bienvenue sur le dépôt du site officiel de Symposium. Ce site a été conçu pour être vitrine de l'association, permettant de présenter les conférences, l'équipe et de faciliter la prise de contact.
 
