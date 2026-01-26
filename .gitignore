@@ -1,0 +1,6 @@
+db.sqlite3
+media/
+static/
+venv/
+*.pyc
+__pycache__/
