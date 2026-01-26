@@ -2,6 +2,8 @@
 
 Bienvenue sur le dépôt du site officiel de **Symposium**. Ce site a été conçu comme la vitrine de l'association : il permet de présenter les conférences, l'équipe actuelle et centralise la prise de contact via un formulaire sécurisé.
 
+## Aidez vous de l'IA pour vous expliquer et vous écrire les codes !
+
 ---
 
 ##  Stack Technique
@@ -38,6 +40,10 @@ Bash
 
 git clone [https://gitlab-cw4.centralesupelec.fr/clement.cayeux/symposium.git](https://gitlab-cw4.centralesupelec.fr/clement.cayeux/symposium.git)
 cd symposium_site
+
+(ou plutôt avec la clé SSH git@gitlab-cw4.centralesupelec.fr:clement.cayeux/symposium.git)
+
+
 Créer un environnement virtuel :
 
 Bash
