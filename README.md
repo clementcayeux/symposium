@@ -123,4 +123,4 @@ Le texte est conforme à la loi LCEN. Si l'hébergeur ou le Président change, m
 Contact en cas de pépin
 Développeur Original : Clément Cayeux (Mandat 2026)
 
-Hébergement : [Préciser ici - ex: PythonAnywhere]
+Hébergement : ViaRezo
