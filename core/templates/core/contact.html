@@ -63,6 +63,10 @@
                 <input type="text" name="subject" placeholder="Sujet de votre message" required style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px;">
                 <textarea name="message" rows="6" placeholder="Votre message..." required style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 25px; font-family: inherit;"></textarea>
                 
+                <div style="display: none;" aria-hidden="true">
+                    <input type="text" name="phone_confirm" tabindex="-1" autocomplete="off">
+                </div>
+
                 <button type="submit" class="btn-main" style="width: 100%; border: none; cursor: pointer; padding: 18px;">
                     Envoyer le message
                 </button>

@@ -103,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr-fr'
 
 TIME_ZONE = 'UTC'
 
@@ -133,3 +133,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'a0d10e001@smtp-brevo.com'
 EMAIL_HOST_PASSWORD = 'xsmtpsib-81feafa9fc1f70343cc2c04e27ebcc5a0a43da3f9281465196936c0b213fa33b-mCTvWua6IG65ikns'
 DEFAULT_FROM_EMAIL = 'Symposium CentraleSupélec <formulaire.symposium@outlook.com>'
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

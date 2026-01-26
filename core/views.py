@@ -23,16 +23,35 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
+from .models import ContactRecipient
 
 
 def contact(request):
     if request.method == 'POST':
+        # 1. On vérifie le piège (Honeypot)
+        honeypot = request.POST.get('phone_confirm')
+        if honeypot:
+            # C'est un robot ! On ne fait rien, on ne dépense pas de crédit mail.
+            # On simule un succès pour que le robot ne cherche pas d'autre faille.
+            messages.success(request, "Votre message a été envoyé. Un mail de confirmation vous a été adressé.")
+            return redirect('contact')
+
+        # 2. Si le champ est vide, c'est un humain, on continue la logique normale
         nom = request.POST.get('name')
         email_utilisateur = request.POST.get('email')
         sujet = request.POST.get('subject')
         message_contenu = request.POST.get('message')
 
-        # --- 1. MAIL POUR CLÉMENT (L'alerte admin) ---
+        # --- RÉCUPÉRATION DYNAMIQUE DES DESTINATAIRES ---
+        # On récupère tous les emails actifs dans une liste
+        destinataires = list(ContactRecipient.objects.filter(actif=True).values_list('email', flat=True))
+        
+        # Sécurité : Si aucun mail n'est configuré dans l'admin, on met un mail par défaut 
+        # pour éviter que send_mail ne plante
+        if not destinataires:
+            destinataires = ['clement.cayeux@symposium-cs.fr']
+
+        # --- 1. MAIL POUR LES MEMBRES SYMPO (L'alerte admin) ---
         corps_admin = f"Nouveau message par le formulaire du site, de : {nom} ({email_utilisateur})\n\nSujet : {sujet}\n\nContenu :\n{message_contenu}"
         
         # --- 2. MAIL POUR L'UTILISATEUR (La confirmation) ---
@@ -47,7 +66,7 @@ def contact(request):
                 subject=f"[Contact WEB] {sujet}",
                 message=corps_admin,
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=['clement.cayeux@symposium-cs.fr'],
+                recipient_list=destinataires, # Utilise la liste de la BDD
                 fail_silently=False,
             )
 
@@ -62,11 +81,22 @@ def contact(request):
             )
 
 
-            messages.success(request, "Votre message a été envoyé. \n Un mail de confirmation vous a été adressé (Veuillez vérifier vos spams).")
+            messages.success(request, "Votre message a été envoyé. Un mail de confirmation vous a été adressé (Veuillez vérifier vos spams).")
             return redirect('contact')
 
         except Exception as e:
             messages.error(request, f"Une erreur est survenue : {e}")
 
     return render(request, 'core/contact.html')
+
+
+
+from .models import Conference
+
+def home(request):
+    # On récupère les 3 prochaines conférences non passées
+    prochaines_conf = Conference.objects.filter(est_passee=False).order_by('date_evenement')[:3]
+    # On récupère les replays (si tu crées aussi un modèle pour eux)
+    
+    return render(request, 'core/index.html', {'conferences': prochaines_conf})
 
