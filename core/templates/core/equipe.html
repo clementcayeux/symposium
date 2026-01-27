@@ -1,14 +1,9 @@
+{% extends 'core/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nous connaître | Symposium CentraleSupélec</title>
-    <link rel="icon" type="image/png" href="{% static 'core/assets/favicon.png' %}">   
-    <link rel="stylesheet" href="{% static 'core/style.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    
+
+{% block title %}Nous connaître | Symposium CentraleSupélec{% endblock %}
+
+{% block extra_head %}
     <style>
         /* Styles spécifiques pour garantir le centrage et l'espace sur cette page */
         .about-wrapper {
@@ -34,33 +29,12 @@
             font-family: 'Playfair Display', serif;
             font-style: italic;
             font-size: 1.4rem !important;
-            color: var(--navy) !important;
+            color: #000b29 !important; /* var(--navy) */
             font-weight: 600;
         }
 
         .about-statement strong {
-            color: var(--gold);
-        }
-
-        /* Harmonisation de la ligne animée pour l'onglet actif */
-        .nav-link {
-            position: relative;
-            padding-bottom: 5px;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--gold);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link.active::after {
-            width: 100%;
+            color: #d4af37; /* var(--gold) */
         }
 
         /* Header avec l'image d'équipe et filtre bleu */
@@ -75,44 +49,44 @@
             padding-top: 80px; 
         }
 
-        /* Style pour le CTA de contact en bas de grille */
+    /* Style pour le CTA de contact optimisé */
         .team-contact-cta {
-            margin-top: 60px;
-            padding: 40px;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-top: 30px; 
+            padding: 40px 40px;
+            background: #ffffff;
+            border-radius: 20px;
+            /* On renforce un peu l'ombre pour qu'elle ressorte mieux */
+            box-shadow: 0 15px 40px rgba(0, 11, 41, 0.12); 
+            border: 1px solid rgba(0, 0, 0, 0.05); /* Fine bordure pour définir les contours */
+            transition: transform 0.3s ease;
         }
+
+        .team-contact-cta:hover {
+            transform: translateY(-5px); /* Petit effet interactif */
+        }
+
+        /* Forcer le soulignement du lien actif dans la navbar pour cette page */
+        .nav-links li a[href*="equipe"] {
+            color: #d4af37 !important;
+        }
+        .nav-links li a[href*="equipe"]::after {
+            width: 100% !important;
+        }
+
+        /* On s'assure que le fond de la page reste bien gris clair */
+        main.content-wrapper {
+            background-color: #f8f9fa; /* bg-light */
+            min-height: 80vh;
+        }
+
     </style>
-</head>
-<body class="bg-light">
+{% endblock %}
 
-    <nav class="navbar">
-        <div class="nav-brand">
-            <a href="{% url 'home' %}">
-                <img src="{% static 'core/assets/logo.png' %}" alt="Logo Symposium" class="nav-logo">
-            </a>
-        </div>
-
-        <div class="menu-toggle" id="mobile-menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-
-        <ul class="nav-links">
-            <li><a href="{% url 'home' %}#home" class="nav-link">Accueil</a></li>
-            <li><a href="{% url 'home' %}#conferences" class="nav-link">Conférences</a></li>
-            <li><a href="{% url 'home' %}#partenaires" class="nav-link">Partenaires</a></li>
-            <li><a href="{% url 'equipe' %}" class="nav-link active">Nous Connaître</a></li>
-            <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
-        </ul>
-    </nav>
-
+{% block content %}
     <header class="page-header-equipe" id="top">
         <div class="header-content">
             <h1 style="font-size: 3rem; margin-bottom: 10px;">Nous connaître</h1>
-            <div class="header-line" style="width: 80px; height: 3px; background: var(--gold); margin: 0 auto 20px;"></div>
+            <div class="header-line" style="width: 80px; height: 3px; background: #d4af37; margin: 0 auto 20px;"></div>
             <p style="font-size: 1.2rem; font-weight: 300;">Notre mission et l'équipe 2026</p>
         </div>
     </header>
@@ -131,7 +105,7 @@
         </div>
     </section>
 
-    <section id="team" class="section-container">
+    <section id="team" class="section-container bg-light">
         <h2 class="section-title">L'Équipe 2026</h2>
         <div class="team-grid">
             
@@ -185,76 +159,40 @@
 
             <div class="team-card">
                 <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/emna.jpg' %}');"></div></div>
-                <div class="member-info">
-                    <p class="role">Membre</p>
-                    <h3>Emna Bannour</h3>
-                </div>
+                <div class="member-info"><p class="role">Membre</p><h3>Emna Bannour</h3></div>
             </div>
-
             <div class="team-card">
                 <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/klervi.jpg' %}');"></div></div>
-                <div class="member-info">
-                    <p class="role">Membre</p>
-                    <h3>Klervi Ringeval</h3>
-                </div>
+                <div class="member-info"><p class="role">Membre</p><h3>Klervi Ringeval</h3></div>
             </div>
-
             <div class="team-card">
                 <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/lamine.jpg' %}');"></div></div>
-                <div class="member-info">
-                    <p class="role">Membre</p>
-                    <h3>Lamine Semmar</h3>
-                </div>
+                <div class="member-info"><p class="role">Membre</p><h3>Lamine Semmar</h3></div>
             </div>
-
             <div class="team-card">
                 <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/gabrielle.jpg' %}');"></div></div>
-                <div class="member-info">
-                    <p class="role">Membre</p>
-                    <h3>Gabrielle Hellier</h3>
-                </div>
+                <div class="member-info"><p class="role">Membre</p><h3>Gabrielle Hellier</h3></div>
             </div>
-
             <div class="team-card">
                 <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/marie-yang.png' %}');"></div></div>
-                <div class="member-info">
-                    <p class="role">Membre</p>
-                    <h3>Marie-Yang Venière</h3>
-                </div>
+                <div class="member-info"><p class="role">Membre</p><h3>Marie-Yang Venière</h3></div>
             </div>
-
             <div class="team-card">
                 <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/jules.jpg' %}');"></div></div>
-                <div class="member-info">
-                    <p class="role">Membre</p>
-                    <h3>Jules Rancurel</h3>
-                </div>
+                <div class="member-info"><p class="role">Membre</p><h3>Jules Rancurel</h3></div>
             </div>
-
             <div class="team-card">
                 <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/theophile-t.png' %}');"></div></div>
-                <div class="member-info">
-                    <p class="role">Membre</p>
-                    <h3>Théophile Thibaudon</h3>
-                </div>
+                <div class="member-info"><p class="role">Membre</p><h3>Théophile Thibaudon</h3></div>
             </div>
-
             <div class="team-card">
                 <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/theophile-s.png' %}');"></div></div>
-                <div class="member-info">
-                    <p class="role">Membre</p>
-                    <h3>Théophile Salabert</h3>
-                </div>
+                <div class="member-info"><p class="role">Membre</p><h3>Théophile Salabert</h3></div>
             </div>
-
             <div class="team-card">
                 <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/albert.jpg' %}');"></div></div>
-                <div class="member-info">
-                    <p class="role">Membre</p>
-                    <h3>Albert Kechteil</h3>
-                </div>
+                <div class="member-info"><p class="role">Membre</p><h3>Albert Kechteil</h3></div>
             </div>
-
         </div>
 
         <div class="team-contact-cta" style="text-align: center;">
@@ -262,28 +200,4 @@
             <a href="{% url 'contact' %}" class="btn-main">Utiliser le formulaire de contact</a>
         </div>
     </section>
-
-   <footer>
-        <div class="footer-content">
-            <p>
-                <a href="{% url 'equipe' %}" class="footer-contact-link">À propos</a>
-                <span style="color: var(--gold); margin: 0 10px;">•</span>
-                <a href="{% url 'equipe' %}#team" class="footer-contact-link">Notre équipe</a>
-                <span style="color: var(--gold); margin: 0 10px;">•</span>
-                <a href="{% url 'contact' %}" class="footer-contact-link">Nous contacter</a>
-                <span style="color: var(--gold); margin: 0 10px;">•</span>
-                <a href="https://www.linkedin.com/company/symposiumcentralesup%C3%A9lec/" target="_blank" class="footer-contact-link">LinkedIn</a>
-            </p>
-
-            <div class="footer-bottom">
-                &copy; 2026 Symposium CentraleSupélec 
-                <span style="margin: 0 8px; opacity: 0.5;">|</span> 
-                <a href="{% url 'mentions_legales' %}" class="footer-legal-link">Mentions Légales</a>
-            </div>
-        </div>
-    </footer>
-
-    <script src="{% static 'core/script.js' %}"></script>
-
-</body>
-</html>
+{% endblock %}

@@ -1,196 +1,137 @@
+{% extends 'core/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Symposium CentraleSupélec</title> 
-    <link rel="icon" type="image/png" href="{% static 'core/assets/favicon.png' %}">   
-    <link rel="stylesheet" href="{% static 'core/style.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-</head>
-<body>
 
-    <nav class="navbar">
-        <div class="nav-brand">
-            <a href="{% url 'home' %}">
-                <img src="{% static 'core/assets/logo.png' %}" alt="Logo Symposium" class="nav-logo">
+{% block content %}
+<header id="home" class="hero" style="background: linear-gradient(rgba(0, 11, 41, 0.65), rgba(0, 11, 41, 0.65)), url('{% static 'core/assets/fond-amphi.jpg' %}') center/cover no-repeat;">
+    <div class="hero-content">
+        <img src="{% static 'core/assets/logo.png' %}" alt="Symposium CentraleSupélec" class="hero-logo">
+        <h1>LES INGÉNIEURS AU CŒUR DU DÉBAT</h1>
+        <p>La tribune étudiante de CentraleSupélec</p>
+        <div class="hero-btns">
+            <a href="#evenements" class="btn-main">Événements</a>
+            <a href="{% url 'equipe' %}" class="btn-main">Nous connaître</a>
+            <a href="{% url 'contact' %}" class="btn-main">Nous contacter</a>
+        </div>
+    </div>
+</header>
+
+<section id="evenements" class="section-container">
+    {% if conferences %}
+    <h2 class="section-title">Prochains Événements</h2>
+    <div class="events-grid">
+        {% for conf in conferences %}
+        <div class="event-card">
+            <div class="event-img" style="background-image: url('{{ conf.image.url }}');">
+                <div class="date-tag">{{ conf.date_evenement|date:"d F"|upper }}</div>
+            </div>
+            <div class="event-info">
+                <span class="category">{{ conf.categorie }}</span>
+                <h3>{{ conf.invite }}</h3>
+                <p class="description">{{ conf.titre }}</p>
+                <div class="event-details">
+                    <span>📍 {{ conf.lieu }}</span>
+                    <span>⏰ {{ conf.date_evenement|date:"H:i" }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <h2 class="section-title" style="margin-top: 80px;">Replays</h2>
+    {% else %}
+    <h2 class="section-title">Replays</h2>
+    {% endif %}
+
+    <div class="video-grid">
+        <a href="https://www.youtube.com/watch?v=iPvnxnpMZ1o" target="_blank" class="video-card">
+            <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/iPvnxnpMZ1o/hqdefault.jpg');">
+                <div class="play-button">▶</div>
+            </div>
+            <div class="video-info"><h3>Valérie Pécresse</h3></div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=UCAZxRdwXkc" target="_blank" class="video-card">
+            <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/UCAZxRdwXkc/hqdefault.jpg');">
+                <div class="play-button">▶</div>
+            </div>
+            <div class="video-info"><h3>Dominique de Villepin</h3></div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=PYDNV0Ro1x0" target="_blank" class="video-card">
+            <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/PYDNV0Ro1x0/hqdefault.jpg');">
+                <div class="play-button">▶</div>
+            </div>
+            <div class="video-info"><h3>Jean-Marc Jancovici</h3></div>
+        </a>
+    </div>
+
+    <div style="text-align: center; margin-top: 50px;">
+        <a href="https://www.youtube.com/@symposiumcs" target="_blank" class="btn-main">Voir tous nos replays</a>
+    </div>
+</section>
+
+<section id="partenaires" class="section-container bg-light">
+    <h2 class="section-title">Nos Partenaires</h2>
+    <div class="partners-grid">
+        <div class="partner-item">
+            <a href="https://akoya.group/" target="_blank" rel="noopener noreferrer">
+                <img src="{% static 'core/assets/akoya.png' %}" alt="Akoya Strategy" class="partner-logo akoya">
             </a>
         </div>
-
-        <div class="menu-toggle" id="mobile-menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-
-        <ul class="nav-links">
-            <li><a href="{% url 'home' %}#home" class="nav-link">Accueil</a></li>
-            <li><a href="{% url 'home' %}#evenements" class="nav-link">Évenements</a></li>
-            <li><a href="{% url 'home' %}#partenaires" class="nav-link">Partenaires</a></li>
-            <li><a href="{% url 'equipe' %}" class="nav-link">Nous Connaître</a></li>
-            <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
-        </ul>
-    </nav>
-
-    <header id="home" class="hero" style="background: linear-gradient(rgba(0, 11, 41, 0.65), rgba(0, 11, 41, 0.65)), url('{% static 'core/assets/fond-amphi.jpg' %}') center/cover no-repeat;">
-        <div class="hero-content">
-            <img src="{% static 'core/assets/logo.png' %}" alt="Symposium CentraleSupélec" class="hero-logo">
-            <h1>LES INGÉNIEURS AU CŒUR DU DÉBAT</h1>
-            <p>La tribune étudiante de CentraleSupélec</p>
-            
-            <div class="hero-btns">
-                <a href="#evenements" class="btn-main">Événements</a>
-                <a href="{% url 'equipe' %}" class="btn-main">Nous connaître</a>
-                <a href="{% url 'contact' %}" class="btn-main">Nous contacter</a>
-            </div>
-        </div>
-    </header>
-    
-    <section id="evenements" class="section-container">
-        {% if conferences %}
-            <h2 class="section-title">Prochains Événements</h2>
-            <div class="events-grid">
-                {% for conf in conferences %}
-                <div class="event-card">
-                    <div class="event-img" style="background-image: url('{{ conf.image.url }}');">
-                        <div class="date-tag">{{ conf.date_evenement|date:"d F"|upper }}</div>
-                    </div>
-                    
-                    <div class="event-info">
-                        <span class="category">{{ conf.categorie }}</span>
-                        <h3>{{ conf.invite }}</h3>
-                        <p class="description">{{ conf.titre }}</p>
-                        
-                        <div class="event-details">
-                            <span>📍 {{ conf.lieu }}</span>
-                            <span>⏰ {{ conf.date_evenement|date:"H:i" }}</span>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-
-            <h2 class="section-title" style="margin-top: 80px;">Replays</h2>
-        {% else %}
-            <h2 class="section-title">Replays</h2>
-        {% endif %}
-
-        <div class="video-grid">
-            <a href="https://www.youtube.com/watch?v=iPvnxnpMZ1o" target="_blank" class="video-card">
-                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/iPvnxnpMZ1o/hqdefault.jpg');">
-                    <div class="play-button">▶</div>
-                </div>
-                <div class="video-info"><h3>Valérie Pécresse</h3></div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=UCAZxRdwXkc" target="_blank" class="video-card">
-                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/UCAZxRdwXkc/hqdefault.jpg');">
-                    <div class="play-button">▶</div>
-                </div>
-                <div class="video-info"><h3>Dominique de Villepin</h3></div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=PYDNV0Ro1x0" target="_blank" class="video-card">
-                <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/PYDNV0Ro1x0/hqdefault.jpg');">
-                    <div class="play-button">▶</div>
-                </div>
-                <div class="video-info"><h3>Jean-Marc Jancovici</h3></div>
+        <div class="partner-item">
+            <a href="https://www.vinci-energies.com/" target="_blank" rel="noopener noreferrer">
+                <img src="{% static 'core/assets/vinci.png' %}" alt="Vinci Energies" class="partner-logo">
             </a>
         </div>
-
-        <div style="text-align: center; margin-top: 50px;">
-            <a href="https://www.youtube.com/@symposiumcs" target="_blank" class="btn-main">Voir tous nos replays</a>
+        <div class="partner-item">
+            <a href="https://www.centralesupelec.fr/" target="_blank" rel="noopener noreferrer">
+                <img src="{% static 'core/assets/centralesupelec.png' %}" alt="CentraleSupélec" class="partner-logo institutionnel">
+            </a>
         </div>
-    </section>
-
-
-    <section id="partenaires" class="section-container bg-light">
-        <h2 class="section-title">Nos Partenaires</h2>
-        <div class="partners-grid">
-            <div class="partner-item">
-                <a href="https://akoya.group/" target="_blank" rel="noopener noreferrer">
-                    <img src="{% static 'core/assets/akoya.png' %}" alt="Akoya Strategy" class="partner-logo akoya">
-                </a>
-            </div>
-            <div class="partner-item">
-                <a href="https://www.vinci-energies.com/" target="_blank" rel="noopener noreferrer">
-                    <img src="{% static 'core/assets/vinci.png' %}" alt="Vinci Energies" class="partner-logo">
-                </a>
-            </div>
-            <div class="partner-item">
-                <a href="https://www.centralesupelec.fr/" target="_blank" rel="noopener noreferrer">
-                    <img src="{% static 'core/assets/centralesupelec.png' %}" alt="CentraleSupélec" class="partner-logo institutionnel">
-                </a>
-            </div>
-            <div class="partner-item">
-                <a href="https://www.universite-paris-saclay.fr/" target="_blank" rel="noopener noreferrer">
-                    <img src="{% static 'core/assets/universite_paris_saclay.png' %}" alt="Université Paris-Saclay" class="partner-logo institutionnel">
-                </a>
-            </div>
-
-            <div class="partner-item">
-                <a href="https://evenements.lepoint.fr/paris-saclay-summit/" target="_blank" rel="noopener noreferrer">
-                    <img src="{% static 'core/assets/pss.png' %}" alt="Paris Saclay Summit" class="partner-logo">
-                </a>
-            </div>
-            <div class="partner-item">
-                <a href="https://lagrandetribune.fr/" target="_blank" rel="noopener noreferrer">
-                    <img src="{% static 'core/assets/lgt.png' %}" alt="La Grande Tribune" class="partner-logo">
-                </a>
-            </div>
-            <div class="partner-item">
-                <a href="https://association.centralesupelec-alumni.com/fr/" target="_blank" rel="noopener noreferrer">
-                    <img src="{% static 'core/assets/csa.png' %}" alt="CentraleSupélec Alumni" class="partner-logo institutionnel">
-                </a>
-            </div>
+        <div class="partner-item">
+            <a href="https://www.universite-paris-saclay.fr/" target="_blank" rel="noopener noreferrer">
+                <img src="{% static 'core/assets/universite_paris_saclay.png' %}" alt="Université Paris-Saclay" class="partner-logo institutionnel">
+            </a>
         </div>
-    </section>
-
-
-    <footer>
-        <div class="footer-content">
-            <p>
-                <a href="{% url 'equipe' %}" class="footer-contact-link">À propos</a>
-                <span style="color: var(--gold); margin: 0 10px;">•</span>
-                <a href="{% url 'equipe' %}#team" class="footer-contact-link">Notre équipe</a>
-                <span style="color: var(--gold); margin: 0 10px;">•</span>
-                <a href="{% url 'contact' %}" class="footer-contact-link">Nous contacter</a>
-                <span style="color: var(--gold); margin: 0 10px;">•</span>
-                <a href="https://www.linkedin.com/company/symposiumcentralesup%C3%A9lec/" target="_blank" class="footer-contact-link">LinkedIn</a>
-            </p>
-
-            <div class="footer-bottom">
-                &copy; 2026 Symposium CentraleSupélec 
-                <span style="margin: 0 8px; opacity: 0.5;">|</span> 
-                <a href="{% url 'mentions_legales' %}" class="footer-legal-link">Mentions Légales</a>
-            </div>
+        <div class="partner-item">
+            <a href="https://evenements.lepoint.fr/paris-saclay-summit/" target="_blank" rel="noopener noreferrer">
+                <img src="{% static 'core/assets/pss.png' %}" alt="Paris Saclay Summit" class="partner-logo">
+            </a>
         </div>
-    </footer>
+        <div class="partner-item">
+            <a href="https://lagrandetribune.fr/" target="_blank" rel="noopener noreferrer">
+                <img src="{% static 'core/assets/lgt.png' %}" alt="La Grande Tribune" class="partner-logo">
+            </a>
+        </div>
+        <div class="partner-item">
+            <a href="https://association.centralesupelec-alumni.com/fr/" target="_blank" rel="noopener noreferrer">
+                <img src="{% static 'core/assets/csa.png' %}" alt="CentraleSupélec Alumni" class="partner-logo institutionnel">
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('header[id], section[id]');
-            const navLinks = document.querySelectorAll('.nav-link');
+{% block extra_js %}
+<script>
+    // Script spécifique à l'index pour le scroll-spy
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('header[id], section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
 
-            window.addEventListener('scroll', () => {
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (pageYOffset >= (sectionTop - 200)) {
-                        current = section.getAttribute('id');
-                    }
-                });
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
 
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href').includes(current)) {
-                        link.classList.add('active');
-                    }
-                });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
             });
         });
-    </script>
-
-    <script src="{% static 'core/script.js' %}"></script>
-
-</body>
-</html>
+    });
+</script>
+{% endblock %}

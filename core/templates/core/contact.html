@@ -1,42 +1,32 @@
+{% extends 'core/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | Symposium CentraleSupélec</title>
-    <link rel="icon" type="image/png" href="{% static 'core/assets/favicon.png' %}">   
-    <link rel="stylesheet" href="{% static 'core/style.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-</head>
-<body class="bg-light">
 
-    <nav class="navbar">
-        <div class="nav-brand">
-            <a href="{% url 'home' %}">
-                <img src="{% static 'core/assets/logo.png' %}" alt="Logo Symposium" class="nav-logo">
-            </a>
-        </div>
+{% block title %}Contact | Symposium CentraleSupélec{% endblock %}
 
-        <div class="menu-toggle" id="mobile-menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
+{% block extra_head %}
+<style>
+    /* Force le soulignement doré pour l'onglet Contact sur cette page */
+    .nav-links li a[href*="contact"] {
+        color: #d4af37 !important; /* var(--gold) */
+    }
+    .nav-links li a[href*="contact"]::after {
+        width: 100% !important;
+    }
+    
+    /* On s'assure que le fond de la page reste bien gris clair */
+    main.content-wrapper {
+        background-color: #f8f9fa; /* bg-light */
+        min-height: 80vh;
+    }
+</style>
+{% endblock %}
 
-        <ul class="nav-links">
-            <li><a href="{% url 'home' %}#home" class="nav-link">Accueil</a></li>
-            <li><a href="{% url 'home' %}#conferences" class="nav-link">Conférences</a></li>
-            <li><a href="{% url 'home' %}#partenaires" class="nav-link">Partenaires</a></li>
-            <li><a href="{% url 'equipe' %}" class="nav-link">Nous Connaître</a></li>
-            <li><a href="{% url 'contact' %}" class="nav-link active">Contact</a></li>
-        </ul>
-    </nav>
-
-    <header class="page-header" style="background: var(--navy); padding: 80px 0 30px;">
+{% block content %}
+<main class="content-wrapper">
+    <header class="page-header" style="background: #000b29; padding: 80px 0 30px;">
         <div class="header-content" style="text-align: center; color: white;">
             <h1 style="margin: 0; font-size: 2.2rem;">Contact</h1>
-            <div class="header-line" style="width: 40px; height: 3px; background: var(--gold); margin: 15px auto 0;"></div>
+            <div class="header-line" style="width: 40px; height: 3px; background: #d4af37; margin: 15px auto 0;"></div>
         </div>
     </header>
 
@@ -60,7 +50,9 @@
                     <input type="text" name="name" placeholder="Nom" required style="padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px;">
                     <input type="email" name="email" placeholder="Email" required style="padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px;">
                 </div>
+                
                 <input type="text" name="subject" placeholder="Sujet de votre message" required style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px;">
+                
                 <textarea name="message" rows="6" placeholder="Votre message..." required style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 25px; font-family: inherit;"></textarea>
                 
                 <div style="display: none;" aria-hidden="true">
@@ -73,28 +65,5 @@
             </form>
         </div>
     </section>
-
-   <footer>
-        <div class="footer-content">
-            <p>
-                <a href="{% url 'equipe' %}" class="footer-contact-link">À propos</a>
-                <span style="color: var(--gold); margin: 0 10px;">•</span>
-                <a href="{% url 'equipe' %}#team" class="footer-contact-link">Notre équipe</a>
-                <span style="color: var(--gold); margin: 0 10px;">•</span>
-                <a href="{% url 'contact' %}" class="footer-contact-link">Nous contacter</a>
-                <span style="color: var(--gold); margin: 0 10px;">•</span>
-                <a href="https://www.linkedin.com/company/symposiumcentralesup%C3%A9lec/" target="_blank" class="footer-contact-link">LinkedIn</a>
-            </p>
-
-            <div class="footer-bottom">
-                &copy; 2026 Symposium CentraleSupélec 
-                <span style="margin: 0 8px; opacity: 0.5;">|</span> 
-                <a href="{% url 'mentions_legales' %}" class="footer-legal-link">Mentions Légales</a>
-            </div>
-        </div>
-    </footer>
-
-    <script src="{% static 'core/script.js' %}"></script>
-
-</body>
-</html>
+</main>
+{% endblock %}

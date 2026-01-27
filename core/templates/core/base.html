@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Symposium CentraleSupélec{% endblock %}</title> 
-    <link rel="icon" type="image/png" href="{% static 'core/assets/favicon.png' %}">   
+    <title>{% block title %}Symposium CentraleSupélec{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{% static 'core/assets/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'core/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     {% block extra_head %}{% endblock %}
@@ -34,8 +34,7 @@
         </ul>
     </nav>
 
-    {% block content %}
-    {% endblock %}
+    {% block content %}{% endblock %}
 
     <footer>
         <div class="footer-content">
@@ -50,8 +49,8 @@
             </p>
 
             <div class="footer-bottom">
-                &copy; 2026 Symposium CentraleSupélec 
-                <span style="margin: 0 8px; opacity: 0.5;">|</span> 
+                &copy; 2026 Symposium CentraleSupélec
+                <span style="margin: 0 8px; opacity: 0.5;">|</span>
                 <a href="{% url 'mentions_legales' %}" class="footer-legal-link">Mentions Légales</a>
             </div>
         </div>

@@ -1,39 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de réception - Symposium</title>
 </head>
-<body style="margin: 0; padding: 0; font-family: 'Inter', Arial, sans-serif; background-color: #f4f4f4;">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+<body style="margin: 0; padding: 0; background-color: #f8f9fa; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
+    
+    <div style="display: none; max-height: 0px; overflow: hidden;">
+        Nous avons bien reçu votre message concernant : {{ sujet }}. L'équipe Symposium vous répondra sous peu.
+    </div>
+
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
         <tr>
             <td align="center" style="padding: 20px 0;">
-                <table border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                <table border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; border: 1px solid #eeeeee; border-radius: 4px;">
+                    
                     <tr>
-                        <td align="center" style="background-color: #000b29; padding: 40px 0;">
-                            <h1 style="color: #d4af37; margin: 0; font-family: 'Playfair Display', serif; letter-spacing: 2px;">SYMPOSIUM</h1>
-                            <p style="color: #ffffff; margin: 5px 0 0 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">CentraleSupélec</p>
+                        <td align="center" bgcolor="#000b29" style="padding: 40px 0;">
+                            <h1 style="color: #d4af37; margin: 0; font-family: 'Georgia', serif; font-size: 28px; letter-spacing: 4px; text-transform: uppercase;">SYMPOSIUM</h1>
+                            <p style="color: #ffffff; margin: 5px 0 0 0; font-family: Arial, sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8;">CentraleSupélec</p>
                         </td>
                     </tr>
+
                     <tr>
-                        <td style="padding: 40px; color: #333333; line-height: 1.6;">
-                            <h2 style="color: #000b29;">Bonjour {{ nom }},</h2>
-                            <p>Nous vous confirmons la bonne réception de votre message concernant le sujet suivant : <strong>"{{ sujet }}"</strong>.</p>
-                            <p>L'équipe de Symposium étudie votre demande avec attention. Un membre de notre équipe reviendra vers vous dans les plus brefs délais.</p>
-                            <hr style="border: 0; border-top: 1px solid #eeeeee; margin: 30px 0;">
-                            <p style="font-size: 14px; color: #666666;">En attendant, n'hésitez pas à suivre nos actualités sur nos réseaux :</p>
-                            <p>
-                                <a href="https://www.linkedin.com/company/symposiumcentralesup%C3%A9lec/" style="color: #d4af37; text-decoration: none; font-weight: bold;">LinkedIn</a> | 
-                                <a href="https://www.youtube.com/@symposiumcs" style="color: #d4af37; text-decoration: none; font-weight: bold;">YouTube</a>
+                        <td style="padding: 40px; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.6; color: #333333;">
+                            <h2 style="color: #000b29; font-size: 20px; margin-bottom: 20px;">Bonjour {{ nom }},</h2>
+                            
+                            <p>Nous vous confirmons la bonne réception de votre message concernant le sujet suivant :<br>
+                               <span style="color: #000b29; font-weight: bold;">"{{ sujet }}"</span>.
                             </p>
+                            
+                            <p>L'équipe de <strong>Symposium</strong> étudie votre demande avec attention. Un membre de notre équipe reviendra vers vous dans les plus brefs délais.</p>
+                            
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td style="padding: 30px 0;">
+                                        <div style="border-top: 1px solid #eeeeee;"></div>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
+
                     <tr>
-                        <td align="center" style="background-color: #f8f8f8; padding: 20px; color: #999999; font-size: 12px;">
-                            Symposium CentraleSupélec<br>
+                        <td align="center" bgcolor="#f4f4f4" style="padding: 25px; font-family: Arial, sans-serif; font-size: 12px; color: #999999; border-top: 1px solid #eeeeee;">
+                            <p style="margin: 0 0 10px 0;"><strong>Symposium CentraleSupélec</strong></p>
+                            <p style="margin: 0;">3 rue Joliot-Curie, 91190 Gif-sur-Yvette</p>
+                            <p style="margin: 10px 0 0 0;">Ceci est un message automatique, merci de ne pas y répondre directement.</p>
                         </td>
                     </tr>
+
                 </table>
-            </td>
+                </td>
         </tr>
     </table>
 </body>
