@@ -19,18 +19,9 @@ virenv/
 # On ne veut pas synchroniser les photos uploadées via Git
 media/
 
-# --- Fichiers Statiques Collectés ---
-# Inutile de les push, collectstatic les recréera sur la VM
-staticfiles/
-static/
-
 # --- Système & IDE ---
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
 *.swp
-
-# --- OneDrive / Windows spécifiques ---
-Desktop.ini
-~$*
