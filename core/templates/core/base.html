@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Symposium CentraleSupélec{% endblock %}</title> 
+    <link rel="icon" type="image/png" href="{% static 'core/assets/favicon.png' %}">   
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'core/assets/logo.png' %}" alt="Logo Symposium" class="nav-logo">
+            </a>
+        </div>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}#home" class="nav-link">Accueil</a></li>
+            <li><a href="{% url 'home' %}#evenements" class="nav-link">Évenements</a></li>
+            <li><a href="{% url 'home' %}#partenaires" class="nav-link">Partenaires</a></li>
+            <li><a href="{% url 'equipe' %}" class="nav-link">Nous Connaître</a></li>
+            <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        <div class="footer-content">
+            <p>
+                <a href="{% url 'equipe' %}" class="footer-contact-link">À propos</a>
+                <span style="color: var(--gold); margin: 0 10px;">•</span>
+                <a href="{% url 'equipe' %}#team" class="footer-contact-link">Notre équipe</a>
+                <span style="color: var(--gold); margin: 0 10px;">•</span>
+                <a href="{% url 'contact' %}" class="footer-contact-link">Nous contacter</a>
+                <span style="color: var(--gold); margin: 0 10px;">•</span>
+                <a href="https://www.linkedin.com/company/symposiumcentralesup%C3%A9lec/" target="_blank" class="footer-contact-link">LinkedIn</a>
+            </p>
+
+            <div class="footer-bottom">
+                &copy; 2026 Symposium CentraleSupélec 
+                <span style="margin: 0 8px; opacity: 0.5;">|</span> 
+                <a href="{% url 'mentions_legales' %}" class="footer-legal-link">Mentions Légales</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'core/script.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

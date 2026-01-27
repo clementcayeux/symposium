@@ -26,7 +26,7 @@
 
         <ul class="nav-links">
             <li><a href="{% url 'home' %}#home" class="nav-link">Accueil</a></li>
-            <li><a href="{% url 'home' %}#conferences" class="nav-link">Conférences</a></li>
+            <li><a href="{% url 'home' %}#evenements" class="nav-link">Évenements</a></li>
             <li><a href="{% url 'home' %}#partenaires" class="nav-link">Partenaires</a></li>
             <li><a href="{% url 'equipe' %}" class="nav-link">Nous Connaître</a></li>
             <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
@@ -40,55 +40,42 @@
             <p>La tribune étudiante de CentraleSupélec</p>
             
             <div class="hero-btns">
-                <a href="#conferences" class="btn-main">Conférences</a>
+                <a href="#evenements" class="btn-main">Événements</a>
                 <a href="{% url 'equipe' %}" class="btn-main">Nous connaître</a>
                 <a href="{% url 'contact' %}" class="btn-main">Nous contacter</a>
             </div>
         </div>
     </header>
     
-    <section id="conferences" class="section-container">
-        <h2 class="section-title">Prochaines Conférences</h2>
-
-
-        <div class="events-grid">
-            {% for conf in conferences %}
-            <div class="event-card">
-                <div class="event-img" style="background-image: url('{{ conf.image.url }}');">
-                    <div class="date-tag">{{ conf.date_evenement|date:"d F"|upper }}</div>
-                </div>
-                
-                <div class="event-info">
-                    <span class="category">{{ conf.categorie }}</span>
-                    <h3>{{ conf.invite }}</h3>
-                    <p class="description">{{ conf.titre }}</p>
-                    
-                    <div class="event-details">
-                        <span>📍 {{ conf.lieu }}</span>
-                        <span>⏰ {{ conf.date_evenement|date:"H:i" }}</span>
-                    </div>
-                </div>
-            </div>
-            {% empty %}
+    <section id="evenements" class="section-container">
+        {% if conferences %}
+            <h2 class="section-title">Prochains Événements</h2>
             <div class="events-grid">
                 {% for conf in conferences %}
-                    <div class="event-card">...</div>
-                {% empty %}
-                </div> <div class="no-events-container">
-                    <div class="no-events-icon">📅</div>
-                    <h3>Le pupitre se prépare...</h3>
-                    <p>Nous finalisons la programmation de nos prochaines rencontres. Revenez-vite !</p>
-                    <div class="no-events-actions">
-                        <a href="{% url 'contact' %}?type=conference" class="btn-secondary">Proposer une conférence</a>
+                <div class="event-card">
+                    <div class="event-img" style="background-image: url('{{ conf.image.url }}');">
+                        <div class="date-tag">{{ conf.date_evenement|date:"d F"|upper }}</div>
+                    </div>
+                    
+                    <div class="event-info">
+                        <span class="category">{{ conf.categorie }}</span>
+                        <h3>{{ conf.invite }}</h3>
+                        <p class="description">{{ conf.titre }}</p>
+                        
+                        <div class="event-details">
+                            <span>📍 {{ conf.lieu }}</span>
+                            <span>⏰ {{ conf.date_evenement|date:"H:i" }}</span>
+                        </div>
                     </div>
                 </div>
-                
-                <div style="display:none;"> {% endfor %}
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
 
-        <h2 class="section-title" style="margin-top: 40px;">Replays</h2>
+            <h2 class="section-title" style="margin-top: 80px;">Replays</h2>
+        {% else %}
+            <h2 class="section-title">Replays</h2>
+        {% endif %}
+
         <div class="video-grid">
             <a href="https://www.youtube.com/watch?v=iPvnxnpMZ1o" target="_blank" class="video-card">
                 <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/iPvnxnpMZ1o/hqdefault.jpg');">
@@ -109,8 +96,9 @@
                 <div class="video-info"><h3>Jean-Marc Jancovici</h3></div>
             </a>
         </div>
+
         <div style="text-align: center; margin-top: 50px;">
-            <a href="https://www.youtube.com/@symposiumcs" target="_blank" class="btn-main">Voir les autres vidéos</a>
+            <a href="https://www.youtube.com/@symposiumcs" target="_blank" class="btn-main">Voir tous nos replays</a>
         </div>
     </section>
 
