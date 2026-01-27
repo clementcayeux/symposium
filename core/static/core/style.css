@@ -491,41 +491,35 @@ footer {
     padding: 20px 0;
 }
 
+.partner-item a {
+    display: block;
+    text-decoration: none;
+    line-height: 0; /* Évite les décalages sous l'image */
+}
+
 .partner-logo {
     max-height: 80px;
     width: auto;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    opacity: 0.9; /* Légère transparence par défaut pour l'élégance */
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+    opacity: 0.8;
+    filter: grayscale(20%); /* Un petit effet pro : un peu gris par défaut */
 }
 
 .partner-logo:hover {
-    transform: scale(1.1); /* Zoom léger comme sur les cartes conférences */
+    transform: scale(1.1);
     opacity: 1;
+    filter: grayscale(0%); /* Couleur pleine au survol */
 }
 
-/* Ajustement mobile */
+/* Ajustements spécifiques */
+.partner-logo.akoya { max-height: 100px; }
+.partner-logo.institutionnel { max-height: 70px; }
+
 @media (max-width: 768px) {
-    .partners-grid { gap: 30px; }
-    .partner-logo { max-height: 60px; }
-}
-
-
-/* On cible spécifiquement Akoya pour compenser sa forme */
-.partner-logo.akoya {
-    max-height: 100px; 
-}
-
-/* Optionnel : si tu veux qu'il soit encore plus imposant, 
-   tu peux aussi jouer sur le zoom par défaut */
-.partner-logo.akoya:hover {
-    transform: scale(1.15); /* Un zoom un poil plus fort au survol */
-}
-
-
-/* Ajustement pour les logos institutionnels larges */
-.partner-logo.institutionnel {
-    max-height: 70px; /* Un peu plus bas s'ils sont très larges */
-    width: auto;
+    .partners-grid { gap: 40px; }
+    .partner-logo { max-height: 50px; }
+    .partner-logo.akoya { max-height: 70px; }
 }
 
 
