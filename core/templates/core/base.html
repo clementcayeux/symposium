@@ -4,12 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Symposium CentraleSupélec{% endblock %}</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>{% block title %}Symposium CentraleSupélec | La tribune étudiante{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Symposium est la tribune étudiante de CentraleSupélec. Nous organisons des conférences et débats pour placer les ingénieurs au cœur du débat public.{% endblock %}">
+    <meta name="author" content="Symposium CentraleSupélec">
+    <link rel="canonical" href="https://symposium.cs-campus.fr{{ request.path }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://symposium.cs-campus.fr{{ request.path }}">
+    <meta property="og:title" content="Symposium CentraleSupélec">
+    <meta property="og:description" content="Les ingénieurs au cœur du débat. Découvrez nos prochaines conférences et replays.">
+    <meta property="og:image" content="https://symposium.cs-campus.fr{% static 'core/assets/logo-share.jpg' %}">
+    <meta property="og:image:alt" content="Logo Symposium CentraleSupélec">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Symposium CentraleSupélec">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Symposium CentraleSupélec">
+    <meta name="twitter:description" content="La tribune étudiante de CentraleSupélec. Découvrez nos invités et débats.">
+    <meta name="twitter:image" content="https://symposium.cs-campus.fr{% static 'core/assets/logo-share.jpg' %}">
+
     <link rel="icon" type="image/png" href="{% static 'core/assets/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'core/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
     {% block extra_head %}{% endblock %}
 </head>
+
+
 <body>
 
     <nav class="navbar">
