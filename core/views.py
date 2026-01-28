@@ -98,5 +98,5 @@ def home(request):
     prochains_evenements = Evenement.objects.filter(est_passee=False).order_by('date_evenement')[:3]
     # On récupère les replays (si tu crées aussi un modèle pour eux)
     
-    return render(request, 'core/index.html', {'evenement': prochains_evenements})
+    return render(request, 'core/index.html', {'evenements': prochains_evenements})
 
