@@ -13,8 +13,8 @@ class Evenement(models.Model):
     ]
 
     invite = models.CharField(max_length=200, help_text="Nom de l'intervenant ou nom du projet")
-    titre = models.CharField(max_length=200)
-    categorie = models.CharField(max_length=100, default="Politique")
+    titre = models.CharField(max_length=400, help_text="Description")
+    categorie = models.CharField(max_length=100, default="Politique",help_text="Le petit texte couleur or")
     type_evenement = models.CharField(max_length=10, choices=TYPE_CHOICES, default='CONF')
     
     # Gestion du temps (Flexible)
