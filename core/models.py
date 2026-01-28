@@ -87,3 +87,24 @@ class ConfigurationSite(models.Model):
 
     def __str__(self):
         return "Paramètres généraux"
+    
+
+
+class Partenaire(models.Model):
+    nom = models.CharField(max_length=100)
+    logo = models.ImageField(upload_to='partenaires/')
+    lien = models.URLField(blank=True, help_text="Lien vers leur site web")
+    ordre = models.PositiveIntegerField(default=100, help_text="Petit nombre = apparaît en premier")
+    
+    # Le réglage magique pour l'admin
+    taille_ajustement = models.PositiveIntegerField(
+        default=100, 
+        help_text="En % : permet d'équilibrer les logos (ex: 80 pour un logo trop massif, 120 pour un logo trop fin)"
+    )
+
+    class Meta:
+        ordering = ['ordre', 'nom']
+        verbose_name = "Partenaire"
+
+    def __str__(self):
+        return self.nom

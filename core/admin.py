@@ -44,3 +44,14 @@ class ConfigurationSiteAdmin(admin.ModelAdmin):
     # Empêcher d'ajouter plusieurs lignes de config (Optionnel mais propre)
     def has_add_permission(self, request):
         return ConfigurationSite.objects.count() == 0
+    
+
+
+from .models import Partenaire
+
+@admin.register(Partenaire)
+class PartenaireAdmin(admin.ModelAdmin):
+    list_display = ('nom', 'ordre', 'taille_ajustement')
+    list_editable = ('ordre', 'taille_ajustement')
+
+

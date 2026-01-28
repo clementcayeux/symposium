@@ -14,7 +14,7 @@
 
     <nav class="navbar">
         <div class="nav-brand">
-            <a href="{% url 'home' %}">
+            <a href="{% url 'index' %}">
                 <img src="{% static 'core/assets/logo.png' %}" alt="Logo Symposium" class="nav-logo">
             </a>
         </div>
@@ -26,9 +26,9 @@
         </div>
 
         <ul class="nav-links">
-            <li><a href="{% url 'home' %}#home" class="nav-link">Accueil</a></li>
-            <li><a href="{% url 'home' %}#evenements" class="nav-link">Évenements</a></li>
-            <li><a href="{% url 'home' %}#partenaires" class="nav-link">Partenaires</a></li>
+            <li><a href="{% url 'index' %}#home" class="nav-link">Accueil</a></li>
+            <li><a href="{% url 'index' %}#evenements" class="nav-link">Évenements</a></li>
+            <li><a href="{% url 'index' %}#partenaires" class="nav-link">Partenaires</a></li>
             <li><a href="{% url 'equipe' %}" class="nav-link">Nous Connaître</a></li>
             <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
         </ul>

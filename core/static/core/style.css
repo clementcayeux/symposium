@@ -486,44 +486,31 @@ footer {
 /* --- PARTENAIRES --- */
 .partners-grid {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 60px;
     flex-wrap: wrap;
-    padding: 20px 0;
+    justify-content: center;
+    align-items: center; /* Centre verticalement les logos */
+    gap: 40px;
+    padding: 20px;
 }
 
-.partner-item a {
-    display: block;
-    text-decoration: none;
-    line-height: 0; /* Évite les décalages sous l'image */
+.partner-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px; /* Largeur de la zone de chaque logo */
+    height: 100px; /* Hauteur de la zone */
 }
 
 .partner-logo {
-    max-height: 80px;
+    height: auto;
     width: auto;
-    cursor: pointer;
-    transition: transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
-    opacity: 0.8;
-    filter: grayscale(20%); /* Un petit effet pro : un peu gris par défaut */
+    object-fit: contain; /* Garde les proportions sans déformer */
+    transition: transform 0.3s ease;
 }
 
 .partner-logo:hover {
-    transform: scale(1.1);
-    opacity: 1;
-    filter: grayscale(0%); /* Couleur pleine au survol */
+    transform: scale(1.05);
 }
-
-/* Ajustements spécifiques */
-.partner-logo.akoya { max-height: 100px; }
-.partner-logo.institutionnel { max-height: 70px; }
-
-@media (max-width: 768px) {
-    .partners-grid { gap: 40px; }
-    .partner-logo { max-height: 50px; }
-    .partner-logo.akoya { max-height: 70px; }
-}
-
 
 /* --- SECTION À PROPOS FORCÉE --- */
 .about-wrapper {
