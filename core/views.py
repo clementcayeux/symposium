@@ -6,9 +6,21 @@ from django.shortcuts import render
 def home(request):
     return render(request, 'core/index.html')
 
-# Cette fonction correspond à views.equipe
+
+
+
+from .models import Membre, ConfigurationSite
+
 def equipe(request):
-    return render(request, 'core/equipe.html')
+    membres = Membre.objects.all()
+    # On récupère la première (et seule) ligne de config, ou None
+    config = ConfigurationSite.objects.first()
+    
+    return render(request, 'core/equipe.html', {
+        'membres': membres,
+        'config': config 
+    })
+
 
 # Cette fonction correspond à views.mentions_legales
 def mentions_legales(request):

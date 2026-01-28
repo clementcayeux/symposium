@@ -26,3 +26,21 @@ class EvenementAdmin(admin.ModelAdmin):
     def display_statut(self, obj):
         return "Passé" if obj.est_passe else "À venir"
     display_statut.short_description = "Statut"
+
+
+from .models import Membre
+
+@admin.register(Membre)
+class MembreAdmin(admin.ModelAdmin):
+    list_display = ('nom', 'role', 'ordre')
+    list_editable = ('ordre',) # Permet de changer l'ordre directement dans la liste
+
+
+
+from .models import ConfigurationSite
+
+@admin.register(ConfigurationSite)
+class ConfigurationSiteAdmin(admin.ModelAdmin):
+    # Empêcher d'ajouter plusieurs lignes de config (Optionnel mais propre)
+    def has_add_permission(self, request):
+        return ConfigurationSite.objects.count() == 0

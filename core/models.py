@@ -61,3 +61,29 @@ class ContactRecipient(models.Model):
     class Meta:
         verbose_name = "Destinataire des messages du formulaire"
         verbose_name_plural = "Destinataires des messages du formulaire"
+
+
+class Membre(models.Model):
+    nom = models.CharField(max_length=100)
+    role = models.CharField(max_length=100)
+    photo = models.ImageField(upload_to='equipe/')
+    ordre = models.PositiveIntegerField(default=100, help_text="Plus petit nombre = apparaît en premier")
+
+    class Meta:
+        verbose_name = "Membre de l'équipe"
+        ordering = ['ordre', 'nom'] # Tri automatique par ordre
+
+    def __str__(self):
+        return f"{self.nom} ({self.role})"
+    
+
+class ConfigurationSite(models.Model):
+    annee_promotion = models.CharField(max_length=4, default="2026", help_text="L'année affichée pour l'équipe (ex: 2026)")
+    # Tu pourras ajouter d'autres champs ici plus tard (ex: slogan, lien réseaux sociaux)
+
+    class Meta:
+        verbose_name = "Configuration du site"
+        verbose_name_plural = "Configuration du site"
+
+    def __str__(self):
+        return "Paramètres généraux"

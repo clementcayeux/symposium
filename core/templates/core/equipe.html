@@ -87,7 +87,7 @@
         <div class="header-content">
             <h1 style="font-size: 3rem; margin-bottom: 10px;">Nous connaître</h1>
             <div class="header-line" style="width: 80px; height: 3px; background: #d4af37; margin: 0 auto 20px;"></div>
-            <p style="font-size: 1.2rem; font-weight: 300;">Notre mission et l'équipe 2026</p>
+            <p style="font-size: 1.2rem; font-weight: 300;">Notre mission et l'équipe {{ config.annee_promotion|default:"2026" }}</p>
         </div>
     </header>
 
@@ -106,94 +106,22 @@
     </section>
 
     <section id="team" class="section-container bg-light">
-        <h2 class="section-title">L'Équipe 2026</h2>
-        <div class="team-grid">
-            
-            <div class="team-card">
-                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/augustin.jpg' %}');"></div></div>
-                <div class="member-info">
-                    <p class="role">Président</p>
-                    <h3>Augustin Foray</h3>
+        <h2 class="section-title">L'Équipe {{ config.annee_promotion|default:"2026" }}</h2>
+            <div class="team-grid">
+                {% for membre in membres %}
+                <div class="team-card">
+                    <div class="member-img-container">
+                        <div class="member-img" style="background-image: url('{{ membre.photo.url }}');"></div>
+                    </div>
+                    <div class="member-info">
+                        <p class="role">{{ membre.role }}</p>
+                        <h3>{{ membre.nom }}</h3>
+                    </div>
                 </div>
+                {% empty %}
+                <p>Aucun membre n'est enregistré pour le moment.</p>
+                {% endfor %}
             </div>
-
-            <div class="team-card">
-                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/nael.jpeg' %}');"></div></div>
-                <div class="member-info">
-                    <p class="role">Vice-Président</p>
-                    <h3>Naël Zein</h3>
-                </div>
-            </div>            
-
-            <div class="team-card">
-                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/clement.jpg' %}');"></div></div>
-                <div class="member-info">
-                    <p class="role">Secrétaire Général</p>
-                    <h3>Clément Cayeux</h3>
-                </div>
-            </div>
-
-            <div class="team-card">
-                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/malo.jpg' %}');"></div></div>
-                <div class="member-info">
-                    <p class="role">Trésorier</p>
-                    <h3>Malo Lemonnier</h3>
-                </div>
-            </div>
-
-            <div class="team-card">
-                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/benoit.png' %}');"></div></div>
-                <div class="member-info">
-                    <p class="role">VP Prospection</p>
-                    <h3>Benoit Mayet</h3>
-                </div>
-            </div>
-
-            <div class="team-card">
-                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/joseph.png' %}');"></div></div>
-                <div class="member-info">
-                    <p class="role">VP Comm & Éloquence</p>
-                    <h3>Joseph Hanna</h3>
-                </div>
-            </div>
-
-            <div class="team-card">
-                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/emna.jpg' %}');"></div></div>
-                <div class="member-info"><p class="role">Membre</p><h3>Emna Bannour</h3></div>
-            </div>
-            <div class="team-card">
-                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/klervi.jpg' %}');"></div></div>
-                <div class="member-info"><p class="role">Membre</p><h3>Klervi Ringeval</h3></div>
-            </div>
-            <div class="team-card">
-                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/lamine.jpg' %}');"></div></div>
-                <div class="member-info"><p class="role">Membre</p><h3>Lamine Semmar</h3></div>
-            </div>
-            <div class="team-card">
-                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/gabrielle.jpg' %}');"></div></div>
-                <div class="member-info"><p class="role">Membre</p><h3>Gabrielle Hellier</h3></div>
-            </div>
-            <div class="team-card">
-                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/marie-yang.png' %}');"></div></div>
-                <div class="member-info"><p class="role">Membre</p><h3>Marie-Yang Venière</h3></div>
-            </div>
-            <div class="team-card">
-                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/jules.jpg' %}');"></div></div>
-                <div class="member-info"><p class="role">Membre</p><h3>Jules Rancurel</h3></div>
-            </div>
-            <div class="team-card">
-                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/theophile-t.png' %}');"></div></div>
-                <div class="member-info"><p class="role">Membre</p><h3>Théophile Thibaudon</h3></div>
-            </div>
-            <div class="team-card">
-                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/theophile-s.png' %}');"></div></div>
-                <div class="member-info"><p class="role">Membre</p><h3>Théophile Salabert</h3></div>
-            </div>
-            <div class="team-card">
-                <div class="member-img-container"><div class="member-img" style="background-image: url('{% static 'core/assets/albert.jpg' %}');"></div></div>
-                <div class="member-info"><p class="role">Membre</p><h3>Albert Kechteil</h3></div>
-            </div>
-        </div>
 
         <div class="team-contact-cta" style="text-align: center;">
             <p style="font-size: 1.1rem; color: #666; margin-bottom: 20px;">Vous souhaitez contacter un membre de l'équipe ?</p>
