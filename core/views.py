@@ -23,10 +23,14 @@ def index(request):
 
     # 2. On récupère tous les partenaires (ordonnés par le champ ordre)
     partenaires = Partenaire.objects.all().order_by('ordre')
+
+    # ON RÉCUPÈRE LES 3 PREMIERS REPLAYS
+    replays = Replay.objects.all()[:3]
     
     return render(request, 'core/index.html', {
         'evenements': prochains_evenements,
-        'partenaires': partenaires
+        'partenaires': partenaires,
+        'replays': replays
     })
 
 

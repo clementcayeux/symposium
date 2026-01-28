@@ -108,3 +108,26 @@ class Partenaire(models.Model):
 
     def __str__(self):
         return self.nom
+    
+
+
+import re
+
+class Replay(models.Model):
+    invite = models.CharField(max_length=200, help_text="Nom de la personnalité (ex: Jean-Marc Jancovici)")
+    url_youtube = models.URLField(help_text="Lien complet de la vidéo (ex: https://www.youtube.com/watch?v=...)")
+    ordre = models.PositiveIntegerField(default=100, help_text="Plus petit nombre = apparaît en premier")
+
+    class Meta:
+        verbose_name = "Replay Vidéo"
+        ordering = ['ordre', '-id']
+
+    def __str__(self):
+        return self.invite
+
+    @property
+    def video_id(self):
+        """Extrait l'ID de la vidéo YouTube pour la miniature"""
+        regex = r"(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})"
+        match = re.search(regex, self.url_youtube)
+        return match.group(1) if match else None

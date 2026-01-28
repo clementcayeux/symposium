@@ -59,24 +59,16 @@
     {% endif %}
 
     <div class="video-grid">
-        <a href="https://www.youtube.com/watch?v=iPvnxnpMZ1o" target="_blank" class="video-card">
-            <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/iPvnxnpMZ1o/hqdefault.jpg');">
+        {% for replay in replays %}
+        <a href="{{ replay.url_youtube }}" target="_blank" class="video-card">
+            <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/{{ replay.video_id }}/hqdefault.jpg');">
                 <div class="play-button">▶</div>
             </div>
-            <div class="video-info"><h3>Valérie Pécresse</h3></div>
+            <div class="video-info"><h3>{{ replay.invite }}</h3></div>
         </a>
-        <a href="https://www.youtube.com/watch?v=UCAZxRdwXkc" target="_blank" class="video-card">
-            <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/UCAZxRdwXkc/hqdefault.jpg');">
-                <div class="play-button">▶</div>
-            </div>
-            <div class="video-info"><h3>Dominique de Villepin</h3></div>
-        </a>
-        <a href="https://www.youtube.com/watch?v=PYDNV0Ro1x0" target="_blank" class="video-card">
-            <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/PYDNV0Ro1x0/hqdefault.jpg');">
-                <div class="play-button">▶</div>
-            </div>
-            <div class="video-info"><h3>Jean-Marc Jancovici</h3></div>
-        </a>
+        {% empty %}
+        <p style="text-align:center; grid-column: 1/-1;">Aucun replay disponible pour le moment.</p>
+        {% endfor %}
     </div>
 
     <div style="text-align: center; margin-top: 50px;">

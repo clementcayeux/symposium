@@ -55,3 +55,9 @@ class PartenaireAdmin(admin.ModelAdmin):
     list_editable = ('ordre', 'taille_ajustement')
 
 
+from .models import Replay
+
+@admin.register(Replay)
+class ReplayAdmin(admin.ModelAdmin):
+    list_display = ('invite', 'ordre', 'url_youtube')
+    list_editable = ('ordre',)
