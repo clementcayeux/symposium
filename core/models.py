@@ -36,7 +36,7 @@ class Evenement(models.Model):
     def __str__(self):
         return f"{self.invite} - {self.titre}"
 
-@property
+    @property
     def est_passe(self):
         """Calcule automatiquement si l'événement est terminé de façon sécurisée"""
         # 1. On détermine la date de référence (fin si elle existe, sinon début)
