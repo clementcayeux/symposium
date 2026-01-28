@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Conference
+from .models import Evenement
 
-@admin.register(Conference)
-class ConferenceAdmin(admin.ModelAdmin):
+@admin.register(Evenement)
+class EvenementAdmin(admin.ModelAdmin):
     list_display = ('invite', 'titre', 'date_evenement', 'est_passee')
     list_filter = ('est_passee',)
 

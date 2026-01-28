@@ -16,21 +16,21 @@
 </header>
 
 <section id="evenements" class="section-container">
-    {% if conferences %}
+    {% if evenements %}
     <h2 class="section-title">Prochains Événements</h2>
     <div class="events-grid">
-        {% for conf in conferences %}
+        {% for event in evenements %}
         <div class="event-card">
-            <div class="event-img" style="background-image: url('{{ conf.image.url }}');">
-                <div class="date-tag">{{ conf.date_evenement|date:"d F"|upper }}</div>
+            <div class="event-img" style="background-image: url('{{ event.image.url }}');">
+                <div class="date-tag">{{ event.date_evenement|date:"d F"|upper }}</div>
             </div>
             <div class="event-info">
-                <span class="category">{{ conf.categorie }}</span>
-                <h3>{{ conf.invite }}</h3>
-                <p class="description">{{ conf.titre }}</p>
+                <span class="category">{{ event.categorie }}</span>
+                <h3>{{ event.invite }}</h3>
+                <p class="description">{{ event.titre }}</p>
                 <div class="event-details">
-                    <span>📍 {{ conf.lieu }}</span>
-                    <span>⏰ {{ conf.date_evenement|date:"H:i" }}</span>
+                    <span>📍 {{ event.lieu }}</span>
+                    <span>⏰ {{ event.date_evenement|date:"H:i" }}</span>
                 </div>
             </div>
         </div>

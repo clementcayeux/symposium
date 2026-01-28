@@ -1,16 +1,20 @@
 from django.db import models    
 
-class Conference(models.Model):
+class Evenement(models.Model):
     invite = models.CharField(max_length=200) # Ex: Manuel Bompard
     titre = models.CharField(max_length=200)  # Ex: Souveraineté et défis...
     categorie = models.CharField(max_length=100, default="Politique") # Ex: Politique
     date_evenement = models.DateTimeField()
     lieu = models.CharField(max_length=200, default="Amphi Michelin") # Ex: Amphi Michelin
-    image = models.ImageField(upload_to='conferences/')
+    image = models.ImageField(upload_to='evenements/')
     est_passee = models.BooleanField(default=False)
 
     def __str__(self):
         return self.invite
+    
+    class Meta:
+        verbose_name = "Événement"
+        verbose_name_plural = "Événements"
     
 
 class ContactRecipient(models.Model):

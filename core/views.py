@@ -91,12 +91,12 @@ def contact(request):
 
 
 
-from .models import Conference
+from .models import Evenement
 
 def home(request):
     # On récupère les 3 prochaines conférences non passées
-    prochaines_conf = Conference.objects.filter(est_passee=False).order_by('date_evenement')[:3]
+    prochains_evenements = Evenement.objects.filter(est_passee=False).order_by('date_evenement')[:3]
     # On récupère les replays (si tu crées aussi un modèle pour eux)
     
-    return render(request, 'core/index.html', {'conferences': prochaines_conf})
+    return render(request, 'core/index.html', {'evenement': prochains_evenements})
 
