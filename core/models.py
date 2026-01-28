@@ -36,12 +36,18 @@ class Evenement(models.Model):
     def __str__(self):
         return f"{self.invite} - {self.titre}"
 
-    @property
+@property
     def est_passe(self):
-        """Calcule automatiquement si l'événement est terminé"""
-        if self.date_fin:
-            return self.date_fin < timezone.now()
-        return self.date_debut < timezone.now()
+        """Calcule automatiquement si l'événement est terminé de façon sécurisée"""
+        # 1. On détermine la date de référence (fin si elle existe, sinon début)
+        date_reference = self.date_fin if self.date_fin else self.date_debut
+
+        # 2. Sécurité : Si pour une raison X ou Y, aucune date n'est définie
+        if not date_reference:
+            return False
+
+        # 3. Comparaison sécurisée
+        return date_reference < timezone.now()
     
 
 class ContactRecipient(models.Model):
