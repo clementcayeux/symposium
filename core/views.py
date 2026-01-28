@@ -7,7 +7,7 @@ from django.utils.html import strip_tags
 from django.utils import timezone
 from django.db.models import Q
 
-from .models import Evenement, Partenaire, Membre, ConfigurationSite, ContactRecipient
+from .models import Evenement, Partenaire, Membre, ConfigurationSite, ContactRecipient, Replay
 
 # --- PAGE D'ACCUEIL (Fusion de home et index) ---
 def index(request):
