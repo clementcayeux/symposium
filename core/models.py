@@ -1,20 +1,47 @@
 from django.db import models    
+from django.utils import timezone
 
 class Evenement(models.Model):
-    invite = models.CharField(max_length=200) # Ex: Manuel Bompard
-    titre = models.CharField(max_length=200)  # Ex: Souveraineté et défis...
-    categorie = models.CharField(max_length=100, default="Politique") # Ex: Politique
-    date_evenement = models.DateTimeField()
-    lieu = models.CharField(max_length=200, default="Amphi Michelin") # Ex: Amphi Michelin
-    image = models.ImageField(upload_to='evenements/')
-    est_passee = models.BooleanField(default=False)
+    # Types d'événements pour filtrer facilement
+    TYPE_CHOICES = [
+        ('CONF', 'Conférence'),
+        ('TABLE', 'Table Ronde'),
+        ('WORK', 'Atelier / Workshop'),
+        ('HACK', 'Hackathon'),
+        ('TRIP', 'Voyage d\'étude'),
+        ('AUTRE', 'Autre'),
+    ]
 
-    def __str__(self):
-        return self.invite
+    invite = models.CharField(max_length=200, help_text="Nom de l'intervenant ou nom du projet")
+    titre = models.CharField(max_length=200)
+    categorie = models.CharField(max_length=100, default="Politique")
+    type_evenement = models.CharField(max_length=10, choices=TYPE_CHOICES, default='CONF')
     
+    # Gestion du temps (Flexible)
+    date_debut = models.DateTimeField(verbose_name="Date et heure de début")
+    date_fin = models.DateTimeField(null=True, blank=True, verbose_name="Date et heure de fin (optionnel)")
+    horaires_precision = models.CharField(max_length=100, blank=True, help_text="Ex: 'Toute la journée' ou '14h-18h'")
+    
+    lieu = models.CharField(max_length=200, default="Amphi Michelin")
+    image = models.ImageField(upload_to='evenements/')
+    lien_inscription = models.URLField(blank=True, null=True, help_text="Lien vers la billetterie (Lydia, Shotgun, etc.)")
+    
+    # Statut
+    est_publie = models.BooleanField(default=True)
+
     class Meta:
         verbose_name = "Événement"
-        verbose_name_plural = "Événements"
+        ordering = ['-date_debut']
+
+    def __str__(self):
+        return f"{self.invite} - {self.titre}"
+
+    @property
+    def est_passe(self):
+        """Calcule automatiquement si l'événement est terminé"""
+        if self.date_fin:
+            return self.date_fin < timezone.now()
+        return self.date_debut < timezone.now()
     
 
 class ContactRecipient(models.Model):

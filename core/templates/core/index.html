@@ -22,7 +22,13 @@
         {% for event in evenements %}
         <div class="event-card">
             <div class="event-img" style="background-image: url('{{ event.image.url }}');">
-                <div class="date-tag">{{ event.date_evenement|date:"d F"|upper }}</div>
+                <div class="date-tag">
+                    {% if event.date_fin %}
+                        DU {{ event.date_debut|date:"d" }} AU {{ event.date_fin|date:"d M"|upper }}
+                    {% else %}
+                        {{ event.date_debut|date:"d F"|upper }}
+                    {% endif %}
+                </div>
             </div>
             <div class="event-info">
                 <span class="category">{{ event.categorie }}</span>
@@ -30,8 +36,19 @@
                 <p class="description">{{ event.titre }}</p>
                 <div class="event-details">
                     <span>📍 {{ event.lieu }}</span>
-                    <span>⏰ {{ event.date_evenement|date:"H:i" }}</span>
+                    <span>⏰ 
+                        {% if event.horaires_precision %}
+                            {{ event.horaires_precision }}
+                        {% else %}
+                            {{ event.date_debut|date:"H:i" }}
+                        {% endif %}
+                    </span>
                 </div>
+                {% if event.lien_inscription %}
+                        <div style="margin-top: 15px;">
+                            <a href="{{ event.lien_inscription }}" target="_blank" class="btn-card">S'inscrire / Billetterie</a>
+                        </div>
+                    {% endif %}                
             </div>
         </div>
         {% endfor %}

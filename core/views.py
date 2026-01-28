@@ -100,3 +100,26 @@ def home(request):
     
     return render(request, 'core/index.html', {'evenements': prochains_evenements})
 
+
+
+
+from django.utils import timezone
+from django.db.models import Q
+
+def home(request):
+    # On récupère l'heure actuelle
+    maintenant = timezone.now()
+    
+    # On veut les événements qui ne sont pas encore terminés
+    evenements = Evenement.objects.filter(
+    Q(date_debut__gte=maintenant) | Q(date_fin__gte=maintenant),
+    est_publie=True
+).distinct().order_by('date_debut')
+
+    return render(request, 'core/index.html', {'evenements': evenements})
+
+
+
+
+
+
