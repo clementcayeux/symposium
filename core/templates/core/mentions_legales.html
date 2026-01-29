@@ -1,37 +1,9 @@
+{% extends 'core/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mentions Légales | Symposium CentraleSupélec</title>
-    <link rel="stylesheet" href="{% static 'core/style.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-</head>
-<body class="bg-light">
 
-    <nav class="navbar">
-        <div class="nav-brand">
-            <a href="{% url 'index' %}">
-                <img src="{% static 'core/assets/logo.png' %}" alt="Logo Symposium" class="nav-logo">
-            </a>
-        </div>
+{% block title %}Mentions Légales | Symposium CentraleSupélec{% endblock %}
 
-        <div class="menu-toggle" id="mobile-menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-
-        <ul class="nav-links">
-            <li><a href="{% url 'index' %}#home" class="nav-link">Accueil</a></li>
-            <li><a href="{% url 'index' %}#conferences" class="nav-link">Évènements</a></li>
-            <li><a href="{% url 'index' %}#partenaires" class="nav-link">Partenaires</a></li>
-            <li><a href="{% url 'equipe' %}" class="nav-link">Nous Connaître</a></li>
-            <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
-        </ul>
-    </nav>
-
+{% block content %}
     <header class="page-header" style="background: var(--navy); padding: 80px 0 30px;">
         <div class="header-content" style="text-align: center; color: white;">
             <h1 style="margin: 0; font-size: 2.2rem;">Mentions Légales</h1>
@@ -39,41 +11,31 @@
         </div>
     </header>
 
-    <section class="section-container" style="max-width: 800px; margin: 40px auto; line-height: 1.8; color: #444;">
+    <section class="section-container" style="max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.8; color: #444;">
+        
         <h3>1. Éditeur du site</h3>
         <p>Le présent site est édité par l'association <strong>Symposium CentraleSupélec</strong>, association loi 1901.<br>
         <strong>Siège social :</strong> Plateau de Saclay, 3 rue Joliot-Curie, 91190 Gif-sur-Yvette.<br>
         <strong>Directeur de la publication :</strong> Le président du mandat en cours.</p>
 
         <h3>2. Hébergement</h3>
-        <p>Le site est hébergé par : ViaRezo CentraleSupélec</p>
+        <p>Le site est hébergé par : <strong>ViaRezo CentraleSupélec</strong>, association d'élèves de l'école CentraleSupélec.</p>
 
-       
-        <h3>4. Données personnelles (RGPD)</h3>
-        <p>Conformément au RGPD, les informations recueillies via le formulaire de contact sont destinées exclusivement au traitement de votre demande par l'équipe du Symposium. Elles ne sont ni cédées, ni vendues à des tiers. Vous disposez d'un droit d'accès et de rectification en nous contactant </strong>.</p>
+
+        <h3>3. Données personnelles et Cookies (RGPD)</h3>
+        <p>Conformément au Règlement Général sur la Protection des Données (RGPD), nous vous informons que :</p>
+        <ul style="margin-bottom: 20px;">
+            <li><strong>Formulaire de contact :</strong> Les informations recueillies via le formulaire sont destinées exclusivement au traitement de votre demande par l'équipe de Symposium. Elles ne sont ni cédées, ni vendues à des tiers.</li>
+            <li><strong>Mesure d'audience :</strong> Ce site utilise <strong>Google Analytics</strong> pour analyser le trafic et améliorer votre expérience. Ces outils déposent des cookies sur votre navigateur pour collecter des données anonymes (pages vues, temps de visite, origine du trafic).</li>
+        </ul>
+        <p>Vous disposez d'un droit d'accès, de rectification et de suppression des données vous concernant. Pour exercer ce droit ou pour toute question, vous pouvez nous contacter via notre <a href="{% url 'contact' %}" style="color: var(--navy); font-weight: 600;">page de contact</a>.</p>
+
+        <h3>4. Limitation de responsabilité</h3>
+        <p>L'association Symposium s'efforce d'assurer l'exactitude des informations diffusées sur ce site. Toutefois, elle ne peut être tenue responsable des omissions ou des erreurs présentes dans le contenu.</p>
+        
+        <h3>5. Propriété intellectuelle et Droits d'auteur</h3>
+ 
+        <p><strong>Photos des intervenants :</strong> Les photographies des invités sont utilisées à des fins purement illustratives et informatives dans le cadre de la promotion des événements. Elles proviennent généralement des dossiers de presse officiels ou nous ont été transmises par les intervenants eux-mêmes. Si, malgré notre vigilance, une photographie a été utilisée sans votre accord ou sans mention de crédit appropriée, nous vous prions de nous contacter immédiatement (voir la page contact).</p>
+
     </section>
-
-    <footer>
-        <div class="footer-content">
-            <p>
-                <a href="{% url 'equipe' %}" class="footer-contact-link">À propos</a>
-                <span style="color: var(--gold); margin: 0 10px;">•</span>
-                <a href="{% url 'equipe' %}#team" class="footer-contact-link">Notre équipe</a>
-                <span style="color: var(--gold); margin: 0 10px;">•</span>
-                <a href="{% url 'contact' %}" class="footer-contact-link">Nous contacter</a>
-                <span style="color: var(--gold); margin: 0 10px;">•</span>
-                <a href="https://www.linkedin.com/company/symposiumcentralesup%C3%A9lec/" target="_blank" class="footer-contact-link">LinkedIn</a>
-            </p>
-
-            <div class="footer-bottom">
-                Symposium, 3 rue Joliot-Curie, Gif-sur-Yvette 
-                <span style="margin: 0 8px; opacity: 0.5;">|</span> 
-                <a href="{% url 'mentions_legales' %}" class="footer-legal-link">Mentions Légales</a>
-            </div>
-        </div>
-    </footer>
-
-    <script src="{% static 'core/script.js' %}"></script>
-
-    </body>
-</html>
+{% endblock %}
