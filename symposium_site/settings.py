@@ -134,12 +134,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Configuration Email via Microsoft 365
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.office365.com'
-EMAIL_PORT = 587
+EMAIL_HOST = 'symposium-cs-fr.mail.protection.outlook.com' # Ton adresse MX
+EMAIL_PORT = 25
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'clement.cayeux@symposium-cs.fr'
-EMAIL_HOST_PASSWORD = 'fjqhdtgdmjphbndy' 
-DEFAULT_FROM_EMAIL = 'Symposium CentraleSupélec <contact@symposium-cs.fr>'
+EMAIL_HOST_USER = '' # Laisser vide
+EMAIL_HOST_PASSWORD = '' # Laisser vide
+DEFAULT_FROM_EMAIL = 'contact@symposium-cs.fr'
 
 
 
