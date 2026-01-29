@@ -9,13 +9,13 @@
     <title>{% block title %}Symposium CentraleSupélec | La tribune étudiante{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}Symposium est la tribune étudiante de CentraleSupélec. Nous organisons des conférences et débats pour placer les ingénieurs au cœur du débat public.{% endblock %}">
     <meta name="author" content="Symposium CentraleSupélec">
-    <link rel="canonical" href="https://symposium.cs-campus.fr{{ request.path }}">
+    <link rel="canonical" href="https://symposium-cs.fr{{ request.path }}">
 
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://symposium.cs-campus.fr{{ request.path }}">
+    <meta property="og:url" content="https://symposium-cs.fr{{ request.path }}">
     <meta property="og:title" content="Symposium CentraleSupélec">
     <meta property="og:description" content="Les ingénieurs au cœur du débat. Découvrez nos prochaines conférences et replays.">
-    <meta property="og:image" content="https://symposium.cs-campus.fr{% static 'core/assets/logo-share.jpg' %}">
+    <meta property="og:image" content="https://symposium-cs.fr{% static 'core/assets/logo-share.jpg' %}">
     <meta property="og:image:alt" content="Logo Symposium CentraleSupélec">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:site_name" content="Symposium CentraleSupélec">
@@ -23,7 +23,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Symposium CentraleSupélec">
     <meta name="twitter:description" content="La tribune étudiante de CentraleSupélec. Découvrez nos invités et débats.">
-    <meta name="twitter:image" content="https://symposium.cs-campus.fr{% static 'core/assets/logo-share.jpg' %}">
+    <meta name="twitter:image" content="https://symposium-cs.fr{% static 'core/assets/logo-share.jpg' %}">
 
     <link rel="icon" type="image/png" href="{% static 'core/assets/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'core/style.css' %}">
@@ -50,7 +50,7 @@
 
         <ul class="nav-links">
             <li><a href="{% url 'index' %}#home" class="nav-link">Accueil</a></li>
-            <li><a href="{% url 'index' %}#evenements" class="nav-link">Évenements</a></li>
+            <li><a href="{% url 'index' %}#evenements" class="nav-link">Évènements</a></li>
             <li><a href="{% url 'index' %}#partenaires" class="nav-link">Partenaires</a></li>
             <li><a href="{% url 'equipe' %}" class="nav-link">Nous Connaître</a></li>
             <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
@@ -72,7 +72,7 @@
             </p>
 
             <div class="footer-bottom">
-                &copy; 2026 Symposium CentraleSupélec
+                Symposium, 3 rue Joliot-Curie, Gif-sur-Yvette
                 <span style="margin: 0 8px; opacity: 0.5;">|</span>
                 <a href="{% url 'mentions_legales' %}" class="footer-legal-link">Mentions Légales</a>
             </div>
