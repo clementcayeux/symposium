@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core'
+    'django.contrib.sitemaps',
+    'django.contrib.sites', 
 ]
 
 MIDDLEWARE = [
@@ -143,3 +145,5 @@ DEFAULT_FROM_EMAIL = 'Symposium CentraleSupélec <formulaire.symposium@outlook.c
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+SITE_ID = 1
