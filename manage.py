@@ -3,13 +3,6 @@
 import os
 import sys
 
-from django.contrib.sites.models import Site
-site = Site.objects.get(id=1)
-site.domain = 'symposium-cs.fr'
-site.name = 'Symposium'
-site.save()
-exit()
-
 
 def main():
     """Run administrative tasks."""
