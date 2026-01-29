@@ -94,7 +94,7 @@ def contact(request):
                 html_message=html_message,
             )
 
-            messages.success(request, "Message envoyé ! Vérifiez vos spams pour la confirmation.")
+            messages.success(request, "Merci, votre message a bien été envoyé, nous reviendrons vers vous dans les plus  brefs délais.")
             return redirect('contact')
 
         except Exception as e:
