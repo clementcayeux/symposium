@@ -6,6 +6,10 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.utils import timezone
 from django.db.models import Q
+from django.core.mail import EmailMessage
+import time
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 from .models import Evenement, Partenaire, Membre, ConfigurationSite, ContactRecipient, Replay
 
@@ -50,10 +54,16 @@ def equipe(request):
 def contact(request):
     if request.method == 'POST':
         # 1. Honeypot pour bloquer les robots
-        honeypot = request.POST.get('phone_confirm')
+        honeypot = request.POST.get('website')
         if honeypot:
-            messages.success(request, "Votre message a été envoyé.")
+            messages.success(request, "Message envoyé.")
             return redirect('contact')
+        
+        timestamp = request.POST.get('form_timestamp')
+        if timestamp:
+            time_elapsed = time.time() - float(timestamp)
+            if time_elapsed < 4:  # Moins de 4 secondes = Bot
+                return redirect('contact')        
 
         # 2. Récupération des données du formulaire
         nom = request.POST.get('name')
@@ -64,26 +74,76 @@ def contact(request):
         # 3. Récupération des destinataires actifs en BDD
         destinataires = list(ContactRecipient.objects.filter(actif=True).values_list('email', flat=True))
         if not destinataires:
-            destinataires = ['clement.cayeux@symposium-cs.fr']
+            destinataires = ['contact@symposium-cs.fr']
 
-        # 4. Préparation des emails
-        # Alerte pour l'équipe
-        corps_admin = f"Nouveau message de : {nom} ({email_utilisateur})\n\nSujet : {sujet}\n\nMessage :\n{message_contenu}"
+        # Nettoyage basique
+        nom = nom.strip() if nom else ""
+        email_utilisateur = email_utilisateur.strip().lower() if email_utilisateur else ""
+        sujet = sujet.strip() if sujet else ""
+        message_contenu = message_contenu.strip() if message_contenu else ""
+
+        # Validation nom
+        if not nom or len(nom) < 2 or len(nom) > 100:
+            messages.error(request, "Merci d’indiquer un nom valide.")
+            return redirect('contact')
+
+        # Validation email
+        try:
+            validate_email(email_utilisateur)
+        except ValidationError:
+            messages.error(request, "Adresse email invalide.")
+            return redirect('contact')
+
+        # Validation sujet
+        if not sujet or len(sujet) > 200:
+            messages.error(request, "Sujet invalide ou trop long.")
+            return redirect('contact')
+
+        # Validation message
+        if not message_contenu or len(message_contenu) < 10:
+            messages.error(request, "Le message doit contenir au moins 10 caractères.")
+            return redirect('contact')
+
+        if len(message_contenu) > 20000:
+            messages.error(request, "Message trop long.")
+            return redirect('contact')
+
         
+        # 4. Préparation du mail pour l'équipe (Admin)
+        sujet_admin = f"[FORMULAIRE WEB] {sujet}"
+        corps_admin = f"""
+Un nouveau message a été reçu via le formulaire du site web.
+
+EXPÉDITEUR : {nom}
+EMAIL : {email_utilisateur}
+SUJET : {sujet}
+
+(Se coordoner pour répondre une fois, mettre contact@symposium-cs.fr en copie de la réponse pour l'archivage)
+-----------------------------------------------------------
+
+MESSAGE :
+{message_contenu}
+
+-----------------------------------------------------------
+
+        """
+
         # Confirmation pour l'utilisateur
         context = {'nom': nom, 'sujet': sujet}
         html_message = render_to_string('core/emails/confirmation_email.html', context)
         plain_message = strip_tags(html_message)
 
         try:
-            # Envoi mail admin
-            send_mail(
-                subject=f"[Contact WEB] {sujet}",
-                message=corps_admin,
+
+            
+            # Envoi mail admin 
+            mail_admin = EmailMessage(
+                subject=sujet_admin,
+                body=corps_admin,
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=destinataires,
-                fail_silently=False,
+                to=destinataires,
             )
+            mail_admin.send()
 
             # Envoi mail confirmation client
             send_mail(
@@ -94,7 +154,7 @@ def contact(request):
                 html_message=html_message,
             )
 
-            messages.success(request, "Merci, votre message a bien été envoyé. Vous avez reçu un mail de confirmation (veuillez vérifiez vos spams).")
+            messages.success(request, "Merci, votre message a bien été envoyé. Vous avez reçu un mail de confirmation (veuillez vérifier vos spams).")
             return redirect('contact')
 
         except Exception as e:

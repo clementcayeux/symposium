@@ -30,8 +30,8 @@
         </div>
     </header>
 
-    <section class="section-container">
-        <div class="about-wrapper" style="max-width: 700px; margin: 0 auto;">
+    <section class="section-container" style="padding-bottom: 0;">
+        <div class="about-wrapper" style="max-width: 800px; margin: 0 auto;">
             
             {% if messages %}
                 {% for message in messages %}
@@ -54,10 +54,12 @@
                 <input type="text" name="subject" placeholder="Sujet de votre message" required style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px;">
                 
                 <textarea name="message" rows="6" placeholder="Votre message..." required style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 25px; font-family: inherit;"></textarea>
-                
-                <div style="display: none;" aria-hidden="true">
-                    <input type="text" name="phone_confirm" tabindex="-1" autocomplete="off">
+
+                <div style="overflow: hidden; width: 0; height: 0; position: absolute; left: -9999px;" aria-hidden="true">
+                    <input type="text" name="website" tabindex="-1" autocomplete="off">
                 </div>
+
+                <input type="hidden" name="form_timestamp" value="{% now 'U' %}">                
 
                 <button type="submit" class="btn-main" style="width: 100%; border: none; cursor: pointer; padding: 18px;">
                     Envoyer le message
@@ -70,7 +72,7 @@
     <div style="margin-top: 0px; text-align: center; border-top: 1px solid #eee; padding: 10px 0 80px 0;">
         <p style="color: #666; margin-bottom: 10px; font-size: 0.95rem;">Pour toute demande de partenariat, vous pouvez nous écrire directement :</p>
         
-        <div id="email-container" style="display: inline-flex; align-items: center; gap: 10px; background: white; padding: 10px 20px; border-radius: 50px; border: 1px dashed #d4af37; min-height: 45px;">
+        <div id="email-container" style="display: inline-flex; align-items: center; gap: 10px; background: white; padding: 10px 20px; border-radius: 50px; border: 1px dashed #d4af37; min-height: 50px;">
             <button id="reveal-btn" onclick="revealEmail()" style="background: none; border: none; color: #d4af37; cursor: pointer; font-weight: 600; font-family: inherit; font-size: 1rem;">
                 Afficher l'adresse email
             </button>
@@ -88,26 +90,12 @@ function revealEmail() {
     const domain = "symposium-cs.fr";
     const fullEmail = user + "@" + domain;
 
-    // On remplace le bouton par l'adresse et un bouton de copie
+    // Correction : ajout de style="", passage en bleu et text-decoration: underline
     container.innerHTML = `
-        <a href="mailto:${fullEmail}" style="text-decoration: none; color: #000b29; font-weight: 600; font-family: monospace;">${fullEmail}</a>
-        <button onclick="copyEmail('${fullEmail}')" title="Copier" style="background: #f0f0f0; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 0.8rem; margin-left: 5px;">
-            📋 Copier
-        </button>
+        <a href="mailto:${fullEmail}" style="text-decoration: underline; color: #007bff; font-weight: 600;">
+            ${fullEmail}
+        </a>
     `;
-}
-
-function copyEmail(email) {
-    navigator.clipboard.writeText(email).then(() => {
-        const btn = event.target;
-        const originalText = btn.innerText;
-        btn.innerText = "Copié !";
-        btn.style.background = "#d4edda";
-        setTimeout(() => {
-            btn.innerText = originalText;
-            btn.style.background = "#f0f0f0";
-        }, 2000);
-    });
 }
 </script>
 
