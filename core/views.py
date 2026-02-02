@@ -52,7 +52,7 @@ def equipe(request):
 
 
 # --- PAGE CONTACT (Avec gestion Email & Honeypot) ---
-@ratelimit(key='ip', rate='4/m', method='POST', block=False)
+@ratelimit(key='ip', rate='4/m', method='POST', block=False) #ici on règle 4 soumissions de formulaire par minute max.
 def contact(request):
     # Vérifier si la limite a été atteinte
     was_limited = getattr(request, 'limited', False)
