@@ -10,6 +10,7 @@ from django.core.mail import EmailMessage
 import time
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from django_ratelimit.decorators import ratelimit
 
 from .models import Evenement, Partenaire, Membre, ConfigurationSite, ContactRecipient, Replay
 
@@ -51,7 +52,14 @@ def equipe(request):
 
 
 # --- PAGE CONTACT (Avec gestion Email & Honeypot) ---
+@ratelimit(key='ip', rate='4/m', method='POST', block=False)
 def contact(request):
+    # Vérifier si la limite a été atteinte
+    was_limited = getattr(request, 'limited', False)
+    if was_limited:
+        messages.error(request, "Trop de tentatives. Veuillez attendre une minute.")
+        return redirect('contact')
+
     if request.method == 'POST':
         # 1. Honeypot pour bloquer les robots
         honeypot = request.POST.get('website')
