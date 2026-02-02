@@ -67,50 +67,107 @@ Bash
 python manage.py runserver
 
 
-##  Configuration du Formulaire de Contact (Brevo)
-Le site utilise Brevo pour l'envoi des mails afin d'éviter les blocages SMTP classiques des boîtes Outlook/Gmail.
 
-Paramètres à vérifier dans settings.py :
-EMAIL_HOST_USER : L'adresse email du compte Brevo (formulaire.symposium@outlook.com).
+Symposium - https://symposium-cs.fr/
+[Dernière mise à jour : Janvier 2026 (création du nouveau site)]
+Mots de passe en bas
+Ce site a été conçu pour être la vitrine de l'association, permettant de présenter les conférences, l'équipe et de faciliter la prise de contact.
 
-EMAIL_HOST_PASSWORD : La Clé SMTP Master générée sur le dashboard Brevo (onglet SMTP & API).
 
-DEFAULT_FROM_EMAIL : L'adresse d'expédition qui apparaîtra chez le destinataire.
+Mises à jour du site
 
-## 🔧 Maintenance & Mises à jour
+Se connecter à la page d’admin Django pour modifier le site sans passer par le code html https://symposium-cs.fr/admin (mettre à la fin de l’url :    /admin)  [voir codes en dessous]. D’ici on peut modifier facilement : 
+la date du mandat (dans configuration du site)
+les membres du mandat
+les prochains événements (3 premiers affichés seulement)
+les replays (3 premiers affichés seulement)
+les partenaires
 
-### Modifier l'Équipe
-Les membres sont gérés manuellement dans core/templates/core/equipe.html.
+Tout le reste se gère directement dans le html. Il faut utiliser git, travailler dans VScode en local puis mettre à jour le serveur avec la nouvelle version.
+Penser aux mentions Légales : Si l'hébergeur est modifié, mettre à jour mentions_legales.html
 
-Photos : À placer dans static/core/assets/. Format recommandé : .jpg ou .png (format carré de préférence).
 
-Sécurité : Les emails individuels sont masqués pour éviter le "scraping". Utilisez les liens LinkedIn.
+Stack Technique
+Framework : Django 5.x (Python)
+Frontend : HTML5, CSS3 (Custom Grid & Flexbox), JavaScript Vanilla
+Emails : Microsoft 365 (SMTP Authenticated).
+Design : Responsive (Mobile First) aux couleurs Navy & Or de Symposium
+Hébergement : VM Debian (Serveur dédié/VPS), par ViaRezo
+Serveur Web : Nginx (Reverse Proxy).
+Base de données : PostgreSQL.
+Analytics : Umami (Self-hosted via Docker).
 
-### Modifier les destinataires du formulaire
-Pour changer qui reçoit les messages envoyés via le site :
+Structure du Projet
 
-Ouvrir core/views.py.
 
-Dans la fonction contact, modifier la recipient_list :
+Installation Locale (Développement)
+Pour reprendre le projet sur votre machine (DANS VS CODE) :
+Cloner le dépôt :
+git clone https://gitlab-cw4.centralesupelec.fr/clement.cayeux/symposium.git
+cd symposium_site
+Créer un environnement virtuel :
+python -m venv venv
+source venv/bin/activate (sur Windows : venv\Scripts\activate)
+installer toutes les bibliothèques nécessaires, elles sont dans requirements.txt : 
+python3 -m pip install -r requirements.txt
+Appliquer les migrations :
+python manage.py migrate
+Lancer le serveur en local :
+python manage.py runserver
 
-Python
 
-recipient_list=['clement.cayeux@symposium-cs.fr', 'autre.membre@symposium-cs.fr']
+Infrastructure & Serveur (La VM ViaRezo)
+Accès
+Connexion : ssh debian@ip_du_serveur
+Gestionnaire de processus : Gunicorn (servi par Nginx).
+Nginx & SSL
+Les fichiers de configuration se trouvent dans /etc/nginx/sites-available/.
+symposium : Gère le site principal.
+umami : Gère le sous-domaine stats.symposium-cs.fr.
+SSL : Géré par Certbot (Let's Encrypt). Renouvellement automatique via cron.
 
-### Mettre à jour les conférences
-Directement dans core/templates/core/index.html.
 
-Modifier les textes et les sources d'images (static/core/assets/).
+Configuration du Formulaire de Contact
+Le site utilise contact@symposium-cs.fr pour l'envoi des mails, voir settings.py
 
-### Ajouter des Replays
-Les liens YouTube se modifient dans index.html au niveau de la section "Replays". Il suffit de remplacer l'ID de la vidéo dans l'URL d'intégration.
+Gestion des Emails
+Configuration : Les paramètres SMTP sont dans le .env de Django.
+Note de sécurité : Les "Security Defaults" de Microsoft 365 ont été désactivés pour permettre l'envoi SMTP. Ne jamais les réactiver sans configurer une alternative (OAuth2), sinon l'envoi de mail cassera.
+MFA : Le compte d'envoi utilise un "Mot de passe d'application" par l’adresse clement.cayeux@symposium-cs.fr (attention ne pas enlever les autorisations à cette adresse, laisser le MFA activé.
 
-### Mentions Légales
-Le texte est conforme à la loi LCEN. Si le Président de l'association change ou si l'Hébergeur est modifié, mettez à jour le fichier mentions_legales.html.
+Statistiques & RGPD (Umami)
+Localisation dans la VM : ~/umami/
+Techno : Docker Compose.
+Maintenance : Pour mettre à jour Umami, aller dans le dossier et faire :
+Bash
+sudo docker compose pull
+sudo docker compose up -d
+RGPD : Tant qu'Umami est utilisé seul, aucun bandeau de cookies n'est requis.
 
-### Contact & Hébergement
+Checklist de Maintenance Annuelle
+Chaque nouvelle équipe doit vérifier ces points en septembre :
+Renouvellement du Domaine : Vérifier la date d'expiration.
+Certificats SSL : Vérifier avec sudo certbot certificates.
+Mises à jour :
+sudo apt update && sudo apt upgrade (Système).
+pip install --upgrade -r requirements.txt (Django).
+Mots de passe : Changer les mots de passe du dashboard Umami et de la base de données s'il y a eu des départs sensibles.
+Logs : Vérifier les erreurs dans /var/log/nginx/error.log.
+
+En cas de crash (Dépannage rapide)
+Le site affiche 502 Bad Gateway : Gunicorn est probablement arrêté.
+sudo systemctl restart gunicorn
+Les mails ne partent plus : Souvent dû à un changement de politique de sécurité Microsoft ou un mot de passe expiré.
+Vérifier les logs Django.
+Les stats ne s'affichent plus : Le container Docker est peut-être tombé.
+cd ~/umami && sudo docker compose restart
+
+
+Sécurité & Confidentialité
+⚠️ RÈGLE D'OR : Le dépôt GitLab doit impérativement rester en PRIVÉ. Le fichier .env ne doit jamais être commité sur Git (il contient la secret key django et le mot de passe d’application du compte mail microsoft pour le formulaire).
+
+
+Contact & Hébergement
 Développeur Original : Clément Cayeux (Mandat 2026)
-
 Hébergement : ViaRezo (CentraleSupélec)
-
-Dernière mise à jour : Janvier 2026
+Registrar (Domaine) : Microsoft 365 (compte des adresses sympo)
