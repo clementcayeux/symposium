@@ -1,0 +1,155 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Connexion Administrateur | Symposium{% endblock %}
+
+{% block extra_head %}
+{{ block.super }}
+<style>
+    /* Sur cette page, on s'assure que le contenu pousse le footer en bas */
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-color: var(--bg-light);
+    }
+    .navbar {
+        position: relative; /* On désancre la navbar pour cette page spécifique */
+    }
+    
+    .login-wrapper {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 20px;
+    }
+
+    .login-card {
+        background: #fff;
+        padding: 50px 40px;
+        border-radius: 16px;
+        box-shadow: 0 15px 40px rgba(0, 11, 41, 0.08);
+        width: 100%;
+        max-width: 450px;
+        text-align: center;
+        border-top: 5px solid var(--gold);
+        animation: fadeInUp 0.5s ease-out;
+    }
+
+    .login-card h2 {
+        font-size: 2rem;
+        color: var(--navy);
+        margin-bottom: 10px;
+    }
+
+    .login-card p {
+        color: #64748b;
+        font-size: 0.95rem;
+        margin-bottom: 35px;
+    }
+
+    .login-form-group {
+        margin-bottom: 22px;
+        text-align: left;
+    }
+
+    .login-form-group label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #374151;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .login-form-group input {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-family: 'Inter', sans-serif;
+        transition: all 0.2s;
+        background-color: #f8fafc;
+        box-sizing: border-box;
+    }
+
+    .login-form-group input:focus {
+        background-color: #fff;
+        border-color: var(--gold);
+        box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
+        outline: none;
+    }
+
+    .btn-login {
+        width: 100%;
+        padding: 16px;
+        background: var(--navy);
+        color: var(--gold);
+        border: none;
+        border-radius: 8px;
+        font-size: 1.05rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+        margin-top: 15px;
+    }
+
+    .btn-login:hover {
+        background: #1a2a4f;
+        transform: translateY(-2px);
+    }
+
+    .login-error {
+        background: #fee2e2;
+        color: #991b1b;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        margin-bottom: 25px;
+        border: 1px solid #fecaca;
+        font-weight: 500;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="login-wrapper">
+    <div class="login-card">
+        
+        <h2>Espace Éditeur</h2>
+        <p>Connectez-vous pour modifier le site en temps réel.</p>
+
+        {% if form.errors %}
+            <div class="login-error">
+                Identifiant ou mot de passe incorrect. Veuillez réessayer.
+            </div>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            <!-- Si l'utilisateur est déjà connecté et tombe ici -->
+            <p style="color: #10b981; font-weight: 600;">Vous êtes déjà connecté(e) en tant que {{ user.username }}.</p>
+            <a href="{% url 'index' %}" class="btn-main" style="display: block; margin-top: 20px;">Accéder au site</a>
+        {% else %}
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next|default:'/' }}">
+                
+                <div class="login-form-group">
+                    <label for="id_username">Identifiant</label>
+                    <input type="text" name="username" autofocus required id="id_username" placeholder="prenom.nom">
+                </div>
+                
+                <div class="login-form-group">
+                    <label for="id_password">Mot de passe</label>
+                    <input type="password" name="password" required id="id_password" placeholder="••••••••">
+                </div>
+                
+                <button type="submit" class="btn-login">Se connecter</button>
+            </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -7,17 +7,12 @@ db.sqlite3
 .pytest_cache/
 .coverage
 
-# --- Environnement Virtuel ---
+# --- Environnement Virtuel & Secrets ---
 venv/
 env/
 ENV/
 .env
 .venv/
-virenv/
-
-# --- Fichiers Media (Photos des invités) ---
-# On ne veut pas synchroniser les photos uploadées via Git
-media/
 
 # --- Système & IDE ---
 .DS_Store

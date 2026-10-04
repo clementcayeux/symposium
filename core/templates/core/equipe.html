@@ -4,128 +4,341 @@
 {% block title %}Nous connaître | Symposium CentraleSupélec{% endblock %}
 
 {% block extra_head %}
+    {{ block.super }}
     <style>
-        /* Styles spécifiques pour garantir le centrage et l'espace sur cette page */
-        .about-wrapper {
-            max-width: 900px;
-            margin: 0 auto !important;
-            text-align: center !important;
-            padding: 60px 20px;
+        /* =================================================================
+           1. TITRES DE SECTION
+           ================================================================= */
+        .section-header-flex {
+            display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 3.5rem;
+        }
+        .section-title {
+            font-size: 2.5rem; color: #000b29; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.5px;
+        }
+        .section-divider {
+            width: 60px; height: 4px; background-color: #d4af37; border-radius: 2px; margin-top: 8px;
         }
 
-        .about-text p {
-            font-size: 1.15rem;
-            line-height: 1.6; 
-            color: #444;
-            margin-bottom: 2.5rem !important; 
-            display: block;
-        }
-
-        .about-text p:last-child {
-            margin-bottom: 0 !important;
-        }
-
-        .about-statement {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.4rem !important;
-            color: #000b29 !important; /* var(--navy) */
-            font-weight: 600;
-        }
-
-        .about-statement strong {
-            color: #d4af37; /* var(--gold) */
-        }
-
-        /* Header avec l'image d'équipe et filtre bleu */
+        /* =================================================================
+           2. HEADER DE LA PAGE
+           ================================================================= */
         .page-header-equipe {
             height: 50vh; 
-            background: linear-gradient(rgba(0, 11, 41, 0.6), rgba(0, 11, 41, 0.6)), url('{% static 'core/assets/equipe.jpg' %}') center/cover no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding-top: 80px; 
+            background: linear-gradient(rgba(0, 11, 41, 0.7), rgba(0, 11, 41, 0.7)), url('{% static "core/assets/equipe.jpg" %}') center/cover no-repeat;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            color: white; padding-top: 60px;
+        }
+        .header-content h1 {
+            font-size: clamp(2.5rem, 5vw, 3.8rem); margin-bottom: 15px; letter-spacing: -1px;
+        }
+        .header-line {
+            width: 80px; height: 4px; background: #d4af37; margin: 0 auto 20px; border-radius: 2px;
+        }
+        
+        body { background-color: #f8f9fa; }
+
+        /* =================================================================
+           3. SECTION À PROPOS
+           ================================================================= */
+        .about-wrapper {
+            max-width: 900px; margin: 0 auto; text-align: center; padding: 50px 40px;
+            background: #ffffff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 11, 41, 0.04);
+            position: relative; border: 1px solid rgba(0,0,0,0.03);
+        }
+        .about-text p {
+            font-size: 1.15rem; line-height: 1.8; color: #475569; margin-bottom: 2.5rem;
+        }
+        .about-text p:last-child { margin-bottom: 0; }
+        
+        .about-statement {
+            font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem !important;
+            color: #000b29 !important; font-weight: 600; padding: 0 20px;
+        }
+        .about-statement strong { color: #d4af37; }
+
+        /* =================================================================
+           4. GRILLE DE L'ÉQUIPE
+           ================================================================= */
+        .team-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 35px; padding: 20px 0;
+        }
+        .team-card {
+            background: white; border-radius: 16px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            border: 1px solid #f1f5f9; text-align: center; display: flex; flex-direction: column; position: relative;
+        }
+        .team-card:hover {
+            transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 11, 41, 0.12); border-color: rgba(212, 175, 55, 0.3);
+        }
+        
+        .member-img-container {
+            width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background: #f8fafc;
+        }
+        .member-img {
+            width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 0.6s ease;
+        }
+        .team-card:hover .member-img { transform: scale(1.08); }
+        
+        .member-info {
+            padding: 25px 20px; display: flex; flex-direction: column; flex-grow: 1; justify-content: center;
+        }
+        .role {
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; color: #d4af37; font-weight: 700; margin-bottom: 8px;
+        }
+        .member-info h3 {
+            font-size: 1.4rem; color: #000b29; margin: 0; font-weight: 800;
         }
 
-    /* Style pour le CTA de contact optimisé */
+        /* =================================================================
+           5. BOUTON CONTACT EN BAS
+           ================================================================= */
         .team-contact-cta {
-            margin-top: 30px; 
-            padding: 40px 40px;
-            background: #ffffff;
-            border-radius: 20px;
-            /* On renforce un peu l'ombre pour qu'elle ressorte mieux */
-            box-shadow: 0 15px 40px rgba(0, 11, 41, 0.12); 
-            border: 1px solid rgba(0, 0, 0, 0.05); /* Fine bordure pour définir les contours */
-            transition: transform 0.3s ease;
+            margin-top: 60px; padding: 50px 40px; background: #ffffff; border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 11, 41, 0.08); border: 1px solid rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;
         }
+        .team-contact-cta:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0, 11, 41, 0.12); }
+        .team-contact-cta p { font-size: 1.2rem; color: #475569; margin-bottom: 25px; font-weight: 500; }
 
-        .team-contact-cta:hover {
-            transform: translateY(-5px); /* Petit effet interactif */
-        }
+        .nav-links li a[href*="equipe"] { color: #d4af37 !important; }
+        .nav-links li a[href*="equipe"]::after { width: 100% !important; }
 
-        /* Forcer le soulignement du lien actif dans la navbar pour cette page */
-        .nav-links li a[href*="equipe"] {
-            color: #d4af37 !important;
+        /* Style spécifique pour la date verrouillée en mode admin */
+        {% if user.is_staff and not request.GET.preview %}
+        .admin-locked-date {
+            cursor: pointer;
+            position: relative;
+            text-decoration: underline dotted #d4af37;
+            text-underline-offset: 4px;
+            transition: opacity 0.2s;
         }
-        .nav-links li a[href*="equipe"]::after {
-            width: 100% !important;
+        .admin-locked-date:hover {
+            opacity: 0.85;
         }
-
-        /* On s'assure que le fond de la page reste bien gris clair */
-        main.content-wrapper {
-            background-color: #f8f9fa; /* bg-light */
-            min-height: 80vh;
-        }
-
+        {% endif %}
     </style>
 {% endblock %}
 
 {% block content %}
     <header class="page-header-equipe" id="top">
         <div class="header-content">
-            <h1 style="font-size: 3rem; margin-bottom: 10px;">Nous connaître</h1>
-            <div class="header-line" style="width: 80px; height: 3px; background: #d4af37; margin: 0 auto 20px;"></div>
-            <p style="font-size: 1.2rem; font-weight: 300;">Notre mission et l'équipe {{ config.annee_promotion|default:"2026" }}</p>
+            <h1>Nous connaître</h1>
+            <div class="header-line"></div>
+            <p style="font-size: 1.2rem; font-weight: 300; opacity: 0.9;">
+                Notre mission et l'équipe 
+                {% if user.is_staff and not request.GET.preview %}
+                    <span class="admin-locked-date" onclick="showLockedMandatNotice(event)" title="À modifier dans les réglages du site">{{ config.annee_promotion|default:"2026" }}</span>
+                {% else %}
+                    <span>{{ config.annee_promotion|default:"2026" }}</span>
+                {% endif %}
+            </p>
         </div>
     </header>
 
-    <section class="section-container" style="background-color: #fff;">
-        <div class="about-wrapper">
-            <h2 class="section-title">À propos</h2>
+    <!-- ============================================
+         SECTION À PROPOS / MISSION
+         ============================================ -->
+    <section class="section-container" style="padding-top: 60px;">
+        <div class="about-wrapper {% if user.is_staff and not request.GET.preview %}admin-item-wrapper{% endif %}">
+            
+            {% if user.is_staff and not request.GET.preview %}
+            <div class="admin-overlay" style="border-radius: 20px;">
+                <button class="admin-btn btn-gold" onclick="editItem('modal-apropos', {{ config.id|default:1 }}, {
+                    a_propos_paragraphe_1: '{{ config.a_propos_paragraphe_1|escapejs }}',
+                    a_propos_statement: '{{ config.a_propos_statement|escapejs }}',
+                    a_propos_paragraphe_2: '{{ config.a_propos_paragraphe_2|escapejs }}'
+                })">✏️ Modifier la présentation</button>
+            </div>
+            {% endif %}
+
+            <div class="section-header-flex" style="margin-bottom: 2.5rem;">
+                <h2 class="section-title">À propos</h2>
+                <div class="section-divider"></div>
+            </div>
             
             <div class="about-text">
-                <p>Fondée en 2014, <strong>Symposium</strong> est la tribune étudiante de CentraleSupélec. Chaque mois, nous invitons des personnalités du monde politique, économique, culturel et académique à participer à des conférences et débats, afin d’échanger sans filtre avec les étudiants.</p>
+                <p data-editable="true" data-multiline="true" data-model="configurationsite" data-id="{{ config.id|default:1 }}" data-field="a_propos_paragraphe_1">{{ config.a_propos_paragraphe_1 }}</p>
                 
-                <p class="about-statement">À l’heure où les enjeux contemporains deviennent toujours plus techniques, Symposium défend la conviction que les <strong>ingénieurs et scientifiques</strong> doivent être pleinement acteurs du débat démocratique.</p>
+                <p class="about-statement" data-editable="true" data-multiline="true" data-model="configurationsite" data-id="{{ config.id|default:1 }}" data-field="a_propos_statement">{{ config.a_propos_statement }}</p>
                 
-                <p>Symposium s’adresse en premier lieu aux étudiants de CentraleSupélec, auxquels s’ajoutent régulièrement ceux de l’ENS Paris-Saclay, de l’École Polytechnique et, plus largement, des établissements du Plateau de Saclay.</p>
+                <p data-editable="true" data-multiline="true" data-model="configurationsite" data-id="{{ config.id|default:1 }}" data-field="a_propos_paragraphe_2">{{ config.a_propos_paragraphe_2 }}</p>
             </div>
         </div>
     </section>
 
-    <section id="team" class="section-container bg-light">
-        <h2 class="section-title">L'Équipe {{ config.annee_promotion|default:"2026" }}</h2>
-            <div class="team-grid">
-                {% for membre in membres %}
-                <div class="team-card">
-                    <div class="member-img-container">
-                        <div class="member-img" style="background-image: url('{{ membre.photo.url }}');"></div>
-                    </div>
-                    <div class="member-info">
-                        <p class="role">{{ membre.role }}</p>
-                        <h3>{{ membre.nom }}</h3>
-                    </div>
-                </div>
-                {% empty %}
-                <p>Aucun membre n'est enregistré pour le moment.</p>
-                {% endfor %}
-            </div>
+    <!-- ============================================
+         SECTION ÉQUIPE
+         ============================================ -->
+    <section id="team" class="section-container">
+        <div class="section-header-flex" style="margin-top: 40px;">
+            <h2 class="section-title">
+                L'Équipe 
+                {% if user.is_staff and not request.GET.preview %}
+                    <span class="admin-locked-date" onclick="showLockedMandatNotice(event)" title="À modifier dans les réglages du site">{{ config.annee_promotion|default:"2026" }}</span>
+                {% else %}
+                    <span>{{ config.annee_promotion|default:"2026" }}</span>
+                {% endif %}
+            </h2>
+            <div class="section-divider"></div>
+            {% if user.is_staff and not request.GET.preview %}
+            <button class="btn-admin-add" onclick="createItem('modal-membre')">＋ Ajouter un membre</button>
+            {% endif %}
+        </div>
 
-        <div class="team-contact-cta" style="text-align: center;">
-            <p style="font-size: 1.1rem; color: #666; margin-bottom: 20px;">Vous souhaitez contacter un membre de l'équipe ?</p>
+        <div class="team-grid">
+            {% for membre in membres %}
+            <div class="team-card {% if user.is_staff and not request.GET.preview %}admin-item-wrapper{% endif %}" id="card-membre-{{ membre.id }}">
+                
+                {% if user.is_staff and not request.GET.preview %}
+                <div class="admin-overlay">
+                    <button class="admin-btn btn-gold" onclick="editItem('modal-membre', {{ membre.id }}, {
+                        nom: '{{ membre.nom|escapejs }}', role: '{{ membre.role|escapejs }}', ordre: '{{ membre.ordre }}'
+                    })">✏️ Éditer</button>
+                    <button class="admin-btn btn-danger" onclick="deleteAdminItem('membre', {{ membre.id }})">🗑️</button>
+                </div>
+                {% endif %}
+
+                <div class="member-img-container">
+                    <div class="member-img" style="background-image: url('{{ membre.photo.url }}');"></div>
+                </div>
+                <div class="member-info">
+                    <p class="role" data-editable="true" data-model="membre" data-id="{{ membre.id }}" data-field="role">{{ membre.role }}</p>
+                    <h3 data-editable="true" data-model="membre" data-id="{{ membre.id }}" data-field="nom">{{ membre.nom }}</h3>
+
+                    {% if user.is_staff and not request.GET.preview %}
+                    <small style="color: #94a3b8; font-size: 0.75rem; margin-top: 10px;">
+                        Ordre : <span data-editable="true" data-model="membre" data-id="{{ membre.id }}" data-field="ordre">{{ membre.ordre }}</span>
+                    </small>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p style="text-align: center; grid-column: 1/-1; color: #64748b;">Aucun membre n'est enregistré pour le moment.</p>
+            {% endfor %}
+        </div>
+
+        <div class="team-contact-cta">
+            <p>Vous souhaitez contacter un membre de l'équipe ?</p>
             <a href="{% url 'contact' %}" class="btn-main">Utiliser le formulaire de contact</a>
         </div>
     </section>
+
+    <!-- =================================================================
+         MODALES D'ADMINISTRATION
+         ================================================================= -->
+    {% if user.is_staff and not request.GET.preview %}
+    
+    <!-- MODALE A PROPOS -->
+    <div id="modal-apropos" class="admin-modal-backdrop">
+        <div class="admin-modal" style="max-width: 750px;">
+            <div class="admin-modal-header">
+                <h3>Modifier la présentation</h3>
+                <button class="admin-modal-close" onclick="closeAdminModal('modal-apropos')" type="button">&times;</button>
+            </div>
+            <form onsubmit="saveAdminForm(event, 'modal-apropos')">
+                <div class="admin-modal-body">
+                    <input type="hidden" name="model" value="configurationsite">
+                    <input type="hidden" name="id" value="{{ config.id|default:1 }}">
+                    
+                    <div class="admin-form-group">
+                        <label class="admin-label">Paragraphe 1 (Introduction)</label>
+                        <textarea class="admin-input" name="a_propos_paragraphe_1" required style="min-height: 120px;"></textarea>
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-label">Phrase d'accroche (En grand et en italique)</label>
+                        <textarea class="admin-input" name="a_propos_statement" required style="min-height: 80px;"></textarea>
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-label">Paragraphe 2 (Public cible)</label>
+                        <textarea class="admin-input" name="a_propos_paragraphe_2" required style="min-height: 120px;"></textarea>
+                    </div>
+                </div>
+                <div class="admin-modal-footer">
+                    <button type="submit" class="btn-admin-add" style="margin: 0; width: 100%; padding: 14px;">Enregistrer les modifications</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODALE MEMBRE -->
+    <div id="modal-membre" class="admin-modal-backdrop">
+        <div class="admin-modal">
+            <div class="admin-modal-header">
+                <h3>Fiche Membre</h3>
+                <button class="admin-modal-close" onclick="closeAdminModal('modal-membre')" type="button">&times;</button>
+            </div>
+            <form onsubmit="saveAdminForm(event, 'modal-membre')">
+                <div class="admin-modal-body">
+                    <input type="hidden" name="model" value="membre">
+                    <input type="hidden" name="id" value="">
+                    
+                    <div class="admin-form-row">
+                        <div class="admin-form-group">
+                            <label class="admin-label">Nom et Prénom *</label>
+                            <input class="admin-input" type="text" name="nom" required placeholder="Ex: Clément Dupond">
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-label">Rôle / Poste *</label>
+                            <input class="admin-input" type="text" name="role" required placeholder="Ex: Président">
+                        </div>
+                    </div>
+
+                    <div class="admin-form-row">
+                        <div class="admin-form-group" style="flex: 0.5;">
+                            <label class="admin-label">Ordre d'affichage *</label>
+                            <input class="admin-input" type="number" name="ordre" required value="100" title="Plus le chiffre est petit, plus le membre apparaît haut dans la liste">
+                        </div>
+                        <div class="admin-form-group">
+                            <label class="admin-label">Photo portrait *</label>
+                            <input class="admin-input" type="file" name="photo" accept="image/*" style="padding: 9px; background: #fff;">
+                            <small style="color: #64748b; margin-top: 5px; display: block;">L'image sera automatiquement compressée en WebP. Laissez vide pour conserver l'image actuelle.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin-modal-footer">
+                    <button type="submit" class="btn-admin-add" style="margin: 0; width: 100%; padding: 14px;">Enregistrer le membre</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script de notification si clic sur l'année du mandat -->
+    <script>
+        function showLockedMandatNotice(e) {
+            e.stopPropagation();
+            let toast = document.getElementById('admin-locked-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'admin-locked-toast';
+                toast.style.cssText = `
+                    position: fixed;
+                    bottom: 75px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #000b29;
+                    color: #fff;
+                    border: 1px solid #d4af37;
+                    padding: 12px 24px;
+                    border-radius: 30px;
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    z-index: 1000000;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-family: 'Inter', sans-serif;
+                `;
+                document.body.appendChild(toast);
+            }
+            toast.innerHTML = `🔒 <span>L'année du mandat est à modifier dans les <a href="{% url 'reglages' %}" style="color: #d4af37; text-decoration: underline; font-weight: 700;">réglages du site</a></span>`;
+            toast.style.display = 'flex';
+            clearTimeout(window.lockedNoticeTimer);
+            window.lockedNoticeTimer = setTimeout(() => {
+                toast.style.display = 'none';
+            }, 4000);
+        }
+    </script>
+    {% endif %}
+
 {% endblock %}

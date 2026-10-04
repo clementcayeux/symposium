@@ -30,27 +30,226 @@
 
     <link rel="icon" type="image/png" href="{% static 'core/assets/favicon.png' %}">
     <link rel="shortcut icon" type="image/png" href="{% static 'core/assets/favicon.png' %}">
-    <link rel="stylesheet" href="{% static 'core/style.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
+    <style>
+        /* ==========================================================================
+           1. VARIABLES ET RESET GLOBAL
+           ========================================================================== */
+        :root {
+            --navy: #000b29;
+            --gold: #D4AF37;
+            --light-gold: #f0c455;
+            --white: #ffffff;
+            --bg-light: #f8f9fa;
+            --text-dark: #1a1a1a;
+            --text-gray: #666;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-dark); line-height: 1.6; background-color: var(--white); }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 700; }
+        a { text-decoration: none; color: inherit; }
+
+        /* ==========================================================================
+           2. NAVIGATION
+           ========================================================================== */
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 5%; background: rgba(0, 11, 41, 0.98); position: fixed;
+            width: 100%; top: 0; z-index: 10000; box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+        .nav-brand { display: flex; align-items: center; }
+        .nav-logo { height: 50px; width: auto; transition: transform 0.3s ease; }
+        .nav-logo:hover { transform: scale(1.05); }
+
+        .nav-links { list-style: none; display: flex; gap: 30px; }
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7); font-size: 0.85rem; text-transform: uppercase;
+            font-weight: 600; letter-spacing: 1px; position: relative; padding-bottom: 5px; transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
+            background-color: var(--gold); transition: width 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active { color: var(--gold) !important; }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+        .menu-toggle { display: none; cursor: pointer; flex-direction: column; gap: 6px; }
+        .menu-toggle .bar { width: 28px; height: 3px; background-color: white; border-radius: 2px; transition: 0.3s; }
+
+        /* ==========================================================================
+           3. ELEMENTS COMMUNS (Sections, Boutons)
+           ========================================================================== */
+        .section-container { padding: 30px 8%; max-width: 1400px; margin: 0 auto; }
+        .bg-light { background-color: var(--bg-light); }
+
+        .btn-main {
+            display: inline-block; background: var(--gold); color: var(--navy); padding: 14px 35px;
+            border-radius: 50px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
+            transition: 0.3s; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); border: none; cursor: pointer;
+        }
+        .btn-main:hover {
+            background: var(--light-gold); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* ==========================================================================
+           4. FOOTER
+           ========================================================================== */
+        footer { background: var(--navy); color: white; padding: 60px 8% 20px; text-align: center; }
+        .footer-contact-link { font-size: 1.1rem; color: rgba(255, 255, 255, 0.9); border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: 0.3s; }
+        .footer-contact-link:hover { color: var(--gold); border-bottom-color: white; }
+        .footer-bottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.7rem; opacity: 0.7; }
+        .footer-legal-link { color: inherit; text-decoration: none; transition: color 0.3s; }
+        .footer-legal-link:hover { color: var(--gold); }
+
+        /* ==========================================================================
+           5. RESPONSIVE MOBILE
+           ========================================================================== */
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; z-index: 10001; }
+            .nav-links {
+                position: fixed; top: 0; right: -100%; height: 100vh; width: 70%;
+                background-color: var(--navy); flex-direction: column; align-items: center;
+                justify-content: center; gap: 30px; transition: 0.4s ease-in-out; box-shadow: -10px 0 20px rgba(0,0,0,0.3);
+            }
+            .nav-links.active { right: 0; }
+            #mobile-menu.is-active .bar:nth-child(2) { opacity: 0; }
+            #mobile-menu.is-active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            #mobile-menu.is-active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+        }
+
+        /* ==========================================================================
+           6. SYSTÈME D'ADMINISTRATION IN-SITU
+           ========================================================================== */
+        {% if user.is_staff and not request.GET.preview %}
+        body.is-admin-mode { padding-top: 50px !important; }
+        body.is-admin-mode .navbar { top: 50px !important; }
+
+        .admin-topbar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 50px;
+            background: #090e1a; border-bottom: 1px solid rgba(212, 175, 55, 0.4); z-index: 99999;
+            display: flex; justify-content: space-between; align-items: center; padding: 0 25px;
+            font-family: 'Inter', sans-serif; box-sizing: border-box;
+        }
+        .admin-topbar-left, .admin-topbar-right { display: flex; align-items: center; gap: 15px; }
+
+        .admin-topbar-btn {
+            background: #17223b; color: #e2e8f0; text-decoration: none; font-size: 0.8rem;
+            font-weight: 500; padding: 6px 14px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.2s ease;
+        }
+        .admin-topbar-btn:hover { background: #233355; color: #fff; }
+        .admin-btn-gold { background: #d4af37; color: #000b29; font-weight: 600; border: none; }
+        .admin-btn-gold:hover { background: #e5bd3c; color: #000; }
+        .admin-btn-danger { background: #842029; color: #fff; border: none; }
+        .admin-btn-danger:hover { background: #a71d2a; }
+
+        .admin-badge { color: #d4af37; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+
+        .admin-status-indicator { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: #94a3b8; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+        .status-dot.green { background: #10b981; box-shadow: 0 0 8px #10b981; }
+        .status-dot.orange { background: #f59e0b; box-shadow: 0 0 8px #f59e0b; animation: pulse 1s infinite; }
+        .status-dot.red { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
+        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+
+        body.is-admin-mode [data-editable="true"] {
+            outline: 1.5px dashed rgba(212, 175, 55, 0.4); outline-offset: 3px; cursor: text; border-radius: 3px;
+            transition: outline-color 0.2s ease, background 0.2s ease;
+        }
+        body.is-admin-mode [data-editable="true"]:hover { outline-color: #d4af37; background-color: rgba(212, 175, 55, 0.1); }
+        body.is-admin-mode [data-editable="true"]:focus { outline: 2px solid #d4af37; background-color: rgba(212, 175, 55, 0.18); }
+        [data-editable="true"].saved-success { background-color: rgba(16, 185, 129, 0.3) !important; }
+
+        .admin-item-wrapper { position: relative; border-radius: inherit; }
+        .admin-overlay {
+            position: absolute; inset: 0; background: rgba(0, 11, 41, 0.8); backdrop-filter: blur(4px);
+            display: flex; gap: 15px; align-items: center; justify-content: center;
+            opacity: 0; transition: all 0.25s ease; z-index: 20; border-radius: inherit;
+        }
+        .admin-item-wrapper:hover .admin-overlay { opacity: 1; }
+        .admin-overlay .admin-btn {
+            padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; font-size: 0.9rem;
+            transition: transform 0.2s; display: flex; align-items: center; gap: 8px;
+        }
+        .admin-overlay .admin-btn:hover { transform: scale(1.05); }
+
+        .btn-admin-add {
+            background: #000b29; color: #d4af37; border: none; padding: 12px 28px;
+            border-radius: 30px; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+        }
+        .btn-admin-add:hover { background: #d4af37; color: #000b29; box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4); transform: translateY(-2px); }
+
+        .admin-modal-backdrop {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 200000;
+            align-items: center; justify-content: center;
+        }
+        .admin-modal {
+            background: #ffffff; border-radius: 16px; width: 95%; max-width: 650px; 
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); position: relative;
+            display: flex; flex-direction: column; max-height: 85vh; overflow: hidden; 
+        }
+        .admin-modal-header {
+            padding: 25px 30px 15px 30px; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; background: #fff;
+        }
+        .admin-modal-header h3 { margin: 0; font-size: 1.5rem; color: #000b29; font-weight: 800; }
+        .admin-modal-close { font-size: 1.8rem; cursor: pointer; color: #94a3b8; background: none; border: none; padding: 0; line-height: 1; }
+        .admin-modal-close:hover { color: #0f172a; }
+
+        .admin-modal-body { padding: 25px 30px; overflow-y: auto; }
+        .admin-modal-body::-webkit-scrollbar { width: 8px; }
+        .admin-modal-body::-webkit-scrollbar-track { background: #f8fafc; }
+        .admin-modal-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        
+        .admin-modal-footer { padding: 15px 30px 25px 30px; border-top: 1px solid #f1f5f9; background: #f8fafc; }
+        .admin-form-row { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; }
+        .admin-form-group { flex: 1; min-width: 250px; margin-bottom: 20px; }
+        .admin-form-row .admin-form-group { margin-bottom: 0; }
+        .admin-label { display: block; font-weight: 700; color: #475569; margin-bottom: 8px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px;}
+        .admin-input {
+            width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 8px;
+            font-size: 0.95rem; font-family: 'Inter', sans-serif; transition: all 0.2s;
+            background: #f8fafc; color: #0f172a; box-sizing: border-box;
+        }
+        .admin-input:focus { background: #fff; border-color: #d4af37; outline: none; }
+        textarea.admin-input { resize: vertical; min-height: 100px; }
+        {% endif %}
+    </style>
     {% block extra_head %}{% endblock %}
 </head>
 
+<body class="{% if user.is_staff and not request.GET.preview %}is-admin-mode{% endif %}">
 
-<body>
+    <!-- TOPBAR ADMIN -->
+    {% if user.is_staff and not request.GET.preview %}
+    <div id="sympo-admin-bar" class="admin-topbar">
+        <div class="admin-topbar-left">
+            <a href="{% url 'reglages' %}" class="admin-topbar-btn admin-btn-gold">⚙️ Réglages</a>
+            <a href="{{ request.path }}?preview=true" target="_blank" class="admin-topbar-btn">👁️ Voir le site en public</a>
+            
+            <span class="admin-status-indicator" style="margin-left: 10px;">
+                <span class="status-dot green" id="admin-status-dot"></span>
+                <span id="admin-status-text">Modifications enregistrées</span>
+            </span>
+        </div>
+        <div class="admin-topbar-right">
+            <span class="admin-badge">⚡ Mode édition administrateur</span>
+            <a href="{% url 'logout' %}" class="admin-topbar-btn admin-btn-danger">Déconnexion</a>
+        </div>
+    </div>
+    {% endif %}
+
     <nav class="navbar">
         <div class="nav-brand">
             <a href="{% url 'index' %}">
                 <img src="{% static 'core/assets/logo.png' %}" alt="Logo Symposium" class="nav-logo">
             </a>
         </div>
-
-        <div class="menu-toggle" id="mobile-menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-
+        <div class="menu-toggle" id="mobile-menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
         <ul class="nav-links">
             <li><a href="{% url 'index' %}#home" class="nav-link">Accueil</a></li>
             <li><a href="{% url 'index' %}#evenements" class="nav-link">Évènements</a></li>
@@ -59,6 +258,17 @@
             <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
         </ul>
     </nav>
+
+    <!-- Affichage des messages flash Django -->
+    {% if messages %}
+    <div class="messages-container" style="max-width: 900px; margin: 20px auto; padding: 0 20px;">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" style="padding: 12px 18px; border-radius: 8px; margin-bottom: 10px; font-size: 0.95rem; {% if message.tags == 'error' %}background:#fde8e8; color:#9b1c1c; border:1px solid #f8b4b4;{% else %}background:#def7ec; color:#03543f; border:1px solid #bcf0da;{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
     {% block content %}{% endblock %}
 
@@ -73,17 +283,174 @@
                 <span style="color: var(--gold); margin: 0 10px;">•</span>
                 <a href="https://www.linkedin.com/company/symposiumcentralesup%C3%A9lec/" target="_blank" class="footer-contact-link">LinkedIn</a>
             </p>
-
             <div class="footer-bottom">
                 Symposium, 3 rue Joliot-Curie, Gif-sur-Yvette
                 <span style="margin: 0 8px; opacity: 0.5;">|</span>
                 <a href="{% url 'mentions_legales' %}" class="footer-legal-link">Mentions Légales</a>
+                <span style="margin: 0 8px; opacity: 0.5;">|</span>
+                <a href="{% url 'login' %}" class="footer-legal-link">🔒 Accès privé</a>
             </div>
         </div>
     </footer>
 
-    <script src="{% static 'core/script.js' %}"></script>
-    {% block extra_js %}{% endblock %}
+    <!-- SCRIPT DU MENU MOBILE -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.getElementById('mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            if(menuToggle && navLinks) {
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    menuToggle.classList.toggle('is-active');
+                });
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                        menuToggle.classList.remove('is-active');
+                    });
+                });
+            }
+        });
+    </script>
 
+    <!-- SCRIPTS D'ADMINISTRATION GLOBAUX -->
+    {% if user.is_staff and not request.GET.preview %}
+    <script>
+        function openAdminModal(modalId) { document.getElementById(modalId).style.display = 'flex'; }
+        function closeAdminModal(modalId) { document.getElementById(modalId).style.display = 'none'; }
+
+        function editItem(modalId, id, data) {
+            const modal = document.getElementById(modalId);
+            const form = modal.querySelector('form');
+            form.reset();
+            form.querySelector('input[name="id"]').value = id;
+            for (const key in data) {
+                const input = form.querySelector(`[name="${key}"]`);
+                if (input) input.value = data[key];
+            }
+            openAdminModal(modalId);
+        }
+
+        function createItem(modalId) {
+            const modal = document.getElementById(modalId);
+            const form = modal.querySelector('form');
+            form.reset();
+            form.querySelector('input[name="id"]').value = '';
+            openAdminModal(modalId);
+        }
+
+        async function saveAdminForm(event, modalId) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const btn = form.querySelector('button[type="submit"]');
+            btn.textContent = "Enregistrement..."; btn.disabled = true;
+
+            function getCookie(n){let c=null;if(document.cookie&&document.cookie!==''){document.cookie.split(';').forEach(i=>{i=i.trim();if(i.startsWith(n+'='))c=decodeURIComponent(i.substring(n.length+1))})}return c;}
+
+            try {
+                const response = await fetch('/api/save-item/', {
+                    method: 'POST',
+                    headers: { 'X-CSRFToken': getCookie('csrftoken') },
+                    body: formData
+                });
+                const res = await response.json();
+                if (res.status === 'success') window.location.reload();
+                else alert(res.message);
+            } catch(e) { alert("Erreur serveur."); }
+            finally { btn.textContent = "Enregistrer"; btn.disabled = false; }
+        }
+
+        async function deleteAdminItem(model, id) {
+            if(!confirm("Supprimer définitivement cet élément ?")) return;
+            function getCookie(n){let c=null;if(document.cookie&&document.cookie!==''){document.cookie.split(';').forEach(i=>{i=i.trim();if(i.startsWith(n+'='))c=decodeURIComponent(i.substring(n.length+1))})}return c;}
+            
+            await fetch('/api/delete-item/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken') },
+                body: JSON.stringify({ model, id })
+            });
+            window.location.reload();
+        }
+
+        // Script pour édition in-text directe
+        document.addEventListener('DOMContentLoaded', () => {
+            const statusDot = document.getElementById('admin-status-dot');
+            const statusText = document.getElementById('admin-status-text');
+
+            function setStatus(state, msg) {
+                if (!statusDot || !statusText) return;
+                statusDot.className = `status-dot ${state}`;
+                statusText.textContent = msg;
+            }
+
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let cookie of cookies) {
+                        cookie = cookie.trim();
+                        if (cookie.startsWith(name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            async function saveField(el) {
+                const model = el.dataset.model;
+                const id = el.dataset.id;
+                const field = el.dataset.field;
+                const originalText = el.dataset.originalValue || '';
+                const newValue = el.innerText.trim();
+
+                if (newValue === originalText) return;
+
+                setStatus('orange', 'En cours d\'enregistrement...');
+                
+                try {
+                    const response = await fetch('/api/inline-update/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': getCookie('csrftoken')
+                        },
+                        body: JSON.stringify({ model, id, field, value: newValue })
+                    });
+                    const result = await response.json();
+                    if (response.ok && result.status === 'success') {
+                        el.dataset.originalValue = newValue;
+                        setStatus('green', 'Modifications enregistrées');
+                        el.classList.add('saved-success');
+                        setTimeout(() => el.classList.remove('saved-success'), 1200);
+                    } else {
+                        throw new Error(result.message || 'Erreur');
+                    }
+                } catch (err) {
+                    setStatus('red', 'Erreur d\'enregistrement !');
+                    alert(`Erreur : ${err.message}`);
+                    el.innerText = originalText;
+                }
+            }
+
+            document.querySelectorAll('[data-editable="true"]').forEach(el => {
+                el.contentEditable = 'true';
+                el.dataset.originalValue = el.innerText.trim();
+                el.addEventListener('focus', () => { el.dataset.originalValue = el.innerText.trim(); });
+                el.addEventListener('blur', () => { saveField(el); });
+                el.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && !el.dataset.multiline) {
+                        e.preventDefault();
+                        el.blur();
+                    }
+                });
+            });
+        });
+    </script>
+    {% endif %}
+
+    {% block extra_js %}{% endblock %}
 </body>
 </html>
