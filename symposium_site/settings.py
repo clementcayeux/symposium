@@ -9,11 +9,31 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv()
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-cle-temporaire-symposium-dev-2026')
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['138.195.138.84', 'localhost', '127.0.0.1', 'symposium.cs-campus.fr', 'symposium-cs.fr', 'www.symposium-cs.fr']
+# Lecture de ALLOWED_HOSTS depuis .env (séparés par des virgules), avec fallback par défaut
+allowed_hosts_env = os.getenv('ALLOWED_HOSTS')
+if allowed_hosts_env:
+    ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_env.split(',') if host.strip()]
+else:
+    ALLOWED_HOSTS = [
+        '138.195.138.84',
+        'localhost',
+        '127.0.0.1',
+        'symposium.cs-campus.fr',
+        'symposium-cs.fr',
+        'www.symposium-cs.fr',
+        '.onrender.com',
+    ]
+
+# Nécessaire pour autoriser les requêtes POST (login, admin) en HTTPS
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.onrender.com',
+    'https://symposium-cs.fr',
+    'https://www.symposium-cs.fr',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -26,7 +46,6 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.sites', 
 ]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -77,9 +96,8 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
-
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -105,8 +123,6 @@ CACHES = {
 
 RATELIMIT_USE_CACHE = 'default'
 
-
-# Redirection automatique vers la nouvelle page de connexion
 LOGIN_URL = 'login' 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
