@@ -20,7 +20,7 @@
   "model": "core.contactrecipient",
   "pk": 1,
   "fields": {
-    "nom": "Cl�ment Cayeux",
+    "nom": "Clï¿½ment Cayeux",
     "email": "clement.cayeux@symposium-cs.fr",
     "actif": true
   }
@@ -29,7 +29,7 @@
   "model": "core.contactrecipient",
   "pk": 2,
   "fields": {
-    "nom": "Cl�ment Test",
+    "nom": "Clï¿½ment Test",
     "email": "clement.cayeux@orange.fr",
     "actif": false
   }
@@ -56,7 +56,7 @@
   "model": "core.contactrecipient",
   "pk": 5,
   "fields": {
-    "nom": "Na�l Zein",
+    "nom": "Naï¿½l Zein",
     "email": "nael.zein@symposium-cs.fr",
     "actif": false
   }
@@ -75,7 +75,7 @@
   "pk": 1,
   "fields": {
     "nom": "Augustin Foray",
-    "role": "Pr�sident",
+    "role": "Prï¿½sident",
     "photo": "equipe/augustin.jpg",
     "ordre": 1
   }
@@ -84,8 +84,8 @@
   "model": "core.membre",
   "pk": 2,
   "fields": {
-    "nom": "Cl�ment Cayeux",
-    "role": "Secr�taire g�n�rale",
+    "nom": "Clï¿½ment Cayeux",
+    "role": "Secrï¿½taire gï¿½nï¿½rale",
     "photo": "equipe/clement.jpg",
     "ordre": 3
   }
@@ -95,7 +95,7 @@
   "pk": 3,
   "fields": {
     "nom": "Malo Lemonnier",
-    "role": "Tr�sorier",
+    "role": "Trï¿½sorier",
     "photo": "equipe/malo.jpg",
     "ordre": 4
   }
@@ -104,8 +104,8 @@
   "model": "core.membre",
   "pk": 4,
   "fields": {
-    "nom": "Na�l Zein",
-    "role": "Vice-pr�sident",
+    "nom": "Naï¿½l Zein",
+    "role": "Vice-prï¿½sident",
     "photo": "equipe/nael.jpeg",
     "ordre": 2
   }
@@ -154,7 +154,7 @@
   "model": "core.membre",
   "pk": 9,
   "fields": {
-    "nom": "Th�ophile Salabert",
+    "nom": "Thï¿½ophile Salabert",
     "role": "Membre",
     "photo": "equipe/theophile-s.png",
     "ordre": 100
@@ -164,7 +164,7 @@
   "model": "core.membre",
   "pk": 10,
   "fields": {
-    "nom": "Th�ophile Thibaudon",
+    "nom": "Thï¿½ophile Thibaudon",
     "role": "Membre",
     "photo": "equipe/theophile-t.png",
     "ordre": 100
@@ -194,7 +194,7 @@
   "model": "core.membre",
   "pk": 13,
   "fields": {
-    "nom": "Marie-Yang Veni�re",
+    "nom": "Marie-Yang Veniï¿½re",
     "role": "Membre",
     "photo": "equipe/1774424101858.webp",
     "ordre": 100
@@ -215,7 +215,7 @@
   "pk": 15,
   "fields": {
     "nom": "Joseph Hanna",
-    "role": "VP Communication & �loquence",
+    "role": "VP Communication & ï¿½loquence",
     "photo": "equipe/joseph.png",
     "ordre": 5
   }
@@ -245,9 +245,9 @@
   "pk": 1,
   "fields": {
     "annee_promotion": "2026",
-    "a_propos_paragraphe_1": "Fond�e en 2014, Symposium est la tribune �tudiante de CentraleSup�lec. Chaque mois, nous invitons des personnalit�s du monde politique, �conomique, culturel et acad�mique � participer � des conf�rences et d�bats, afin d��changer sans filtre avec les �tudiants.",
-    "a_propos_statement": "� l�heure o� les enjeux contemporains deviennent toujours plus techniques, Symposium d�fend la conviction que les ing�nieurs et scientifiques doivent �tre pleinement acteurs du d�bat d�mocratique.",
-    "a_propos_paragraphe_2": "Symposium s�adresse en premier lieu aux �tudiants de CentraleSup�lec, auxquels s�ajoutent r�guli�rement ceux de l�ENS Paris-Saclay, de l��cole Polytechnique et, plus largement, des �tablissements du Plateau de Saclay."
+    "a_propos_paragraphe_1": "Fondï¿½e en 2014, Symposium est la tribune ï¿½tudiante de CentraleSupï¿½lec. Chaque mois, nous invitons des personnalitï¿½s du monde politique, ï¿½conomique, culturel et acadï¿½mique ï¿½ participer ï¿½ des confï¿½rences et dï¿½bats, afin dï¿½ï¿½changer sans filtre avec les ï¿½tudiants.",
+    "a_propos_statement": "ï¿½ lï¿½heure oï¿½ les enjeux contemporains deviennent toujours plus techniques, Symposium dï¿½fend la conviction que les ingï¿½nieurs et scientifiques doivent ï¿½tre pleinement acteurs du dï¿½bat dï¿½mocratique.",
+    "a_propos_paragraphe_2": "Symposium sï¿½adresse en premier lieu aux ï¿½tudiants de CentraleSupï¿½lec, auxquels sï¿½ajoutent rï¿½guliï¿½rement ceux de lï¿½ENS Paris-Saclay, de lï¿½ï¿½cole Polytechnique et, plus largement, des ï¿½tablissements du Plateau de Saclay."
   }
 },
 {
@@ -276,7 +276,7 @@
   "model": "core.partenaire",
   "pk": 3,
   "fields": {
-    "nom": "CentraleSup�lec",
+    "nom": "CentraleSupï¿½lec",
     "logo": "partenaires/centralesupelec.png",
     "lien": "https://www.centralesupelec.fr/",
     "ordre": 3,
@@ -287,7 +287,7 @@
   "model": "core.partenaire",
   "pk": 4,
   "fields": {
-    "nom": "Universit� Paris Saclay",
+    "nom": "Universitï¿½ Paris Saclay",
     "logo": "partenaires/universite_paris_saclay.png",
     "lien": "https://www.universite-paris-saclay.fr/",
     "ordre": 4,
@@ -298,7 +298,7 @@
   "model": "core.partenaire",
   "pk": 5,
   "fields": {
-    "nom": "CentraleSup�lec Alumni",
+    "nom": "CentraleSupï¿½lec Alumni",
     "logo": "partenaires/csa.png",
     "lien": "https://association.centralesupelec-alumni.com/fr/",
     "ordre": 5,
