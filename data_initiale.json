@@ -1,26 +1,45 @@
 [
 {
-  "model": "auth.user",
+  "model": "core.evenement",
+  "pk": 4,
   "fields": {
-    "password": "pbkdf2_sha256$1000000$UrywRDnRuUhanCHe7CRLrU$T0l3Nz/qkDCBIoGRjg7GFX9AaMWHeId2Ps4EISWqdF4=",
-    "last_login": "2026-10-05T00:16:59.517Z",
-    "is_superuser": true,
-    "username": "admin",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2026-01-26T20:55:36.367Z",
-    "groups": [],
-    "user_permissions": []
+    "invite": "Paris Saclay Summit",
+    "titre": "bff",
+    "categorie": "États-Unis et Souveraineté française",
+    "type_evenement": "CONF",
+    "date_debut": "2026-10-16T17:51:00Z",
+    "date_fin": null,
+    "horaires_precision": "Précisions à venir",
+    "lieu": "Amphi Michelin",
+    "image": "evenements/téléchargement_ijxkqJW.jpg",
+    "lien_inscription": "",
+    "texte_bouton_inscription": "",
+    "est_publie": true
+  }
+},
+{
+  "model": "core.evenement",
+  "pk": 5,
+  "fields": {
+    "invite": "Manuel Bompard",
+    "titre": "Juge de la Cour Pénale Internationale. Placé sous sanctions américaines sévères pour avoir approuvé un mandat d'arrêt contre Benjamin Netanyahu.",
+    "categorie": "Chef d'entreprise",
+    "type_evenement": "CONF",
+    "date_debut": "2026-10-31T17:52:00Z",
+    "date_fin": null,
+    "horaires_precision": "Toute la journée",
+    "lieu": "Eiffel & Bouygues",
+    "image": "evenements/pascaltrailer.png",
+    "lien_inscription": "",
+    "texte_bouton_inscription": "S'inscrire / Billetterie",
+    "est_publie": false
   }
 },
 {
   "model": "core.contactrecipient",
   "pk": 1,
   "fields": {
-    "nom": "Clï¿½ment Cayeux",
+    "nom": "Clément Cayeux",
     "email": "clement.cayeux@symposium-cs.fr",
     "actif": true
   }
@@ -29,7 +48,7 @@
   "model": "core.contactrecipient",
   "pk": 2,
   "fields": {
-    "nom": "Clï¿½ment Test",
+    "nom": "Clément Test",
     "email": "clement.cayeux@orange.fr",
     "actif": false
   }
@@ -56,7 +75,7 @@
   "model": "core.contactrecipient",
   "pk": 5,
   "fields": {
-    "nom": "Naï¿½l Zein",
+    "nom": "Naël Zein",
     "email": "nael.zein@symposium-cs.fr",
     "actif": false
   }
@@ -75,7 +94,7 @@
   "pk": 1,
   "fields": {
     "nom": "Augustin Foray",
-    "role": "Prï¿½sident",
+    "role": "Président",
     "photo": "equipe/augustin.jpg",
     "ordre": 1
   }
@@ -84,8 +103,8 @@
   "model": "core.membre",
   "pk": 2,
   "fields": {
-    "nom": "Clï¿½ment Cayeux",
-    "role": "Secrï¿½taire gï¿½nï¿½rale",
+    "nom": "Clément Cayeux",
+    "role": "Secrétaire générale",
     "photo": "equipe/clement.jpg",
     "ordre": 3
   }
@@ -95,7 +114,7 @@
   "pk": 3,
   "fields": {
     "nom": "Malo Lemonnier",
-    "role": "Trï¿½sorier",
+    "role": "Trésorier",
     "photo": "equipe/malo.jpg",
     "ordre": 4
   }
@@ -104,8 +123,8 @@
   "model": "core.membre",
   "pk": 4,
   "fields": {
-    "nom": "Naï¿½l Zein",
-    "role": "Vice-prï¿½sident",
+    "nom": "Naël Zein",
+    "role": "Vice-président",
     "photo": "equipe/nael.jpeg",
     "ordre": 2
   }
@@ -154,7 +173,7 @@
   "model": "core.membre",
   "pk": 9,
   "fields": {
-    "nom": "Thï¿½ophile Salabert",
+    "nom": "Théophile Salabert",
     "role": "Membre",
     "photo": "equipe/theophile-s.png",
     "ordre": 100
@@ -164,7 +183,7 @@
   "model": "core.membre",
   "pk": 10,
   "fields": {
-    "nom": "Thï¿½ophile Thibaudon",
+    "nom": "Théophile Thibaudon",
     "role": "Membre",
     "photo": "equipe/theophile-t.png",
     "ordre": 100
@@ -194,9 +213,9 @@
   "model": "core.membre",
   "pk": 13,
   "fields": {
-    "nom": "Marie-Yang Veniï¿½re",
+    "nom": "Marie-Yang Venière",
     "role": "Membre",
-    "photo": "equipe/1774424101858.webp",
+    "photo": "equipe/marie-yang.png",
     "ordre": 100
   }
 },
@@ -215,29 +234,9 @@
   "pk": 15,
   "fields": {
     "nom": "Joseph Hanna",
-    "role": "VP Communication & ï¿½loquence",
+    "role": "VP Communication & Éloquence",
     "photo": "equipe/joseph.png",
     "ordre": 5
-  }
-},
-{
-  "model": "core.membre",
-  "pk": 16,
-  "fields": {
-    "nom": "Julien Lesguillier",
-    "role": "Membre",
-    "photo": "equipe/1776093951429.webp",
-    "ordre": 100
-  }
-},
-{
-  "model": "core.membre",
-  "pk": 17,
-  "fields": {
-    "nom": "Tristan Baeza",
-    "role": "Membre",
-    "photo": "equipe/1760705900449.webp",
-    "ordre": 100
   }
 },
 {
@@ -245,9 +244,9 @@
   "pk": 1,
   "fields": {
     "annee_promotion": "2026",
-    "a_propos_paragraphe_1": "Fondï¿½e en 2014, Symposium est la tribune ï¿½tudiante de CentraleSupï¿½lec. Chaque mois, nous invitons des personnalitï¿½s du monde politique, ï¿½conomique, culturel et acadï¿½mique ï¿½ participer ï¿½ des confï¿½rences et dï¿½bats, afin dï¿½ï¿½changer sans filtre avec les ï¿½tudiants.",
-    "a_propos_statement": "ï¿½ lï¿½heure oï¿½ les enjeux contemporains deviennent toujours plus techniques, Symposium dï¿½fend la conviction que les ingï¿½nieurs et scientifiques doivent ï¿½tre pleinement acteurs du dï¿½bat dï¿½mocratique.",
-    "a_propos_paragraphe_2": "Symposium sï¿½adresse en premier lieu aux ï¿½tudiants de CentraleSupï¿½lec, auxquels sï¿½ajoutent rï¿½guliï¿½rement ceux de lï¿½ENS Paris-Saclay, de lï¿½ï¿½cole Polytechnique et, plus largement, des ï¿½tablissements du Plateau de Saclay."
+    "a_propos_paragraphe_1": "Fondée en 2014, Symposium est la tribune étudiante de CentraleSupélec. Chaque mois, nous invitons des personnalités du monde politique, économique, culturel et académique à participer à des conférences et débats, afin d’échanger sans filtre avec les étudiants.",
+    "a_propos_statement": "À l’heure où les enjeux contemporains deviennent toujours plus techniques, Symposium défend la conviction que les ingénieurs et scientifiques doivent être pleinement acteurs du débat démocratique.",
+    "a_propos_paragraphe_2": "Symposium s’adresse en premier lieu aux étudiants de CentraleSupélec, auxquels s’ajoutent régulièrement ceux de l’ENS Paris-Saclay, de l’École Polytechnique et, plus largement, des établissements du Plateau de Saclay."
   }
 },
 {
@@ -276,7 +275,7 @@
   "model": "core.partenaire",
   "pk": 3,
   "fields": {
-    "nom": "CentraleSupï¿½lec",
+    "nom": "CentraleSupélec",
     "logo": "partenaires/centralesupelec.png",
     "lien": "https://www.centralesupelec.fr/",
     "ordre": 3,
@@ -287,7 +286,7 @@
   "model": "core.partenaire",
   "pk": 4,
   "fields": {
-    "nom": "Universitï¿½ Paris Saclay",
+    "nom": "Université Paris Saclay",
     "logo": "partenaires/universite_paris_saclay.png",
     "lien": "https://www.universite-paris-saclay.fr/",
     "ordre": 4,
@@ -298,7 +297,7 @@
   "model": "core.partenaire",
   "pk": 5,
   "fields": {
-    "nom": "CentraleSupï¿½lec Alumni",
+    "nom": "CentraleSupélec Alumni",
     "logo": "partenaires/csa.png",
     "lien": "https://association.centralesupelec-alumni.com/fr/",
     "ordre": 5,
@@ -328,17 +327,6 @@
   }
 },
 {
-  "model": "core.partenaire",
-  "pk": 8,
-  "fields": {
-    "nom": "Hyris",
-    "logo": "partenaires/Logo_Hyris_N.webp",
-    "lien": "https://hyris.tv/",
-    "ordre": 100,
-    "taille_ajustement": 100
-  }
-},
-{
   "model": "core.replay",
   "pk": 4,
   "fields": {
@@ -363,13 +351,6 @@
     "invite": "Bernard Fontana",
     "url_youtube": "https://youtu.be/Ppmu73F8eb8?si=ougkiEwIZrVSPsJ7",
     "ordre": 100
-  }
-},
-{
-  "model": "sites.site",
-  "fields": {
-    "domain": "example.com",
-    "name": "example.com"
   }
 }
 ]
