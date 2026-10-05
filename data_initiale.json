@@ -1,38 +1,19 @@
 [
 {
-  "model": "core.evenement",
-  "pk": 4,
+  "model": "auth.user",
   "fields": {
-    "invite": "Paris Saclay Summit",
-    "titre": "bff",
-    "categorie": "États-Unis et Souveraineté française",
-    "type_evenement": "CONF",
-    "date_debut": "2026-10-16T17:51:00Z",
-    "date_fin": null,
-    "horaires_precision": "Précisions à venir",
-    "lieu": "Amphi Michelin",
-    "image": "evenements/téléchargement_ijxkqJW.jpg",
-    "lien_inscription": "",
-    "texte_bouton_inscription": "",
-    "est_publie": true
-  }
-},
-{
-  "model": "core.evenement",
-  "pk": 5,
-  "fields": {
-    "invite": "Manuel Bompard",
-    "titre": "Juge de la Cour Pénale Internationale. Placé sous sanctions américaines sévères pour avoir approuvé un mandat d'arrêt contre Benjamin Netanyahu.",
-    "categorie": "Chef d'entreprise",
-    "type_evenement": "CONF",
-    "date_debut": "2026-10-31T17:52:00Z",
-    "date_fin": null,
-    "horaires_precision": "Toute la journée",
-    "lieu": "Eiffel & Bouygues",
-    "image": "evenements/pascaltrailer.png",
-    "lien_inscription": "",
-    "texte_bouton_inscription": "S'inscrire / Billetterie",
-    "est_publie": false
+    "password": "pbkdf2_sha256$1000000$UrywRDnRuUhanCHe7CRLrU$T0l3Nz/qkDCBIoGRjg7GFX9AaMWHeId2Ps4EISWqdF4=",
+    "last_login": "2026-10-05T00:16:59.517Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-01-26T20:55:36.367Z",
+    "groups": [],
+    "user_permissions": []
   }
 },
 {
@@ -215,7 +196,7 @@
   "fields": {
     "nom": "Marie-Yang Venière",
     "role": "Membre",
-    "photo": "equipe/marie-yang.png",
+    "photo": "equipe/1774424101858.webp",
     "ordre": 100
   }
 },
@@ -237,6 +218,26 @@
     "role": "VP Communication & Éloquence",
     "photo": "equipe/joseph.png",
     "ordre": 5
+  }
+},
+{
+  "model": "core.membre",
+  "pk": 16,
+  "fields": {
+    "nom": "Julien Lesguillier",
+    "role": "Membre",
+    "photo": "equipe/1776093951429.webp",
+    "ordre": 100
+  }
+},
+{
+  "model": "core.membre",
+  "pk": 17,
+  "fields": {
+    "nom": "Tristan Baeza",
+    "role": "Membre",
+    "photo": "equipe/1760705900449.webp",
+    "ordre": 100
   }
 },
 {
@@ -327,6 +328,17 @@
   }
 },
 {
+  "model": "core.partenaire",
+  "pk": 8,
+  "fields": {
+    "nom": "Hyris",
+    "logo": "partenaires/Logo_Hyris_N.webp",
+    "lien": "https://hyris.tv/",
+    "ordre": 100,
+    "taille_ajustement": 100
+  }
+},
+{
   "model": "core.replay",
   "pk": 4,
   "fields": {
@@ -351,6 +363,13 @@
     "invite": "Bernard Fontana",
     "url_youtube": "https://youtu.be/Ppmu73F8eb8?si=ougkiEwIZrVSPsJ7",
     "ordre": 100
+  }
+},
+{
+  "model": "sites.site",
+  "fields": {
+    "domain": "example.com",
+    "name": "example.com"
   }
 }
 ]
