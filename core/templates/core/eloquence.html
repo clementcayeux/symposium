@@ -1,0 +1,315 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+{{ block.super }}
+<style>
+    /* =================================================================
+       1. ESTHÉTIQUE ÉLOQUENCE (SOBRE & INSTITUTIONNELLE)
+       ================================================================= */
+    
+    .eloquence-hero {
+        min-height: 52vh;
+        background: linear-gradient(rgba(0, 11, 41, 0.82), rgba(0, 11, 41, 0.88)), url('{% static 'core/assets/fond-amphi.jpg' %}') center/cover no-repeat;
+        display: flex; align-items: center; justify-content: center; text-align: center; color: white;
+        padding: 130px 20px 70px 20px;
+    }
+    .eloquence-hero-content { max-width: 800px; display: flex; flex-direction: column; align-items: center; }
+
+    .eloquence-hero h1 {
+        font-size: clamp(2rem, 3.8vw, 2.7rem); font-weight: 800; line-height: 1.15;
+        margin-bottom: 15px; letter-spacing: -0.5px;
+    }
+    .eloquence-hero p {
+        font-size: 1.15rem; color: rgba(255, 255, 255, 0.85); font-weight: 300;
+        line-height: 1.6; max-width: 640px; margin: 0;
+    }
+
+    /* Structure de section */
+    .section-container { max-width: 1150px; margin: 0 auto; padding: 60px 20px; }
+    .section-header-flex { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 3rem; }
+    .section-title { font-size: 2.1rem; color: #000b29; font-weight: 800; margin-bottom: 0.4rem; letter-spacing: -0.5px; }
+    .section-divider { width: 50px; height: 3px; background-color: #d4af37; border-radius: 2px; margin-top: 6px; }
+
+    /* Grille des 2 Concours */
+    .tournaments-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 35px; }
+    .tournament-card {
+        background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0;
+        box-shadow: 0 8px 25px rgba(0, 11, 41, 0.04); overflow: hidden; display: flex; flex-direction: column;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .tournament-card:hover { transform: translateY(-4px); box-shadow: 0 15px 35px rgba(0, 11, 41, 0.08); }
+    
+    .tournament-header {
+        background: #000b29; color: white; padding: 25px 22px; position: relative; border-bottom: 3px solid #d4af37;
+    }
+    .tournament-tag {
+        color: #d4af37; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;
+    }
+    .tournament-header h3 { font-size: 1.35rem; font-weight: 800; margin: 0; line-height: 1.25; }
+
+    .tournament-body { padding: 25px 22px; display: flex; flex-direction: column; flex-grow: 1; }
+    .tournament-desc { color: #475569; font-size: 0.92rem; line-height: 1.55; margin-bottom: 20px; }
+    
+    .tournament-specs {
+        background: #f8fafc; border: 1px solid #edf2f7; border-radius: 8px; padding: 14px;
+        display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem; color: #334155; margin-bottom: 22px;
+    }
+    .tournament-specs strong { color: #000b29; font-weight: 600; }
+    
+    .btn-tournament {
+        display: block; text-align: center; background: #000b29; color: #fff; padding: 11px;
+        border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: all 0.2s; margin-top: auto;
+    }
+    .btn-tournament:hover { background: #d4af37; color: #000b29; }
+
+    /* Encart VINCI Energies (placé sous les concours) */
+    .vinci-showcase {
+        background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 11, 41, 0.03); padding: 30px;
+        display: grid; grid-template-columns: 220px 1fr; gap: 30px; align-items: center;
+    }
+    .vinci-logo-box {
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        background: #f8fafc; border: 1px solid #edf2f7; border-radius: 10px; padding: 20px 15px; text-align: center;
+    }
+    .vinci-logo-box img { max-width: 160px; height: auto; object-fit: contain; }
+    .vinci-support-label { margin-top: 8px; font-size: 0.72rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.6px; }
+
+    .vinci-text h3 { font-size: 1.25rem; color: #000b29; font-weight: 800; margin: 0 0 6px 0; }
+    .vinci-text p { color: #475569; font-size: 0.92rem; line-height: 1.55; margin: 0; }
+
+    @media (max-width: 768px) {
+        .vinci-showcase { grid-template-columns: 1fr; text-align: center; padding: 22px; }
+        .vinci-logo-box { margin: 0 auto; width: 100%; max-width: 200px; }
+    }
+
+    /* Les 3 piliers */
+    .features-grid {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;
+    }
+    .feature-card {
+        background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    }
+    .feature-card h4 { font-size: 1.05rem; color: #000b29; font-weight: 800; margin: 0 0 6px 0; }
+    .feature-card p { font-size: 0.88rem; color: #64748b; line-height: 1.55; margin: 0; }
+
+    /* Bannière contact */
+    .candidature-banner {
+        background: #000b29; color: #ffffff; border-radius: 16px; padding: 40px 25px;
+        text-align: center; margin-top: 50px;
+    }
+    .candidature-banner h3 { font-size: 1.55rem; font-weight: 800; margin-bottom: 8px; color: #fff; }
+    .candidature-banner p { color: rgba(255,255,255,0.8); font-size: 0.95rem; max-width: 550px; margin: 0 auto 20px auto; }
+    .btn-gold-action {
+        display: inline-block; background: #d4af37; color: #000b29; padding: 12px 28px;
+        border-radius: 8px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: transform 0.2s, background 0.2s;
+    }
+    .btn-gold-action:hover { transform: scale(1.03); background: #e5be47; color: #000b29; }
+
+    /* Ergonomie Admin */
+    {% if is_admin_editing %}
+    .btn-admin-add {
+        background: #000b29; color: #d4af37; border: none; padding: 12px 24px;
+        border-radius: 30px; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+    }
+    .btn-admin-add:hover { background: #d4af37; color: #000b29; transform: translateY(-2px); }
+
+    .admin-modal-backdrop {
+        display: none; position: fixed; inset: 0;
+        background: rgba(0, 11, 41, 0.75); backdrop-filter: blur(6px); z-index: 200000;
+        align-items: center; justify-content: center; padding: 20px;
+    }
+    .admin-modal {
+        background: #ffffff; border-radius: 16px; width: 100%; max-width: 650px; 
+        box-shadow: 0 25px 60px rgba(0,0,0,0.4); display: flex; flex-direction: column; max-height: 85vh; overflow: hidden; 
+    }
+    .admin-modal-header {
+        padding: 18px 24px; border-bottom: 1px solid #e2e8f0; display: flex;
+        justify-content: space-between; align-items: center; flex-shrink: 0;
+    }
+    .admin-modal-header h3 { margin: 0; font-size: 1.25rem; color: #000b29; font-weight: 800; }
+    .admin-modal-close { font-size: 1.6rem; cursor: pointer; color: #94a3b8; background: none; border: none; padding: 0; line-height: 1; }
+    
+    .admin-modal-body {
+        padding: 22px 26px; overflow-y: auto !important; flex-grow: 1;
+        background: #f8fafc; max-height: calc(85vh - 130px);
+    }
+    .admin-modal-footer {
+        padding: 14px 26px; border-top: 1px solid #e2e8f0; background: #fff;
+        display: flex; justify-content: flex-end; flex-shrink: 0;
+    }
+    .admin-form-group { margin-bottom: 14px; }
+    .admin-label { display: block; font-weight: 600; color: #334155; margin-bottom: 5px; font-size: 0.82rem; }
+    .admin-input {
+        width: 100%; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 8px;
+        font-size: 0.9rem; background: #fff; color: #0f172a; box-sizing: border-box;
+    }
+    .admin-input:focus { border-color: #d4af37; outline: none; }
+    textarea.admin-input { resize: vertical; min-height: 75px; }
+    {% endif %}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- HERO ÉLOQUENCE -->
+<header class="eloquence-hero">
+    <div class="eloquence-hero-content">
+        <h1 data-editable="true" data-model="page_eloquence" data-id="1" data-field="titre_hero">
+            ÉLOQUENCE
+        </h1>
+        <p data-editable="true" data-multiline="true" data-model="page_eloquence" data-id="1" data-field="sous_titre_hero">
+            Former les élèves-ingénieurs à la prise de parole et organiser les deux concours d'éloquence de référence du campus.
+        </p>
+    </div>
+</header>
+
+<div class="section-container">
+    
+    <!-- LES DEUX CONCOURS -->
+    <div class="section-header-flex">
+        <h2 class="section-title">Nos deux concours annuels</h2>
+        <div class="section-divider"></div>
+    </div>
+
+    <div class="tournaments-grid">
+        
+        <!-- 1. CONCOURS CENTRALESUPÉLEC -->
+        <article class="tournament-card">
+            <div class="tournament-header">
+                <div class="tournament-tag">Compétition Interne</div>
+                <h3>Concours de CentraleSupélec</h3>
+            </div>
+            <div class="tournament-body">
+                <p class="tournament-desc" data-editable="true" data-multiline="true" data-model="page_eloquence" data-id="1" data-field="desc_concours_cs">
+                    Le tournoi de référence du campus. Sélections, joutes oratoires et grande finale en amphithéâtre Michelin ou au théâtre Rousseau devant un grand jury.
+                </p>
+                <div class="tournament-specs">
+                    <div><strong>Lieu :</strong> CentraleSupélec</div>
+                    <div><strong>Format :</strong> Joutes et plaidoiries finales</div>
+                    <div><strong>Public :</strong> Étudiants et diplômés du campus</div>
+                </div>
+                <a href="#contact" class="btn-tournament">Participer / Informations</a>
+            </div>
+        </article>
+
+        <!-- 2. CONCOURS INTER-ÉCOLES -->
+        <article class="tournament-card">
+            <div class="tournament-header">
+                <div class="tournament-tag">Tournoi grandes écoles</div>
+                <h3>Concours Inter-Écoles</h3>
+            </div>
+            <div class="tournament-body">
+                <p class="tournament-desc" data-editable="true" data-multiline="true" data-model="page_eloquence" data-id="1" data-field="desc_concours_inter">
+                    Rencontre réunissant les meilleurs orateurs devant des jurys de haut rang.
+                </p>
+                <div class="tournament-specs">
+                    <div><strong>Délégations :</strong> Polytechnique, Mines, Ponts, HEC, ESSEC, Assas, ENSTA,...</div>
+                    <div><strong>Lieu :</strong> CentraleSupélec</div>
+                    <div><strong>Format :</strong> Éliminatoires et finale</div>
+                </div>
+                <a href="#contact" class="btn-tournament">Participer / Informations</a>
+            </div>
+        </article>
+
+    </div>
+
+    <!-- ENCADRÉ PARTENAIRE VINCI ENERGIES (SOUS LES DEUX CARTES) -->
+    <div class="vinci-showcase">
+        <div class="vinci-logo-box">
+            <img src="{% static 'core/assets/vinci.png' %}" alt="VINCI Energies" loading="lazy">
+            <span class="vinci-support-label">Partenaire Officiel</span>
+        </div>
+        <div class="vinci-text">
+            <h3 data-editable="true" data-model="page_eloquence" data-id="1" data-field="titre_vinci">
+                Partenaire Majeur : VINCI Energies
+            </h3>
+            <p data-editable="true" data-multiline="true" data-model="page_eloquence" data-id="1" data-field="texte_vinci">
+                Soutien du pôle art oratoire de Symposium, VINCI Energies parraine le Concours CentraleSupélec et le Concours Inter-Écoles, récompensant chaque année les meilleurs talents oratoires du campus.
+            </p>
+        </div>
+    </div>
+
+    <!-- LE PÔLE ART ORATOIRE -->
+    <div class="section-header-flex" style="margin-top: 80px;">
+        <h2 class="section-title">Le Pôle Art Oratoire</h2>
+        <div class="section-divider"></div>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-card">
+            <h4>Jurys Qualifiés</h4>
+            <p>Avocats pénalistes, magistrats, conférenciers et représentants d'entreprises partenaires.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Ateliers & Préparation</h4>
+            <p>Séances d'entraînement régulières pour travailler la structure du discours, la voix et l'argumentation.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Captation & Scénographie</h4>
+            <p>Événements scénarisés en amphithéâtre et retransmis sur les canaux de Symposium.</p>
+        </div>
+    </div>
+
+    <!-- BANNIÈRE CONTACT -->
+    <div id="contact" class="candidature-banner">
+        <h3 data-editable="true" data-model="page_eloquence" data-id="1" data-field="titre_action">
+            Participer ou Assister aux Finales
+        </h3>
+        <p data-editable="true" data-multiline="true" data-model="page_eloquence" data-id="1" data-field="sous_titre_action">
+            Les dates de sélection et l'ouverture de la billetterie sont communiquées chaque saison.
+        </p>
+        <a href="{% url 'contact' %}" class="btn-gold-action">
+            Contacter le Pôle Éloquence
+        </a>
+    </div>
+
+</div>
+
+<!-- MODALE ADMIN IN-PAGE -->
+{% if is_admin_editing %}
+<div style="position: fixed; bottom: 25px; right: 25px; z-index: 9999;">
+    <button class="btn-admin-add" onclick="createItem('modal-eloquence-page')">Modifier les textes</button>
+</div>
+
+<div id="modal-eloquence-page" class="admin-modal-backdrop">
+    <div class="admin-modal">
+        <div class="admin-modal-header">
+            <h3>Textes de la page Éloquence</h3>
+            <button class="admin-modal-close" onclick="closeAdminModal('modal-eloquence-page')" type="button">&times;</button>
+        </div>
+        <form onsubmit="saveAdminForm(event, 'modal-eloquence-page')">
+            <div class="admin-modal-body">
+                <input type="hidden" name="model" value="page_eloquence">
+                <input type="hidden" name="id" value="1">
+                
+                <div class="admin-form-group">
+                    <label class="admin-label">Titre Hero</label>
+                    <input class="admin-input" type="text" name="titre_hero" value="L'ART ORATOIRE & L'ÉLOQUENCE">
+                </div>
+
+                <div class="admin-form-group">
+                    <label class="admin-label">Sous-titre Hero</label>
+                    <textarea class="admin-input" name="sous_titre_hero">Former les élèves-ingénieurs à la prise de parole et organiser les deux concours d'éloquence de référence du campus.</textarea>
+                </div>
+
+                <div class="admin-form-group">
+                    <label class="admin-label">Titre Encart VINCI Energies</label>
+                    <input class="admin-input" type="text" name="titre_vinci" value="Partenaire Majeur : VINCI Energies">
+                </div>
+
+                <div class="admin-form-group">
+                    <label class="admin-label">Texte Encart VINCI Energies</label>
+                    <textarea class="admin-input" name="texte_vinci">Soutien du pôle art oratoire de Symposium, VINCI Energies parraine le Concours CentraleSupélec et le Concours Inter-Écoles, récompensant chaque année les meilleurs talents oratoires du campus.</textarea>
+                </div>
+            </div>
+            <div class="admin-modal-footer">
+                <button type="submit" class="btn-admin-add" style="margin: 0; width: 100%; padding: 12px;">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

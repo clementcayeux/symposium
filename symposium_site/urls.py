@@ -6,6 +6,8 @@ from core.views import admin_entry_redirect
 from django.urls import re_path
 from django.views.static import serve
 from core.views import liste_invites, api_sauvegarder_invite, api_supprimer_invite
+from core.views import eloquence
+
 
 urlpatterns = [
     # On intercepte les anciennes URLs admin pour forcer le nouveau design
@@ -21,8 +23,8 @@ urlpatterns = [
     path('invites/', liste_invites, name='invites'),
     path('api/invites/sauvegarder/', api_sauvegarder_invite, name='api_sauvegarder_invite'),
     path('api/invites/supprimer/', api_supprimer_invite, name='api_supprimer_invite'),
+    path('eloquence/', eloquence, name='eloquence'),
 ]
-
 
 
 urlpatterns += [
