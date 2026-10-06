@@ -15,8 +15,12 @@ from django.core.exceptions import ValidationError
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import user_passes_test
 from django_ratelimit.decorators import ratelimit
-
+from .models import Invite
 from .models import Evenement, Partenaire, Membre, ConfigurationSite, ContactRecipient, Replay
+from datetime import datetime
+from django.views.decorators.http import require_POST
+
+
 
 
 # --- REDIRECTION DEPUIS /admin/ ---
@@ -371,3 +375,79 @@ def api_delete_item(request):
         return JsonResponse({'status': 'success'})
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+
+
+def liste_invites(request):
+    categorie = request.GET.get('cat')
+    invites = Invite.objects.all()[:30]
+    if categorie:
+        invites = invites.filter(categorie=categorie)
+    
+    return render(request, 'core/invites.html', {
+        'invites': invites,
+        'categorie_active': categorie,
+    })
+
+
+
+@require_POST
+@user_passes_test(lambda u: u.is_staff)
+def api_sauvegarder_invite(request):
+    try:
+        data = json.loads(request.body)
+        invite_id = data.get('id')
+        nom = data.get('nom', '').strip()
+        fonction = data.get('fonction', '').strip()
+        youtube_url = data.get('youtube_url', '').strip()
+        categorie = data.get('categorie', 'economie')
+        ordre = int(data.get('ordre', 100) or 100)
+        
+        date_str = data.get('date_venue')
+        date_venue = None
+        if date_str:
+            try:
+                date_venue = datetime.strptime(date_str, '%Y-%m-%d').date()
+            except ValueError:
+                pass
+
+        if not nom or not youtube_url:
+            return JsonResponse({'success': False, 'error': 'Le nom et le lien YouTube sont requis.'}, status=400)
+
+        if invite_id:
+            invite = Invite.objects.get(id=invite_id)
+            invite.nom = nom
+            invite.fonction = fonction
+            invite.youtube_url = youtube_url
+            invite.categorie = categorie
+            invite.ordre = ordre
+            invite.date_venue = date_venue
+            invite.save()
+        else:
+            invite = Invite.objects.create(
+                nom=nom,
+                fonction=fonction,
+                youtube_url=youtube_url,
+                categorie=categorie,
+                ordre=ordre,
+                date_venue=date_venue
+            )
+
+        return JsonResponse({'success': True, 'id': invite.id})
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+
+
+@require_POST
+@user_passes_test(lambda u: u.is_staff)
+def api_supprimer_invite(request):
+    try:
+        data = json.loads(request.body)
+        invite_id = data.get('id')
+        if not invite_id:
+            return JsonResponse({'success': False, 'error': 'ID manquant.'}, status=400)
+        
+        Invite.objects.filter(id=invite_id).delete()
+        return JsonResponse({'success': True})
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+

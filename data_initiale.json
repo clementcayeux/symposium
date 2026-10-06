@@ -3,7 +3,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$1000000$UrywRDnRuUhanCHe7CRLrU$T0l3Nz/qkDCBIoGRjg7GFX9AaMWHeId2Ps4EISWqdF4=",
-    "last_login": "2026-10-05T00:16:59.517Z",
+    "last_login": "2026-10-06T03:14:42.878Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -363,6 +363,318 @@
     "invite": "Bernard Fontana",
     "url_youtube": "https://youtu.be/Ppmu73F8eb8?si=ougkiEwIZrVSPsJ7",
     "ordre": 100
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 89,
+  "fields": {
+    "nom": "Jean-Marc Jancovici",
+    "fonction": "Président du Shift Project & Associé Carbone 4",
+    "date_venue": "2023-11-29",
+    "description": "",
+    "categorie": "sciences",
+    "youtube_url": "https://www.youtube.com/watch?v=PYDNV0Ro1x0",
+    "ordre": 1
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 90,
+  "fields": {
+    "nom": "Dominique de Villepin",
+    "fonction": "Ancien Premier ministre & Ministre des Affaires étrangères",
+    "date_venue": "2024-09-16",
+    "description": "",
+    "categorie": "politique",
+    "youtube_url": "https://www.youtube.com/watch?v=UCAZxRdwXkc",
+    "ordre": 2
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 91,
+  "fields": {
+    "nom": "Carlos Tavares",
+    "fonction": "Ancien directeur général de Stellantis",
+    "date_venue": "2023-09-19",
+    "description": "",
+    "categorie": "economie",
+    "youtube_url": "https://www.youtube.com/watch?v=Tdj08ojp2OI",
+    "ordre": 30
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 92,
+  "fields": {
+    "nom": "Bernard Fontana",
+    "fonction": "Président-directeur général d'EDF",
+    "date_venue": "2026-09-23",
+    "description": "",
+    "categorie": "economie",
+    "youtube_url": "https://www.youtube.com/watch?v=Ppmu73F8eb8",
+    "ordre": 4
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 93,
+  "fields": {
+    "nom": "Jacques Attali",
+    "fonction": "Économiste, écrivain & Conseiller d'État",
+    "date_venue": "2025-04-10",
+    "description": "",
+    "categorie": "economie",
+    "youtube_url": "https://www.youtube.com/watch?v=8KxSIAFLE9U",
+    "ordre": 5
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 94,
+  "fields": {
+    "nom": "Éric Dupond-Moretti",
+    "fonction": "Ancien ministre de la Justice",
+    "date_venue": "2018-12-14",
+    "description": "",
+    "categorie": "politique",
+    "youtube_url": "https://www.youtube.com/watch?v=joRP61cb_Uo",
+    "ordre": 6
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 95,
+  "fields": {
+    "nom": "Édith Cresson",
+    "fonction": "Première femme Première ministre de France",
+    "date_venue": "2024-10-22",
+    "description": "",
+    "categorie": "politique",
+    "youtube_url": "https://www.youtube.com/watch?v=8Kfy_3S1egQ",
+    "ordre": 7
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 96,
+  "fields": {
+    "nom": "Valérie Pécresse",
+    "fonction": "Présidente de la Région Île-de-France",
+    "date_venue": "2025-10-08",
+    "description": "",
+    "categorie": "politique",
+    "youtube_url": "https://www.youtube.com/watch?v=iPvnxnpMZ1o",
+    "ordre": 8
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 97,
+  "fields": {
+    "nom": "Cédric Villani",
+    "fonction": "Mathématicien (Médaille Fields) & Ancien député",
+    "date_venue": "2020-12-06",
+    "description": "",
+    "categorie": "sciences",
+    "youtube_url": "https://www.youtube.com/watch?v=Keabh7PuViE",
+    "ordre": 9
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 98,
+  "fields": {
+    "nom": "Patrice Caine",
+    "fonction": "Directeur général de Thales",
+    "date_venue": "2024-10-14",
+    "description": "",
+    "categorie": "economie",
+    "youtube_url": "https://www.youtube.com/watch?v=SpdyLIcPjqE",
+    "ordre": 10
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 99,
+  "fields": {
+    "nom": "Martin Sion",
+    "fonction": "Ancien président exécutif d'ArianeGroup",
+    "date_venue": "2025-04-29",
+    "description": "",
+    "categorie": "sciences",
+    "youtube_url": "https://www.youtube.com/watch?v=4JRUmaFpjgM",
+    "ordre": 11
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 100,
+  "fields": {
+    "nom": "Geoffroy Roux de Bézieux",
+    "fonction": "Ancien Président du MEDEF",
+    "date_venue": "2024-12-02",
+    "description": "",
+    "categorie": "economie",
+    "youtube_url": "https://www.youtube.com/watch?v=FfjV4ccK3Bo",
+    "ordre": 12
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 101,
+  "fields": {
+    "nom": "Amiral Nicolas Vaujour",
+    "fonction": "Chef d'état-major de la Marine nationale",
+    "date_venue": "2024-11-15",
+    "description": "",
+    "categorie": "politique",
+    "youtube_url": "https://youtu.be/MbJau7J-Bng?si=BJk_JopBBP_CtGC7",
+    "ordre": 13
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 102,
+  "fields": {
+    "nom": "André Comte-Sponville",
+    "fonction": "Philosophe & Écrivain",
+    "date_venue": "2024-04-09",
+    "description": "",
+    "categorie": "culture",
+    "youtube_url": "https://www.youtube.com/watch?v=2mkWMLssZPM",
+    "ordre": 14
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 103,
+  "fields": {
+    "nom": "Sylvie Retailleau",
+    "fonction": "Ancienne ministre de l'Enseignement supérieur et de la Recherche",
+    "date_venue": "2023-02-02",
+    "description": "",
+    "categorie": "politique",
+    "youtube_url": "https://www.youtube.com/watch?v=w5rh3Kh7w5Y",
+    "ordre": 15
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 104,
+  "fields": {
+    "nom": "Pascal Boniface",
+    "fonction": "Directeur de l'IRIS et géopolitologue",
+    "date_venue": "2026-05-14",
+    "description": "",
+    "categorie": "politique",
+    "youtube_url": "https://youtu.be/NPMN6V0pucw?si=FjcqrVsicjkvACOK",
+    "ordre": 16
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 105,
+  "fields": {
+    "nom": "Gérard Araud",
+    "fonction": "Ambassadeur de France aux États-Unis et à l'ONU",
+    "date_venue": "2023-03-16",
+    "description": "",
+    "categorie": "politique",
+    "youtube_url": "https://www.youtube.com/watch?v=-ZvEpR2Ulgc",
+    "ordre": 17
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 106,
+  "fields": {
+    "nom": "Manuel Bompard",
+    "fonction": "Député & Coordinateur national de La France Insoumise",
+    "date_venue": "2026-06-20",
+    "description": "",
+    "categorie": "politique",
+    "youtube_url": "https://www.youtube.com/live/W3vlD5BjvCo?si=OAQCmgNHXjyKnE0F",
+    "ordre": 18
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 108,
+  "fields": {
+    "nom": "François Villeroy de Galhau",
+    "fonction": "Gouverneur de la Banque de France",
+    "date_venue": "2023-05-24",
+    "description": "",
+    "categorie": "economie",
+    "youtube_url": "https://youtu.be/8ITwP7hU4iE?si=kyU79EBdmztapau_",
+    "ordre": 20
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 109,
+  "fields": {
+    "nom": "Patrick Pouyanné",
+    "fonction": "Président-directeur général de TotalEnergies",
+    "date_venue": "2023-10-18",
+    "description": "",
+    "categorie": "economie",
+    "youtube_url": "https://www.youtube.com/live/QzVV2aaKF3c?si=lLjGRNAz_E78vIJN",
+    "ordre": 21
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 110,
+  "fields": {
+    "nom": "Laurent Fabius",
+    "fonction": "Président du Conseil constitutionnel & Ancien Premier ministre",
+    "date_venue": "2022-11-08",
+    "description": "",
+    "categorie": "politique",
+    "youtube_url": "https://youtu.be/HEE7z7ClR3o?si=cAgX-PM9CSuNCIjo",
+    "ordre": 22
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 119,
+  "fields": {
+    "nom": "François Hollande",
+    "fonction": "Ancien Président de la République",
+    "date_venue": "2020-01-15",
+    "description": "",
+    "categorie": "politique",
+    "youtube_url": "https://youtu.be/sdQIl6AfoYU?si=jLbdWyc7e_Xakckw",
+    "ordre": 1
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 120,
+  "fields": {
+    "nom": "Thierry Breton",
+    "fonction": "Ancien commissaire européen au marché intérieur",
+    "date_venue": "2022-09-01",
+    "description": "",
+    "categorie": "politique",
+    "youtube_url": "https://www.youtube.com/live/S6wzdRL_mDo?si=dotNx3SdniT3X8jr",
+    "ordre": 4
+  }
+},
+{
+  "model": "core.invite",
+  "pk": 121,
+  "fields": {
+    "nom": "Sandrine Rousseau",
+    "fonction": "Députée de l'Assemblée nationale",
+    "date_venue": "2023-06-05",
+    "description": "",
+    "categorie": "politique",
+    "youtube_url": "https://www.youtube.com/live/SQY3UVQ2Wlw?si=nu3SUED0e790lSTA",
+    "ordre": 15
   }
 },
 {

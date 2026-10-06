@@ -61,3 +61,33 @@ from .models import Replay
 class ReplayAdmin(admin.ModelAdmin):
     list_display = ('invite', 'ordre', 'url_youtube')
     list_editable = ('ordre',)
+
+
+
+
+from .models import Invite
+
+@admin.register(Invite)
+class InviteAdmin(admin.ModelAdmin):
+    # Colonnes visibles dans le tableau de bord
+    list_display = ('nom', 'fonction', 'ordre', 'date_venue', 'categorie')
+    # Filtres latéraux et recherche
+    list_filter = ('categorie', 'date_venue')
+    search_fields = ('nom', 'fonction')
+    ordering = ('ordre', '-date_venue')
+
+    # Organisation du formulaire d'édition
+    fieldsets = (
+        ("Informations principales", {
+            "fields": ("nom", "fonction", "categorie", "ordre"),
+            "description": "Le nom et la fonction s'affichent directement sur la carte. L'ordre (1, 2, 3...) détermine la position."
+        }),
+        ("Conférence & Médias", {
+            "fields": ("youtube_url", "date_venue"),
+            "description": "Colle l'URL complète YouTube (la miniature s'actualise toute seule)."
+        }),
+        ("Détails complémentaires", {
+            "fields": ("description",),
+            "classes": ("collapse",),
+        }),
+    )

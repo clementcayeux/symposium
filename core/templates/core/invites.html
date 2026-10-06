@@ -1,0 +1,689 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<style>
+  :root {
+    --sympo-red: #8b1524;
+    --sympo-red-dark: #6e0f1c;
+    --sympo-slate: #0f172a;
+  }
+
+  .invites-section {
+    background-color: #f8fafc;
+    min-height: 100vh;
+    padding-top: 6.5rem;
+    padding-bottom: 5rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .invites-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .invites-header {
+    text-align: center;
+    margin-bottom: 2.75rem;
+  }
+
+  .invites-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.5rem;
+  }
+
+  .invites-subtitle {
+    font-size: 1.05rem;
+    color: #64748b;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .admin-add-wrapper {
+    margin-top: 1.5rem;
+  }
+
+  .admin-add-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--sympo-slate);
+    color: #ffffff;
+    padding: 0.65rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+  }
+
+  .admin-add-btn:hover {
+    background-color: #1e293b;
+    transform: translateY(-1px);
+  }
+
+  /* Grille des 30 cartes */
+  .invites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.75rem;
+  }
+
+  .invite-card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .invite-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.08);
+  }
+
+  .invite-thumb-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #020617;
+    overflow: hidden;
+  }
+
+  .invite-thumb-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .invite-year-pill {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+  }
+
+  .invite-content {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+  }
+
+  .invite-meta {
+    margin-bottom: 1.25rem;
+  }
+
+  /* Titre strict : nom de l'invité seul */
+  .invite-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.3;
+    margin: 0 0 0.35rem 0;
+  }
+
+  .invite-role {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #64748b;
+    line-height: 1.4;
+  }
+
+  .invite-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: var(--sympo-red);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .invite-action-btn:hover {
+    background-color: var(--sympo-red-dark);
+    color: #ffffff;
+  }
+
+  .invite-action-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  .invite-admin-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.45rem;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    background-color: #f1f5f9;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+
+  .invite-admin-btn:hover {
+    background-color: #e2e8f0;
+    color: #0f172a;
+  }
+
+  /* BANNIÈRE YOUTUBE EN BAS DE PAGE */
+  .youtube-more-banner {
+    margin-top: 4.5rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 2.75rem 2rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+  }
+
+  .youtube-more-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 0.5rem;
+  }
+
+  .youtube-more-desc {
+    color: #64748b;
+    font-size: 1rem;
+    max-width: 580px;
+    margin: 0 auto 1.5rem auto;
+    line-height: 1.5;
+  }
+
+  .youtube-more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    background-color: #ff0000;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.8rem 1.6rem;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(255, 0, 0, 0.2);
+    transition: background-color 0.2s ease, transform 0.15s ease;
+  }
+
+  .youtube-more-link:hover {
+    background-color: #cc0000;
+    transform: translateY(-2px);
+    color: #ffffff;
+  }
+
+  .youtube-more-link svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+
+  /* MODALE RESPONSIVE */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+
+  .modal-overlay.active { display: flex; }
+
+  .modal-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 520px;
+    max-height: calc(100vh - 2rem);
+    max-height: calc(100dvh - 2rem);
+    border-radius: 14px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: modalIn 0.2s ease-out;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .modal-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .modal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .modal-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #94a3b8;
+    cursor: pointer;
+  }
+
+  .modal-close-btn:hover { color: #0f172a; }
+
+  .modal-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    flex: 1 1 auto;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #334155;
+  }
+
+  .form-group input, .form-group select {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.9rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    outline: none;
+  }
+
+  .form-group input:focus, .form-group select:focus {
+    border-color: var(--sympo-red);
+    box-shadow: 0 0 0 3px rgba(139, 21, 36, 0.1);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .modal-footer {
+    padding: 1.1rem 1.5rem;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    gap: 0.75rem;
+  }
+
+  .btn-delete {
+    background-color: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fca5a5;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .btn-delete:hover { background-color: #fecaca; }
+
+  .btn-cancel {
+    background: none;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .btn-cancel:hover { background-color: #e2e8f0; color: #0f172a; }
+
+  .btn-save {
+    background-color: var(--sympo-red);
+    color: #ffffff;
+    border: none;
+    padding: 0.6rem 1.35rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .btn-save:hover { background-color: var(--sympo-red-dark); }
+
+  @media (max-width: 640px) {
+    .modal-overlay {
+      padding: 0.5rem;
+      align-items: flex-end;
+    }
+
+    .modal-card {
+      max-height: 90dvh;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .form-row { grid-template-columns: 1fr; }
+    .modal-footer { flex-direction: column-reverse; }
+    .modal-footer > div { width: 100%; }
+    .btn-delete, .btn-cancel, .btn-save { width: 100%; text-align: center; padding: 0.75rem; }
+  }
+</style>
+
+<section class="invites-section">
+  <div class="invites-container">
+    
+    <div class="invites-header">
+      <h1 class="invites-title">Les Invités de Symposium</h1>
+      <p class="invites-subtitle">Sélection des grandes personnalités reçues en conférence à CentraleSupélec.</p>
+
+      {% if user.is_staff %}
+      <div class="admin-add-wrapper">
+        <button type="button" class="admin-add-btn" onclick="ouvrirModalAjout()">
+          ➕ Ajouter un invité
+        </button>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Grille des 30 cartes -->
+    <div class="invites-grid">
+      {% for invite in invites %}
+      <article class="invite-card">
+        <div class="invite-thumb-wrapper">
+          <img 
+            src="https://img.youtube.com/vi/{{ invite.youtube_id }}/hqdefault.jpg" 
+            alt="{{ invite.nom }}" 
+            loading="lazy"
+          >
+          {% if invite.date_venue %}
+          <span class="invite-year-pill">{{ invite.date_venue|date:"Y" }}</span>
+          {% endif %}
+        </div>
+
+        <div class="invite-content">
+          <div class="invite-meta">
+            <!-- Titre strict : nom de l'invité seul -->
+            <h2 class="invite-name">{{ invite.nom }}</h2>
+            {% if invite.fonction %}
+            <div class="invite-role">{{ invite.fonction }}</div>
+            {% endif %}
+          </div>
+
+          <div>
+            <a href="{{ invite.youtube_url }}" target="_blank" rel="noopener noreferrer" class="invite-action-btn">
+              <svg viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              Visionner la conférence
+            </a>
+
+            {% if user.is_staff %}
+            <button 
+              type="button" 
+              class="invite-admin-btn"
+              data-id="{{ invite.id }}"
+              data-nom="{{ invite.nom }}"
+              data-fonction="{{ invite.fonction }}"
+              data-url="{{ invite.youtube_url }}"
+              data-date="{{ invite.date_venue|date:'Y-m-d' }}"
+              data-categorie="{{ invite.categorie }}"
+              data-ordre="{{ invite.ordre }}"
+              onclick="ouvrirModalEdition(this)"
+            >
+              ✏️ Modifier / Supprimer
+            </button>
+            {% endif %}
+          </div>
+        </div>
+      </article>
+      {% empty %}
+      <div style="grid-column: 1 / -1; text-align: center; color: #94a3b8; padding: 4rem 0;">
+        <p style="font-size: 1.1rem;">Aucune conférence répertoriée pour le moment.</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Encart YouTube en bas de page -->
+    <div class="youtube-more-banner">
+      <h3 class="youtube-more-title">Plus de conférences sur notre chaîne</h3>
+      <p class="youtube-more-desc">
+        Retrouvez l'intégralité de nos replays, tables rondes et entretiens exclusifs sur la chaîne officielle de Symposium.
+      </p>
+      <a href="https://www.youtube.com/@symposiumcs" target="_blank" rel="noopener noreferrer" class="youtube-more-link">
+        <svg viewBox="0 0 24 24">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+        Découvrir la chaîne YouTube (@symposiumcs)
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODALE D'ÉDITION IN-PAGE -->
+{% if user.is_staff %}
+{% csrf_token %}
+<div class="modal-overlay" id="inviteModal" onclick="fermerSiBackdrop(event)">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modalTitle">Modifier la fiche</h3>
+      <button type="button" class="modal-close-btn" onclick="fermerModal()" aria-label="Fermer">×</button>
+    </div>
+
+    <div class="modal-body">
+      <input type="hidden" id="inviteId">
+
+      <div class="form-group">
+        <label for="inviteNom">Nom de l'intervenant seul</label>
+        <input type="text" id="inviteNom" placeholder="Ex: Jean-Marc Jancovici">
+      </div>
+
+      <div class="form-group">
+        <label for="inviteFonction">Fonction / Titre</label>
+        <input type="text" id="inviteFonction" placeholder="Ex: Président du Shift Project">
+      </div>
+
+      <div class="form-group">
+        <label for="inviteUrl">Lien de la vidéo YouTube</label>
+        <input type="url" id="inviteUrl" placeholder="https://www.youtube.com/watch?v=...">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="inviteDate">Date de la conférence</label>
+          <input type="date" id="inviteDate">
+        </div>
+        <div class="form-group">
+          <label for="inviteOrdre">Ordre d'affichage</label>
+          <input type="number" id="inviteOrdre" placeholder="1 = tout en haut">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inviteCategorie">Catégorie</label>
+        <select id="inviteCategorie">
+          <option value="economie">Économie & Entreprise</option>
+          <option value="politique">Politique & Diplomatie</option>
+          <option value="sciences">Sciences, Climat & Énergie</option>
+          <option value="culture">Culture & Société</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <div>
+        <button type="button" id="btnSupprimer" class="btn-delete" onclick="supprimerInvite()">
+          Supprimer
+        </button>
+      </div>
+      <div style="display: flex; gap: 0.5rem;">
+        <button type="button" class="btn-cancel" onclick="fermerModal()">Annuler</button>
+        <button type="button" class="btn-save" onclick="sauvegarderInvite()">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function getCsrfToken() {
+    return document.querySelector('[name=csrfmiddlewaretoken]').value;
+  }
+
+  function ouvrirModalAjout() {
+    document.getElementById('modalTitle').textContent = "Ajouter un invité";
+    document.getElementById('inviteId').value = "";
+    document.getElementById('inviteNom').value = "";
+    document.getElementById('inviteFonction').value = "";
+    document.getElementById('inviteUrl').value = "";
+    document.getElementById('inviteDate').value = "";
+    document.getElementById('inviteOrdre').value = "15";
+    document.getElementById('inviteCategorie').value = "economie";
+    document.getElementById('btnSupprimer').style.display = "none";
+    document.getElementById('inviteModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function ouvrirModalEdition(btn) {
+    document.getElementById('modalTitle').textContent = "Modifier l'invité";
+    document.getElementById('inviteId').value = btn.dataset.id || "";
+    document.getElementById('inviteNom').value = btn.dataset.nom || "";
+    document.getElementById('inviteFonction').value = btn.dataset.fonction || "";
+    document.getElementById('inviteUrl').value = btn.dataset.url || "";
+    document.getElementById('inviteDate').value = btn.dataset.date || "";
+    document.getElementById('inviteOrdre').value = btn.dataset.ordre || "10";
+    document.getElementById('inviteCategorie').value = btn.dataset.categorie || "economie";
+    document.getElementById('btnSupprimer').style.display = "inline-block";
+    document.getElementById('inviteModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function fermerModal() {
+    document.getElementById('inviteModal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+
+  function fermerSiBackdrop(e) {
+    if (e.target.id === 'inviteModal') fermerModal();
+  }
+
+  async function sauvegarderInvite() {
+    const payload = {
+      id: document.getElementById('inviteId').value,
+      nom: document.getElementById('inviteNom').value,
+      fonction: document.getElementById('inviteFonction').value,
+      youtube_url: document.getElementById('inviteUrl').value,
+      date_venue: document.getElementById('inviteDate').value,
+      ordre: document.getElementById('inviteOrdre').value,
+      categorie: document.getElementById('inviteCategorie').value,
+    };
+
+    if (!payload.nom || !payload.youtube_url) {
+      alert("Le nom et le lien YouTube sont indispensables.");
+      return;
+    }
+
+    try {
+      const res = await fetch("{% url 'api_sauvegarder_invite' %}", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCsrfToken()
+        },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.success) {
+        window.location.reload();
+      } else {
+        alert("Erreur : " + (data.error || "Impossible d'enregistrer"));
+      }
+    } catch (err) {
+      alert("Erreur de connexion lors de l'enregistrement.");
+    }
+  }
+
+  async function supprimerInvite() {
+    const id = document.getElementById('inviteId').value;
+    if (!id) return;
+
+    if (!confirm("Voulez-vous vraiment supprimer cet invité ?")) return;
+
+    try {
+      const res = await fetch("{% url 'api_supprimer_invite' %}", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCsrfToken()
+        },
+        body: JSON.stringify({ id: id })
+      });
+      const data = await res.json();
+      if (data.success) {
+        window.location.reload();
+      } else {
+        alert("Erreur : " + (data.error || "Impossible de supprimer"));
+      }
+    } catch (err) {
+      alert("Erreur de connexion lors de la suppression.");
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') fermerModal();
+  });
+</script>
+{% endif %}
+{% endblock %}

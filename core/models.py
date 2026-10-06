@@ -229,3 +229,46 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
             old_file.delete(save=False)
         except Exception:
             pass
+
+
+import re
+from django.db import models
+
+class Invite(models.Model):
+    CATEGORIES = [
+        ('politique', 'Politique & Diplomatie'),
+        ('economie', 'Économie & Entreprise'),
+        ('sciences', 'Sciences, Climat & Énergie'),
+        ('culture', 'Culture & Société'),
+    ]
+
+    nom = models.CharField(max_length=200, help_text="Ex: Jean-Marc Jancovici")
+    fonction = models.CharField(max_length=255, blank=True, help_text="Ex: Président du Shift Project")
+    date_venue = models.DateField(null=True, blank=True)
+    description = models.TextField(blank=True, help_text="Court résumé de l'intervention")
+    categorie = models.CharField(max_length=50, choices=CATEGORIES, default='economie')
+    youtube_url = models.URLField(max_length=500, help_text="Lien complet de la vidéo YouTube")
+    ordre = models.PositiveIntegerField(default=0, help_text="Pour forcer l'ordre d'affichage")
+
+    class Meta:
+        ordering = ['ordre', '-date_venue']
+        verbose_name = "Invité"
+        verbose_name_plural = "Invités"
+
+    def __str__(self):
+        return f"{self.nom} ({self.date_venue.strftime('%Y') if self.date_venue else 'Date inconnue'})"
+
+    @property
+    def youtube_id(self):
+        """Extrait automatiquement l'ID de la vidéo YouTube depuis l'URL."""
+        pattern = r'(?:v=|\/|youtu\.be\/|embed\/)([0-9A-Za-z_-]{11})'
+        match = re.search(pattern, self.youtube_url or '')
+        return match.group(1) if match else None
+
+    @property
+    def thumbnail_url(self):
+        """Miniature automatique sans fichier local."""
+        yid = self.youtube_id
+        if yid:
+            return f"https://img.youtube.com/vi/{yid}/hqdefault.jpg"
+        return "/static/core/assets/fond-amphi.jpg"
